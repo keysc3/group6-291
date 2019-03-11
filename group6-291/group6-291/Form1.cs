@@ -22,7 +22,7 @@ namespace group6_291
         {
 
         }
-
+        //testing commit
         private void passwordLabel_Click(object sender, EventArgs e)
         {
 
@@ -31,7 +31,7 @@ namespace group6_291
         private void loginButton_Click(object sender, EventArgs e)
         {
             //Connect to Databse
-            SqlConnection conn = new SqlConnection("Data Source=DESKTOP-3CQFTT1;Initial Catalog=hospital_users;Integrated Security=True");
+            SqlConnection conn = new SqlConnection("Data Source=LAPTOP-CO5D6OT9;Initial Catalog=hospital_users;Integrated Security=True");
             conn.Open();
 
             //Create query string and parameters
