@@ -47,12 +47,21 @@ namespace group6_291
             while (userReader.Read())
             {
                 if (userReader["isAdmin"].Equals(true))
-                    loginResponseLabel.Text = "Admin logged in";
+                {
+                    //add here
+                    Home obj1 = new Home();
+                    obj1.Show();
+                    this.Hide();
+                    //loginResponseLabel.Text = "Admin logged in";
+                }
                 else
+                {
                     loginResponseLabel.Text = "Receptionist logged in";
+                }
                 conn.Close();
                 return;
             }
+
             //Invalid login
             loginResponseLabel.Text = "Invalid username or password";
             conn.Close();
