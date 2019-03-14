@@ -48,15 +48,18 @@ namespace group6_291
             {
                 if (userReader["isAdmin"].Equals(true))
                 {
-                    //add here
-                    Home obj1 = new Home();
-                    obj1.Show();
+                    AdminHome Admin = new AdminHome();
+                    Admin.Show();
                     this.Hide();
+                    //add here
                     //loginResponseLabel.Text = "Admin logged in";
                 }
                 else
                 {
-                    loginResponseLabel.Text = "Receptionist logged in";
+                    Home RegisterPatient = new Home();
+                    RegisterPatient.Show();
+                    this.Hide();
+                    //loginResponseLabel.Text = "Receptionist logged in";
                 }
                 conn.Close();
                 return;
