@@ -281,9 +281,9 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(223, 29);
+            this.vScrollBar1.Location = new System.Drawing.Point(223, 70);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 484);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 433);
             this.vScrollBar1.TabIndex = 30;
             // 
             // label11
