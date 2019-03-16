@@ -537,5 +537,6 @@ namespace group6_291
             conn.Close();
             //Update status and reset fields
             populateWardList();
+        }
     }
 }
