@@ -253,9 +253,20 @@ namespace group6_291
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void deleteAccountButton_Click(object sender, EventArgs e)
         {
+            DataRowView accViewItem = accountListBox.SelectedItem as DataRowView;
+            string username = accViewItem["username"].ToString();
 
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand deleteUser = new SqlCommand("delete from [User] where username = @username", conn);
+            deleteUser.Parameters.AddWithValue("@username", username);
+            deleteUser.ExecuteNonQuery();
+            conn.Close();
+            //Update status and reset fields
+            populateAccountList();
+            requestInfo.Text = "";
         }
 
         //Purpose: Repopulate the account list box when the refresh button is clicked
@@ -538,6 +549,8 @@ namespace group6_291
             conn.Close();
             //Update status and reset fields
             populateWardList();
+            wardUpdateReqInfo.Text = "";
+            addWardInfo.Text = "";
         }
 
         private void WardUpdateButton_Click(object sender, EventArgs e)

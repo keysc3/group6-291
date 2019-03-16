@@ -31,7 +31,7 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
             this.refreshAccountList = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.deleteAccountButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.resetUserButton = new System.Windows.Forms.Button();
@@ -149,6 +149,7 @@
             this.addWardType = new System.Windows.Forms.Label();
             this.addWardName = new System.Windows.Forms.Label();
             this.updateWardTab = new System.Windows.Forms.TabPage();
+            this.resetUpdateWard = new System.Windows.Forms.Button();
             this.wardUpdateReqInfo = new System.Windows.Forms.Label();
             this.updateCurrentCap = new System.Windows.Forms.Label();
             this.updateSelectedCurrentCap = new System.Windows.Forms.Label();
@@ -170,7 +171,6 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.resetUpdateWard = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -202,7 +202,7 @@
             // 
             this.UserAccTab.BackColor = System.Drawing.Color.WhiteSmoke;
             this.UserAccTab.Controls.Add(this.refreshAccountList);
-            this.UserAccTab.Controls.Add(this.button4);
+            this.UserAccTab.Controls.Add(this.deleteAccountButton);
             this.UserAccTab.Controls.Add(this.tabControl1);
             this.UserAccTab.Controls.Add(this.accountListBox);
             this.UserAccTab.Controls.Add(this.label32);
@@ -226,15 +226,15 @@
             this.refreshAccountList.UseVisualStyleBackColor = true;
             this.refreshAccountList.Click += new System.EventHandler(this.refreshAccountList_Click);
             // 
-            // button4
+            // deleteAccountButton
             // 
-            this.button4.Location = new System.Drawing.Point(6, 458);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(99, 23);
-            this.button4.TabIndex = 66;
-            this.button4.Text = "Delete Account";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.deleteAccountButton.Location = new System.Drawing.Point(6, 458);
+            this.deleteAccountButton.Name = "deleteAccountButton";
+            this.deleteAccountButton.Size = new System.Drawing.Size(99, 23);
+            this.deleteAccountButton.TabIndex = 66;
+            this.deleteAccountButton.Text = "Delete Account";
+            this.deleteAccountButton.UseVisualStyleBackColor = true;
+            this.deleteAccountButton.Click += new System.EventHandler(this.deleteAccountButton_Click);
             // 
             // tabControl1
             // 
@@ -1392,6 +1392,16 @@
             this.updateWardTab.Text = "Update";
             this.updateWardTab.UseVisualStyleBackColor = true;
             // 
+            // resetUpdateWard
+            // 
+            this.resetUpdateWard.Location = new System.Drawing.Point(433, 344);
+            this.resetUpdateWard.Name = "resetUpdateWard";
+            this.resetUpdateWard.Size = new System.Drawing.Size(100, 23);
+            this.resetUpdateWard.TabIndex = 64;
+            this.resetUpdateWard.Text = "Reset";
+            this.resetUpdateWard.UseVisualStyleBackColor = true;
+            this.resetUpdateWard.Click += new System.EventHandler(this.resetUpdateWard_Click);
+            // 
             // wardUpdateReqInfo
             // 
             this.wardUpdateReqInfo.AutoSize = true;
@@ -1586,16 +1596,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // resetUpdateWard
-            // 
-            this.resetUpdateWard.Location = new System.Drawing.Point(433, 344);
-            this.resetUpdateWard.Name = "resetUpdateWard";
-            this.resetUpdateWard.Size = new System.Drawing.Size(100, 23);
-            this.resetUpdateWard.TabIndex = 64;
-            this.resetUpdateWard.Text = "Reset";
-            this.resetUpdateWard.UseVisualStyleBackColor = true;
-            this.resetUpdateWard.Click += new System.EventHandler(this.resetUpdateWard_Click);
-            // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1699,7 +1699,7 @@
         private System.Windows.Forms.VScrollBar wardListScrollBar;
         private System.Windows.Forms.Label wardActionLabel;
         private System.Windows.Forms.Label wardManagementTitle;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button deleteAccountButton;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox recepCheckbox;
