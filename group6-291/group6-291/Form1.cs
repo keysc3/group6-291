@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace group6_291
 {
+
     public partial class Form1 : Form
     {
+        public static int Account = 0;
         public Form1()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace group6_291
             conn.Open();
 
             //Create query string and parameters
-            string query = "select isAdmin from Users where username = @username and password = @password";
+            string query = "select isAdmin from [User] where username = @username and password = @password";
             SqlCommand getUser = new SqlCommand(query, conn);
             getUser.Parameters.AddWithValue("@username", usernameBox.Text);
             getUser.Parameters.AddWithValue("@password", passwordBox.Text);
@@ -48,7 +50,8 @@ namespace group6_291
             {
                 if (userReader["isAdmin"].Equals(true))
                 {
-                    AdminHome Admin = new AdminHome();
+                    Account = 1;
+                    AdminMaster Admin = new AdminMaster();
                     Admin.Show();
                     this.Hide();
                     //add here
@@ -56,9 +59,12 @@ namespace group6_291
                 }
                 else
                 {
-                    Home RegisterPatient = new Home();
-                    RegisterPatient.Show();
+                    //Home RegisterPatient = new Home();
+                    //RegisterPatient.Show();
+                    AdminMaster Admin = new AdminMaster();
+                    Admin.Show();
                     this.Hide();
+
                     //loginResponseLabel.Text = "Receptionist logged in";
                 }
                 conn.Close();
