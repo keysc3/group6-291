@@ -251,38 +251,23 @@ namespace group6_291
         private void accountListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
-            AccountUpdateLabel.Text = drvItem["username"].ToString();
-          
             string user = drvItem["username"].ToString();
-            SqlConnection conn = new SqlConnection(Globals.conn);
-            conn.Open();
-            var sql = "Select isAdmin, password from [User] where username=@userID";// repeat for all variables
+            string admin = drvItem["isAdmin"].ToString();
+            string password = drvItem["password"].ToString();
 
-            SqlCommand UpdateTab = new SqlCommand(sql, conn);
-
-            UpdateTab.Parameters.AddWithValue("@userID", user);
-            SqlDataReader reader = UpdateTab.ExecuteReader();
-
-            if (reader.Read())
+            if (admin.Equals("True"))
             {
-                if (reader["isAdmin"].ToString().Equals("True"))
-                {
-                    //label18.Text = reader["isAdmin"].ToString();
-                    UpdateRecpCheckBox.Checked = false;
-                    UpdateAdminCheckBox.Checked = true;
-                }
-                else
-                {
-                    //label18.Text = reader["isAdmin"].ToString();
-                    UpdateAdminCheckBox.Checked = false;
-                    UpdateRecpCheckBox.Checked = true;
-                }
-
-                UpdatePassLabelText.Text = reader["password"].ToString();
-
+                
+                UpdateRecpCheckBox.Checked = false;
+                UpdateAdminCheckBox.Checked = true;
             }
-
-            conn.Close();
+            else
+            {
+                UpdateAdminCheckBox.Checked = false;
+                UpdateRecpCheckBox.Checked = true;
+            }
+            UpdatePassLabelText.Text = password;
+            AccountUpdateLabel.Text = user;
         }
 
         private void UpdateAccountButton_Click(object sender, EventArgs e) //update here
