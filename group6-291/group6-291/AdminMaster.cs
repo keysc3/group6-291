@@ -31,6 +31,9 @@ namespace group6_291
             addUsername.Leave += new EventHandler(addUsername_Leave);
             addPassword.Leave += new EventHandler(addPassword_Leave);
             populateAccountList();
+            addWardNameBox.Leave += new EventHandler(addWardNameBox_Leave);
+            AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
+            populateWardList();
         }
 
 
@@ -47,6 +50,22 @@ namespace group6_291
             ds.Tables[0].DefaultView.Sort = "username asc";
             accountListBox.DataSource = ds.Tables[0];
             accountListBox.DisplayMember = "username";
+            conn.Close();
+        }
+
+        //Purpose: Populate the ward list box with all the registered wards
+        private void populateWardList()
+        {
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "wardName asc";
+            wardListBox.DataSource = ds.Tables[0];
+            wardListBox.DisplayMember = "wardName";
             conn.Close();
         }
 
@@ -215,6 +234,7 @@ namespace group6_291
                 requestInfo.Text = "User added successfully";
                 requestInfo.ForeColor = Color.Green;
                 resetAddUserFields();
+                conn.Close();
             }
             populateAccountList();
 
@@ -359,7 +379,163 @@ namespace group6_291
 
         private void UpdatePassLabel_Click(object sender, EventArgs e)
         {
+        }
+        
+                private void addWardStatusBox_TextChanged(object sender, EventArgs e)
+        {
 
         }
+
+        private void addWardNameBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addWardStatusBox_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addWardNameBox_Leave(object sender, EventArgs e)
+        {
+            wardIsValid();
+        }
+
+        private void addWardCapacityBox_Leave(object sender, EventArgs e)
+        {
+            capacityIsValid();
+        }
+
+        private bool wardIsValid()
+        {
+            string inputedWardName = addWardNameBox.Text;
+            //Check username against username constraints
+            if (!Regex.IsMatch(inputedWardName, @"^[a-zA-Z]+$"))
+            {
+                addWardInfo.Text = "*Invalid ward name characters";
+                addWardInfo.ForeColor = Color.Red;
+                return false;
+            }
+            else if (inputedWardName.Length < 2 || inputedWardName.Length > 32)
+            {
+                addWardInfo.Text = "*Invalid ward name length";
+                addWardInfo.ForeColor = Color.Red;
+                return false;
+            }
+            //Check to see if the username already exists
+            else
+            {
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+                SqlCommand checkUsername = new SqlCommand("select count(*) from [Ward] where wardName = @wardName", conn);
+                checkUsername.Parameters.AddWithValue("@wardName", inputedWardName);
+                int wardExist = (int)checkUsername.ExecuteScalar();
+                //Username already exists
+                if (wardExist > 0)
+                {
+                    addWardInfo.Text = "*Ward already exists";
+                    addWardInfo.ForeColor = Color.Red;
+                    return false;
+                }
+                //Username does not already exist
+                else
+                {
+                    addWardInfo.Text = "*Ward name is available";
+                    addWardInfo.ForeColor = Color.Green;
+                    return true;
+                }
+            }
+        }
+
+        private bool capacityIsValid()
+        {
+            int capacity;
+            if (Int32.TryParse(AddWardCapacityBox.Text, out capacity))
+            {
+                if (capacity > 0)
+                {
+                    addWardCapInfo.Text = "";
+                    return true;
+                }
+                else
+                {
+                    addWardCapInfo.Text = "*Capacity must be greater than 0";
+                    addWardCapInfo.ForeColor = Color.Red;
+                    return false;
+                }
+            }
+            else
+            {
+                addWardCapInfo.Text = "*Invalid capacity";
+                addWardCapInfo.ForeColor = Color.Red;
+                return false;
+            }
+        }
+
+        private void addWardTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addWardButt_Click(object sender, EventArgs e)
+        {
+            //Make sure ward name and capacity are valid
+            if (!wardIsValid() || !capacityIsValid())
+            {
+                addWardRequestInfo.Text = "*Invalid add ward request. Please fix errors!";
+                addWardRequestInfo.ForeColor = Color.Red;
+            }
+            //All criteria is met, add user to databse
+            else
+            {
+                //Insert into database
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+                SqlCommand addWard = new SqlCommand("insert into [Ward] (wardName, overall_capacity, current_capacity) values (@wardName, @overallCap, @currentCap)", conn);
+                addWard.Parameters.AddWithValue("@wardName", addWardNameBox.Text);
+                addWard.Parameters.AddWithValue("@overallCap", Int32.Parse(AddWardCapacityBox.Text));
+                addWard.Parameters.AddWithValue("@currentCap", 0);
+                addWard.ExecuteNonQuery();
+                conn.Close();
+                //Update status and reset fields
+                addWardRequestInfo.Text = "Ward added successfully";
+                addWardRequestInfo.ForeColor = Color.Green;
+                resetAddWardFields();
+            }
+        }
+
+        //Purpose: Reset all reporting and input fields
+        private void resetAddWardFields()
+        {
+            addWardNameBox.Text = "";
+            AddWardCapacityBox.Text = "";
+            addWardInfo.Text = "";
+            addWardCapInfo.Text = "";
+        }
+
+        private void addWardReset_Click(object sender, EventArgs e)
+        {
+            resetAddWardFields();
+            addWardRequestInfo.Text = "";
+        }
+
+        private void wardListRefresh_Click(object sender, EventArgs e)
+        {
+            populateWardList();
+        }
+
+        private void deleteWardButton_Click(object sender, EventArgs e)
+        {
+            DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
+            string wardName = wardViewItem["wardName"].ToString();
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand addWard = new SqlCommand("delete from [Ward] where wardName = @wardName", conn);
+            addWard.Parameters.AddWithValue("@wardName", wardName);
+            addWard.ExecuteNonQuery();
+            conn.Close();
+            //Update status and reset fields
+            populateWardList();
     }
 }
