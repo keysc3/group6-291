@@ -47,6 +47,9 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.UpdatePassLabel = new System.Windows.Forms.Label();
+            this.UpdatePassLabelText = new System.Windows.Forms.Label();
+            this.UpdateCheckLabel = new System.Windows.Forms.Label();
             this.UpdateRecpCheckBox = new System.Windows.Forms.CheckBox();
             this.UpdateAdminCheckBox = new System.Windows.Forms.CheckBox();
             this.UpdateAccountButton = new System.Windows.Forms.Button();
@@ -131,9 +134,11 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.WardTab = new System.Windows.Forms.TabPage();
+            this.wardListRefresh = new System.Windows.Forms.Button();
             this.deleteWardButton = new System.Windows.Forms.Button();
             this.wardActionTabs = new System.Windows.Forms.TabControl();
             this.addWardTab = new System.Windows.Forms.TabPage();
+            this.addWardReset = new System.Windows.Forms.Button();
             this.addWardRequestInfo = new System.Windows.Forms.Label();
             this.addWardCapInfo = new System.Windows.Forms.Label();
             this.addWardInfo = new System.Windows.Forms.Label();
@@ -144,16 +149,17 @@
             this.addWardType = new System.Windows.Forms.Label();
             this.addWardName = new System.Windows.Forms.Label();
             this.updateWardTab = new System.Windows.Forms.TabPage();
+            this.wardUpdateReqInfo = new System.Windows.Forms.Label();
+            this.updateCurrentCap = new System.Windows.Forms.Label();
+            this.updateSelectedCurrentCap = new System.Windows.Forms.Label();
             this.WardUpdateButton = new System.Windows.Forms.Button();
             this.updateCurrentStatus = new System.Windows.Forms.Label();
             this.updateSelectedStatus = new System.Windows.Forms.Label();
-            this.updateCurrentCapacity = new System.Windows.Forms.Label();
-            this.updateSelectedCapacity = new System.Windows.Forms.Label();
+            this.updateOverallCap = new System.Windows.Forms.Label();
+            this.updateSelectedOverallCap = new System.Windows.Forms.Label();
             this.updateCurrentName = new System.Windows.Forms.Label();
             this.updateSelectedWard = new System.Windows.Forms.Label();
             this.updateWardButton = new System.Windows.Forms.Button();
-            this.updateWardStatus = new System.Windows.Forms.Label();
-            this.updateWardStatusBox = new System.Windows.Forms.TextBox();
             this.updateWardCapacityBox = new System.Windows.Forms.TextBox();
             this.updateWardNameBox = new System.Windows.Forms.TextBox();
             this.updateWardCapacity = new System.Windows.Forms.Label();
@@ -164,11 +170,7 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.UpdateCheckLabel = new System.Windows.Forms.Label();
-            this.UpdatePassLabelText = new System.Windows.Forms.Label();
-            this.UpdatePassLabel = new System.Windows.Forms.Label();
-            this.addWardReset = new System.Windows.Forms.Button();
-            this.wardListRefresh = new System.Windows.Forms.Button();
+            this.resetUpdateWard = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -396,6 +398,35 @@
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // UpdatePassLabel
+            // 
+            this.UpdatePassLabel.AutoSize = true;
+            this.UpdatePassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.UpdatePassLabel.Location = new System.Drawing.Point(243, 15);
+            this.UpdatePassLabel.Name = "UpdatePassLabel";
+            this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
+            this.UpdatePassLabel.TabIndex = 66;
+            this.UpdatePassLabel.Text = "Password:";
+            this.UpdatePassLabel.Click += new System.EventHandler(this.UpdatePassLabel_Click);
+            // 
+            // UpdatePassLabelText
+            // 
+            this.UpdatePassLabelText.AutoSize = true;
+            this.UpdatePassLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.UpdatePassLabelText.Location = new System.Drawing.Point(321, 15);
+            this.UpdatePassLabelText.Name = "UpdatePassLabelText";
+            this.UpdatePassLabelText.Size = new System.Drawing.Size(78, 20);
+            this.UpdatePassLabelText.TabIndex = 65;
+            this.UpdatePassLabelText.Text = "Password";
+            // 
+            // UpdateCheckLabel
+            // 
+            this.UpdateCheckLabel.AutoSize = true;
+            this.UpdateCheckLabel.Location = new System.Drawing.Point(10, 221);
+            this.UpdateCheckLabel.Name = "UpdateCheckLabel";
+            this.UpdateCheckLabel.Size = new System.Drawing.Size(0, 13);
+            this.UpdateCheckLabel.TabIndex = 64;
             // 
             // UpdateRecpCheckBox
             // 
@@ -1198,6 +1229,16 @@
             this.WardTab.TabIndex = 1;
             this.WardTab.Text = "Ward Details";
             // 
+            // wardListRefresh
+            // 
+            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
+            this.wardListRefresh.Name = "wardListRefresh";
+            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
+            this.wardListRefresh.TabIndex = 67;
+            this.wardListRefresh.Text = "Refresh";
+            this.wardListRefresh.UseVisualStyleBackColor = true;
+            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
+            // 
             // deleteWardButton
             // 
             this.deleteWardButton.Location = new System.Drawing.Point(6, 461);
@@ -1238,6 +1279,16 @@
             this.addWardTab.Text = "Add";
             this.addWardTab.UseVisualStyleBackColor = true;
             this.addWardTab.Click += new System.EventHandler(this.addWardTab_Click);
+            // 
+            // addWardReset
+            // 
+            this.addWardReset.Location = new System.Drawing.Point(434, 343);
+            this.addWardReset.Name = "addWardReset";
+            this.addWardReset.Size = new System.Drawing.Size(99, 23);
+            this.addWardReset.TabIndex = 53;
+            this.addWardReset.Text = "Reset";
+            this.addWardReset.UseVisualStyleBackColor = true;
+            this.addWardReset.Click += new System.EventHandler(this.addWardReset_Click);
             // 
             // addWardRequestInfo
             // 
@@ -1317,16 +1368,18 @@
             // 
             // updateWardTab
             // 
+            this.updateWardTab.Controls.Add(this.resetUpdateWard);
+            this.updateWardTab.Controls.Add(this.wardUpdateReqInfo);
+            this.updateWardTab.Controls.Add(this.updateCurrentCap);
+            this.updateWardTab.Controls.Add(this.updateSelectedCurrentCap);
             this.updateWardTab.Controls.Add(this.WardUpdateButton);
             this.updateWardTab.Controls.Add(this.updateCurrentStatus);
             this.updateWardTab.Controls.Add(this.updateSelectedStatus);
-            this.updateWardTab.Controls.Add(this.updateCurrentCapacity);
-            this.updateWardTab.Controls.Add(this.updateSelectedCapacity);
+            this.updateWardTab.Controls.Add(this.updateOverallCap);
+            this.updateWardTab.Controls.Add(this.updateSelectedOverallCap);
             this.updateWardTab.Controls.Add(this.updateCurrentName);
             this.updateWardTab.Controls.Add(this.updateSelectedWard);
             this.updateWardTab.Controls.Add(this.updateWardButton);
-            this.updateWardTab.Controls.Add(this.updateWardStatus);
-            this.updateWardTab.Controls.Add(this.updateWardStatusBox);
             this.updateWardTab.Controls.Add(this.updateWardCapacityBox);
             this.updateWardTab.Controls.Add(this.updateWardNameBox);
             this.updateWardTab.Controls.Add(this.updateWardCapacity);
@@ -1339,20 +1392,49 @@
             this.updateWardTab.Text = "Update";
             this.updateWardTab.UseVisualStyleBackColor = true;
             // 
+            // wardUpdateReqInfo
+            // 
+            this.wardUpdateReqInfo.AutoSize = true;
+            this.wardUpdateReqInfo.Location = new System.Drawing.Point(7, 228);
+            this.wardUpdateReqInfo.Name = "wardUpdateReqInfo";
+            this.wardUpdateReqInfo.Size = new System.Drawing.Size(0, 13);
+            this.wardUpdateReqInfo.TabIndex = 63;
+            // 
+            // updateCurrentCap
+            // 
+            this.updateCurrentCap.AutoSize = true;
+            this.updateCurrentCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateCurrentCap.Location = new System.Drawing.Point(134, 66);
+            this.updateCurrentCap.Name = "updateCurrentCap";
+            this.updateCurrentCap.Size = new System.Drawing.Size(29, 13);
+            this.updateCurrentCap.TabIndex = 62;
+            this.updateCurrentCap.Text = "Num";
+            // 
+            // updateSelectedCurrentCap
+            // 
+            this.updateSelectedCurrentCap.AutoSize = true;
+            this.updateSelectedCurrentCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateSelectedCurrentCap.Location = new System.Drawing.Point(6, 66);
+            this.updateSelectedCurrentCap.Name = "updateSelectedCurrentCap";
+            this.updateSelectedCurrentCap.Size = new System.Drawing.Size(88, 13);
+            this.updateSelectedCurrentCap.TabIndex = 61;
+            this.updateSelectedCurrentCap.Text = "Current Capacity:";
+            // 
             // WardUpdateButton
             // 
-            this.WardUpdateButton.Location = new System.Drawing.Point(10, 255);
+            this.WardUpdateButton.Location = new System.Drawing.Point(9, 202);
             this.WardUpdateButton.Name = "WardUpdateButton";
             this.WardUpdateButton.Size = new System.Drawing.Size(100, 23);
             this.WardUpdateButton.TabIndex = 60;
             this.WardUpdateButton.Text = "Update Ward";
             this.WardUpdateButton.UseVisualStyleBackColor = true;
+            this.WardUpdateButton.Click += new System.EventHandler(this.WardUpdateButton_Click);
             // 
             // updateCurrentStatus
             // 
             this.updateCurrentStatus.AutoSize = true;
             this.updateCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateCurrentStatus.Location = new System.Drawing.Point(134, 70);
+            this.updateCurrentStatus.Location = new System.Drawing.Point(133, 88);
             this.updateCurrentStatus.Name = "updateCurrentStatus";
             this.updateCurrentStatus.Size = new System.Drawing.Size(37, 13);
             this.updateCurrentStatus.TabIndex = 59;
@@ -1362,37 +1444,37 @@
             // 
             this.updateSelectedStatus.AutoSize = true;
             this.updateSelectedStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateSelectedStatus.Location = new System.Drawing.Point(7, 70);
+            this.updateSelectedStatus.Location = new System.Drawing.Point(6, 88);
             this.updateSelectedStatus.Name = "updateSelectedStatus";
             this.updateSelectedStatus.Size = new System.Drawing.Size(40, 13);
             this.updateSelectedStatus.TabIndex = 58;
             this.updateSelectedStatus.Text = "Status:";
             // 
-            // updateCurrentCapacity
+            // updateOverallCap
             // 
-            this.updateCurrentCapacity.AutoSize = true;
-            this.updateCurrentCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateCurrentCapacity.Location = new System.Drawing.Point(134, 44);
-            this.updateCurrentCapacity.Name = "updateCurrentCapacity";
-            this.updateCurrentCapacity.Size = new System.Drawing.Size(29, 13);
-            this.updateCurrentCapacity.TabIndex = 57;
-            this.updateCurrentCapacity.Text = "Num";
+            this.updateOverallCap.AutoSize = true;
+            this.updateOverallCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateOverallCap.Location = new System.Drawing.Point(134, 44);
+            this.updateOverallCap.Name = "updateOverallCap";
+            this.updateOverallCap.Size = new System.Drawing.Size(29, 13);
+            this.updateOverallCap.TabIndex = 57;
+            this.updateOverallCap.Text = "Num";
             // 
-            // updateSelectedCapacity
+            // updateSelectedOverallCap
             // 
-            this.updateSelectedCapacity.AutoSize = true;
-            this.updateSelectedCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateSelectedCapacity.Location = new System.Drawing.Point(6, 44);
-            this.updateSelectedCapacity.Name = "updateSelectedCapacity";
-            this.updateSelectedCapacity.Size = new System.Drawing.Size(51, 13);
-            this.updateSelectedCapacity.TabIndex = 56;
-            this.updateSelectedCapacity.Text = "Capacity:";
+            this.updateSelectedOverallCap.AutoSize = true;
+            this.updateSelectedOverallCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateSelectedOverallCap.Location = new System.Drawing.Point(6, 44);
+            this.updateSelectedOverallCap.Name = "updateSelectedOverallCap";
+            this.updateSelectedOverallCap.Size = new System.Drawing.Size(87, 13);
+            this.updateSelectedOverallCap.TabIndex = 56;
+            this.updateSelectedOverallCap.Text = "Overall Capacity:";
             // 
             // updateCurrentName
             // 
             this.updateCurrentName.AutoSize = true;
             this.updateCurrentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateCurrentName.Location = new System.Drawing.Point(133, 15);
+            this.updateCurrentName.Location = new System.Drawing.Point(132, 12);
             this.updateCurrentName.Name = "updateCurrentName";
             this.updateCurrentName.Size = new System.Drawing.Size(51, 20);
             this.updateCurrentName.TabIndex = 55;
@@ -1402,7 +1484,7 @@
             // 
             this.updateSelectedWard.AutoSize = true;
             this.updateSelectedWard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateSelectedWard.Location = new System.Drawing.Point(6, 15);
+            this.updateSelectedWard.Location = new System.Drawing.Point(5, 12);
             this.updateSelectedWard.Name = "updateSelectedWard";
             this.updateSelectedWard.Size = new System.Drawing.Size(122, 20);
             this.updateSelectedWard.TabIndex = 54;
@@ -1416,22 +1498,6 @@
             this.updateWardButton.TabIndex = 53;
             this.updateWardButton.Text = "Update Ward";
             this.updateWardButton.UseVisualStyleBackColor = true;
-            // 
-            // updateWardStatus
-            // 
-            this.updateWardStatus.AutoSize = true;
-            this.updateWardStatus.Location = new System.Drawing.Point(7, 199);
-            this.updateWardStatus.Name = "updateWardStatus";
-            this.updateWardStatus.Size = new System.Drawing.Size(65, 13);
-            this.updateWardStatus.TabIndex = 52;
-            this.updateWardStatus.Text = "New Status:";
-            // 
-            // updateWardStatusBox
-            // 
-            this.updateWardStatusBox.Location = new System.Drawing.Point(10, 215);
-            this.updateWardStatusBox.Name = "updateWardStatusBox";
-            this.updateWardStatusBox.Size = new System.Drawing.Size(100, 20);
-            this.updateWardStatusBox.TabIndex = 51;
             // 
             // updateWardCapacityBox
             // 
@@ -1519,35 +1585,16 @@
             this.label1.Size = new System.Drawing.Size(164, 31);
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
-            //
-            // UpdateCheckLabel
             // 
-            this.UpdateCheckLabel.AutoSize = true;
-            this.UpdateCheckLabel.Location = new System.Drawing.Point(10, 221);
-            this.UpdateCheckLabel.Name = "UpdateCheckLabel";
-            this.UpdateCheckLabel.Size = new System.Drawing.Size(0, 13);
-            this.UpdateCheckLabel.TabIndex = 64;
+            // resetUpdateWard
             // 
-            // UpdatePassLabelText
-            // 
-            this.UpdatePassLabelText.AutoSize = true;
-            this.UpdatePassLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabelText.Location = new System.Drawing.Point(321, 15);
-            this.UpdatePassLabelText.Name = "UpdatePassLabelText";
-            this.UpdatePassLabelText.Size = new System.Drawing.Size(78, 20);
-            this.UpdatePassLabelText.TabIndex = 65;
-            this.UpdatePassLabelText.Text = "Password";
-            // 
-            // UpdatePassLabel
-            // 
-            this.UpdatePassLabel.AutoSize = true;
-            this.UpdatePassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabel.Location = new System.Drawing.Point(243, 15);
-            this.UpdatePassLabel.Name = "UpdatePassLabel";
-            this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
-            this.UpdatePassLabel.TabIndex = 66;
-            this.UpdatePassLabel.Text = "Password:";
-            this.UpdatePassLabel.Click += new System.EventHandler(this.UpdatePassLabel_Click);
+            this.resetUpdateWard.Location = new System.Drawing.Point(433, 344);
+            this.resetUpdateWard.Name = "resetUpdateWard";
+            this.resetUpdateWard.Size = new System.Drawing.Size(100, 23);
+            this.resetUpdateWard.TabIndex = 64;
+            this.resetUpdateWard.Text = "Reset";
+            this.resetUpdateWard.UseVisualStyleBackColor = true;
+            this.resetUpdateWard.Click += new System.EventHandler(this.resetUpdateWard_Click);
             // 
             // AdminMaster
             // 
@@ -1583,26 +1630,6 @@
             this.updateWardTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-          
-            // addWardReset
-            // 
-            this.addWardReset.Location = new System.Drawing.Point(434, 343);
-            this.addWardReset.Name = "addWardReset";
-            this.addWardReset.Size = new System.Drawing.Size(99, 23);
-            this.addWardReset.TabIndex = 53;
-            this.addWardReset.Text = "Reset";
-            this.addWardReset.UseVisualStyleBackColor = true;
-            this.addWardReset.Click += new System.EventHandler(this.addWardReset_Click);
-            // 
-            // wardListRefresh
-            // 
-            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
-            this.wardListRefresh.Name = "wardListRefresh";
-            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
-            this.wardListRefresh.TabIndex = 67;
-            this.wardListRefresh.Text = "Refresh";
-            this.wardListRefresh.UseVisualStyleBackColor = true;
-            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
 
         }
 
@@ -1657,13 +1684,11 @@
         private System.Windows.Forms.TabPage updateWardTab;
         private System.Windows.Forms.Label updateCurrentStatus;
         private System.Windows.Forms.Label updateSelectedStatus;
-        private System.Windows.Forms.Label updateCurrentCapacity;
-        private System.Windows.Forms.Label updateSelectedCapacity;
+        private System.Windows.Forms.Label updateOverallCap;
+        private System.Windows.Forms.Label updateSelectedOverallCap;
         private System.Windows.Forms.Label updateCurrentName;
         private System.Windows.Forms.Label updateSelectedWard;
         private System.Windows.Forms.Button updateWardButton;
-        private System.Windows.Forms.Label updateWardStatus;
-        private System.Windows.Forms.TextBox updateWardStatusBox;
         private System.Windows.Forms.TextBox updateWardCapacityBox;
         private System.Windows.Forms.TextBox updateWardNameBox;
         private System.Windows.Forms.Label updateWardCapacity;
@@ -1749,5 +1774,9 @@
         private System.Windows.Forms.Label addWardInfo;
         private System.Windows.Forms.Button addWardReset;
         private System.Windows.Forms.Button wardListRefresh;
+        private System.Windows.Forms.Label updateCurrentCap;
+        private System.Windows.Forms.Label updateSelectedCurrentCap;
+        private System.Windows.Forms.Label wardUpdateReqInfo;
+        private System.Windows.Forms.Button resetUpdateWard;
     }
 }

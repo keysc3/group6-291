@@ -33,6 +33,7 @@ namespace group6_291
             populateAccountList();
             addWardNameBox.Leave += new EventHandler(addWardNameBox_Leave);
             AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
+            wardListBox.SelectedIndexChanged += new EventHandler(wardListBox_SelectedIndexChanged);
             populateWardList();
         }
 
@@ -537,6 +538,86 @@ namespace group6_291
             conn.Close();
             //Update status and reset fields
             populateWardList();
+        }
+
+        private void WardUpdateButton_Click(object sender, EventArgs e)
+        {
+            DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
+            string wardName = wardViewItem["wardName"].ToString();
+            int overallCap = Int32.Parse(wardViewItem["overall_capacity"].ToString());
+            int currentCap = Int32.Parse(wardViewItem["current_capacity"].ToString());
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand updateWard = new SqlCommand("update [Ward] set wardName = @newWardName, overall_capacity = @newOverallCap where wardName = @oldWardName", conn);
+            updateWard.Parameters.AddWithValue("@oldWardName", wardName);
+            if (updateWardNameBox.Text.Length > 0)
+                updateWard.Parameters.AddWithValue("@newWardName", updateWardNameBox.Text);
+            else
+                updateWard.Parameters.AddWithValue("@newWardName", wardName);
+
+            int newCapacity;
+            if (updateWardCapacityBox.Text.Length > 0)
+            {
+                updateSelectedWard.Text = "we here";
+                if (Int32.TryParse(updateWardCapacityBox.Text, out newCapacity))
+                {
+                    if (newCapacity > 0 && (currentCap <= newCapacity))
+                        updateWard.Parameters.AddWithValue("@newOverallCap", newCapacity);
+                    else
+                    {
+                        wardUpdateReqInfo.Text = "*Invalid new capacity";
+                        wardUpdateReqInfo.ForeColor = Color.Red;
+                        conn.Close();
+                        return;
+                    }
+                }
+                else
+                {
+                    wardUpdateReqInfo.Text = "*Invalid new capacity number";
+                    wardUpdateReqInfo.ForeColor = Color.Red;
+                    conn.Close();
+                    return;
+                }
+            }
+            else
+                updateWard.Parameters.AddWithValue("@newOverallCap", overallCap);
+
+            updateWard.ExecuteNonQuery();
+            wardUpdateReqInfo.Text = "Ward successfully update";
+            wardUpdateReqInfo.ForeColor = Color.Green;
+            resetUpdateWardFields();
+            conn.Close();
+            populateWardList();
+        }
+
+        private void resetUpdateWardFields()
+        {
+            updateWardNameBox.Text = "";
+            updateWardCapacityBox.Text = "";
+        }
+
+        private void wardListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
+            string wardName = wardViewItem["wardName"].ToString();
+            string overallCap = wardViewItem["overall_capacity"].ToString();
+            string currentCap = wardViewItem["current_capacity"].ToString();
+
+            updateCurrentName.Text = wardName;
+            updateCurrentCap.Text = currentCap;
+            updateOverallCap.Text = overallCap;
+
+            if (Int32.Parse(overallCap) == Int32.Parse(currentCap))
+                updateCurrentStatus.Text = "Full";
+            else
+                updateCurrentStatus.Text = "Not Full";
+        }
+
+        private void resetUpdateWard_Click(object sender, EventArgs e)
+        {
+            resetUpdateWardFields();
+            wardUpdateReqInfo.Text = "";
         }
     }
 }
