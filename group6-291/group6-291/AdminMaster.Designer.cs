@@ -47,14 +47,14 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.UpdateRecpCheckBox = new System.Windows.Forms.CheckBox();
+            this.UpdateAdminCheckBox = new System.Windows.Forms.CheckBox();
+            this.UpdateAccountButton = new System.Windows.Forms.Button();
+            this.UpdatePassText = new System.Windows.Forms.TextBox();
+            this.UpdateUserText = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.AccountUpdateLabel = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.accountListBox = new System.Windows.Forms.ListBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -164,6 +164,9 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.UpdateCheckLabel = new System.Windows.Forms.Label();
+            this.UpdatePassLabelText = new System.Windows.Forms.Label();
+            this.UpdatePassLabel = new System.Windows.Forms.Label();
             this.addWardReset = new System.Windows.Forms.Button();
             this.wardListRefresh = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
@@ -373,14 +376,17 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBox3);
-            this.tabPage2.Controls.Add(this.checkBox4);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.textBox9);
-            this.tabPage2.Controls.Add(this.textBox12);
+            this.tabPage2.Controls.Add(this.UpdatePassLabel);
+            this.tabPage2.Controls.Add(this.UpdatePassLabelText);
+            this.tabPage2.Controls.Add(this.UpdateCheckLabel);
+            this.tabPage2.Controls.Add(this.UpdateRecpCheckBox);
+            this.tabPage2.Controls.Add(this.UpdateAdminCheckBox);
+            this.tabPage2.Controls.Add(this.UpdateAccountButton);
+            this.tabPage2.Controls.Add(this.UpdatePassText);
+            this.tabPage2.Controls.Add(this.UpdateUserText);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.AccountUpdateLabel);
             this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -389,49 +395,53 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // checkBox3
+            // UpdateRecpCheckBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(10, 128);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(85, 17);
-            this.checkBox3.TabIndex = 62;
-            this.checkBox3.Text = "Receptionist";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.UpdateRecpCheckBox.AutoSize = true;
+            this.UpdateRecpCheckBox.Location = new System.Drawing.Point(10, 128);
+            this.UpdateRecpCheckBox.Name = "UpdateRecpCheckBox";
+            this.UpdateRecpCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.UpdateRecpCheckBox.TabIndex = 62;
+            this.UpdateRecpCheckBox.Text = "Receptionist";
+            this.UpdateRecpCheckBox.UseVisualStyleBackColor = true;
+            this.UpdateRecpCheckBox.CheckedChanged += new System.EventHandler(this.UpdateRecpCheckBox_CheckedChanged);
             // 
-            // checkBox4
+            // UpdateAdminCheckBox
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(10, 153);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(55, 17);
-            this.checkBox4.TabIndex = 61;
-            this.checkBox4.Text = "Admin";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.UpdateAdminCheckBox.AutoSize = true;
+            this.UpdateAdminCheckBox.Location = new System.Drawing.Point(10, 153);
+            this.UpdateAdminCheckBox.Name = "UpdateAdminCheckBox";
+            this.UpdateAdminCheckBox.Size = new System.Drawing.Size(55, 17);
+            this.UpdateAdminCheckBox.TabIndex = 61;
+            this.UpdateAdminCheckBox.Text = "Admin";
+            this.UpdateAdminCheckBox.UseVisualStyleBackColor = true;
+            this.UpdateAdminCheckBox.CheckedChanged += new System.EventHandler(this.UpdateAdminCheckBox_CheckedChanged);
             // 
-            // button5
+            // UpdateAccountButton
             // 
-            this.button5.Location = new System.Drawing.Point(10, 176);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 23);
-            this.button5.TabIndex = 60;
-            this.button5.Text = "Update Account";
-            this.button5.UseVisualStyleBackColor = true;
+            this.UpdateAccountButton.Location = new System.Drawing.Point(10, 176);
+            this.UpdateAccountButton.Name = "UpdateAccountButton";
+            this.UpdateAccountButton.Size = new System.Drawing.Size(100, 23);
+            this.UpdateAccountButton.TabIndex = 60;
+            this.UpdateAccountButton.Text = "Update Account";
+            this.UpdateAccountButton.UseVisualStyleBackColor = true;
+            this.UpdateAccountButton.Click += new System.EventHandler(this.UpdateAccountButton_Click);
             // 
-            // textBox9
+            // UpdatePassText
             // 
-            this.textBox9.Location = new System.Drawing.Point(10, 102);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 57;
+            this.UpdatePassText.Location = new System.Drawing.Point(10, 102);
+            this.UpdatePassText.Name = "UpdatePassText";
+            this.UpdatePassText.Size = new System.Drawing.Size(100, 20);
+            this.UpdatePassText.TabIndex = 57;
             // 
-            // textBox12
+            // UpdateUserText
             // 
-            this.textBox12.Location = new System.Drawing.Point(10, 63);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 56;
+            this.UpdateUserText.Location = new System.Drawing.Point(10, 63);
+            this.UpdateUserText.Name = "UpdateUserText";
+            this.UpdateUserText.Size = new System.Drawing.Size(100, 20);
+            this.UpdateUserText.TabIndex = 56;
             // 
             // label10
             // 
@@ -451,16 +461,16 @@
             this.label17.TabIndex = 58;
             this.label17.Text = "New Username:";
             // 
-            // label21
+            // AccountUpdateLabel
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(144, 15);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(83, 20);
-            this.label21.TabIndex = 55;
-            this.label21.Text = "Username";
-            this.label21.Click += new System.EventHandler(this.label21_Click);
+            this.AccountUpdateLabel.AutoSize = true;
+            this.AccountUpdateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountUpdateLabel.Location = new System.Drawing.Point(144, 15);
+            this.AccountUpdateLabel.Name = "AccountUpdateLabel";
+            this.AccountUpdateLabel.Size = new System.Drawing.Size(83, 20);
+            this.AccountUpdateLabel.TabIndex = 55;
+            this.AccountUpdateLabel.Text = "Username";
+            this.AccountUpdateLabel.Click += new System.EventHandler(this.AccountUpdateLabel_Click);
             // 
             // label22
             // 
@@ -479,6 +489,7 @@
             this.accountListBox.Name = "accountListBox";
             this.accountListBox.Size = new System.Drawing.Size(224, 394);
             this.accountListBox.TabIndex = 56;
+            this.accountListBox.SelectedIndexChanged += new System.EventHandler(this.accountListBox_SelectedIndexChanged);
             // 
             // label32
             // 
@@ -1508,26 +1519,35 @@
             this.label1.Size = new System.Drawing.Size(164, 31);
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
+            //
+            // UpdateCheckLabel
             // 
-            // addWardReset
+            this.UpdateCheckLabel.AutoSize = true;
+            this.UpdateCheckLabel.Location = new System.Drawing.Point(10, 221);
+            this.UpdateCheckLabel.Name = "UpdateCheckLabel";
+            this.UpdateCheckLabel.Size = new System.Drawing.Size(0, 13);
+            this.UpdateCheckLabel.TabIndex = 64;
             // 
-            this.addWardReset.Location = new System.Drawing.Point(434, 343);
-            this.addWardReset.Name = "addWardReset";
-            this.addWardReset.Size = new System.Drawing.Size(99, 23);
-            this.addWardReset.TabIndex = 53;
-            this.addWardReset.Text = "Reset";
-            this.addWardReset.UseVisualStyleBackColor = true;
-            this.addWardReset.Click += new System.EventHandler(this.addWardReset_Click);
+            // UpdatePassLabelText
             // 
-            // wardListRefresh
+            this.UpdatePassLabelText.AutoSize = true;
+            this.UpdatePassLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.UpdatePassLabelText.Location = new System.Drawing.Point(321, 15);
+            this.UpdatePassLabelText.Name = "UpdatePassLabelText";
+            this.UpdatePassLabelText.Size = new System.Drawing.Size(78, 20);
+            this.UpdatePassLabelText.TabIndex = 65;
+            this.UpdatePassLabelText.Text = "Password";
             // 
-            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
-            this.wardListRefresh.Name = "wardListRefresh";
-            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
-            this.wardListRefresh.TabIndex = 67;
-            this.wardListRefresh.Text = "Refresh";
-            this.wardListRefresh.UseVisualStyleBackColor = true;
-            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
+            // UpdatePassLabel
+            // 
+            this.UpdatePassLabel.AutoSize = true;
+            this.UpdatePassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.UpdatePassLabel.Location = new System.Drawing.Point(243, 15);
+            this.UpdatePassLabel.Name = "UpdatePassLabel";
+            this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
+            this.UpdatePassLabel.TabIndex = 66;
+            this.UpdatePassLabel.Text = "Password:";
+            this.UpdatePassLabel.Click += new System.EventHandler(this.UpdatePassLabel_Click);
             // 
             // AdminMaster
             // 
@@ -1563,6 +1583,26 @@
             this.updateWardTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+          
+            // addWardReset
+            // 
+            this.addWardReset.Location = new System.Drawing.Point(434, 343);
+            this.addWardReset.Name = "addWardReset";
+            this.addWardReset.Size = new System.Drawing.Size(99, 23);
+            this.addWardReset.TabIndex = 53;
+            this.addWardReset.Text = "Reset";
+            this.addWardReset.UseVisualStyleBackColor = true;
+            this.addWardReset.Click += new System.EventHandler(this.addWardReset_Click);
+            // 
+            // wardListRefresh
+            // 
+            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
+            this.wardListRefresh.Name = "wardListRefresh";
+            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
+            this.wardListRefresh.TabIndex = 67;
+            this.wardListRefresh.Text = "Refresh";
+            this.wardListRefresh.UseVisualStyleBackColor = true;
+            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
 
         }
 
@@ -1645,14 +1685,14 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.CheckBox UpdateRecpCheckBox;
+        private System.Windows.Forms.CheckBox UpdateAdminCheckBox;
+        private System.Windows.Forms.Button UpdateAccountButton;
+        private System.Windows.Forms.TextBox UpdatePassText;
+        private System.Windows.Forms.TextBox UpdateUserText;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label AccountUpdateLabel;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ListBox accountListBox;
         private System.Windows.Forms.Label label32;
@@ -1701,6 +1741,9 @@
         private System.Windows.Forms.Label checkboxInfo;
         private System.Windows.Forms.Button resetUserButton;
         private System.Windows.Forms.Button refreshAccountList;
+        private System.Windows.Forms.Label UpdateCheckLabel;
+        private System.Windows.Forms.Label UpdatePassLabelText;
+        private System.Windows.Forms.Label UpdatePassLabel;
         private System.Windows.Forms.Label addWardRequestInfo;
         private System.Windows.Forms.Label addWardCapInfo;
         private System.Windows.Forms.Label addWardInfo;

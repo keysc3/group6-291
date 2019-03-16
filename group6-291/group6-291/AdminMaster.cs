@@ -16,9 +16,9 @@ namespace group6_291
     {
         public AdminMaster()
         {
-            
+
             InitializeComponent();
-            
+
         }
         private void AdminMaster_Load(object sender, EventArgs e)
         {
@@ -36,7 +36,7 @@ namespace group6_291
             populateWardList();
         }
 
- 
+
         //Purpose: Populate the account list box with all the registered users
         private void populateAccountList()
         {
@@ -44,7 +44,7 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select username, isAdmin from [User]", conn);
+            SqlDataAdapter adapter = new SqlDataAdapter("select username, password, isAdmin from [User]", conn);
             //Fill the dataset, sort it, and bind it to the list box
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "username asc";
@@ -71,13 +71,9 @@ namespace group6_291
 
         private void label10_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
 
         }
+
 
         private void vScrollBar2_Scroll(object sender, ScrollEventArgs e)
         {
@@ -240,6 +236,7 @@ namespace group6_291
                 resetAddUserFields();
                 conn.Close();
             }
+            populateAccountList();
 
         }
 
@@ -266,7 +263,125 @@ namespace group6_291
             populateAccountList();
         }
 
-        private void addWardStatusBox_TextChanged(object sender, EventArgs e)
+        private void AccountUpdateLabel_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void accountListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
+            string user = drvItem["username"].ToString();
+            string admin = drvItem["isAdmin"].ToString();
+            string password = drvItem["password"].ToString();
+
+            if (admin.Equals("True"))
+            {
+                
+                UpdateRecpCheckBox.Checked = false;
+                UpdateAdminCheckBox.Checked = true;
+            }
+            else
+            {
+                UpdateAdminCheckBox.Checked = false;
+                UpdateRecpCheckBox.Checked = true;
+            }
+            UpdatePassLabelText.Text = password;
+            AccountUpdateLabel.Text = user;
+        }
+
+        private void UpdateAccountButton_Click(object sender, EventArgs e) //update here
+        {
+            DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
+            string user = drvItem["username"].ToString();
+            string pass = drvItem["password"].ToString();
+
+            if (UpdateRecpCheckBox.Checked == false && UpdateAdminCheckBox.Checked == false)
+            {
+                UpdateCheckLabel.Text = "*Please select a role";
+                UpdateCheckLabel.ForeColor = Color.Red;
+            }
+            
+            //update user database
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            var sql = "UPDATE [User] SET username = @username, password = @password, isAdmin= @isAdmin where username=@userID";// repeat for all variables
+
+            SqlCommand UpdateUser = new SqlCommand(sql, conn);
+
+            if (UpdateUserText.Text.Length > 0)
+            {
+                UpdateUser.Parameters.AddWithValue("@username", UpdateUserText.Text);
+            } else
+            {
+                UpdateUser.Parameters.AddWithValue("@username", user);
+            }
+
+            if (UpdatePassText.Text.Length > 0)
+            {
+                UpdateUser.Parameters.AddWithValue("@password", UpdatePassText.Text);
+            } else
+            {
+                UpdateUser.Parameters.AddWithValue("@password", pass);
+            }
+        
+            if (UpdateRecpCheckBox.Checked)
+            {
+                UpdateUser.Parameters.AddWithValue("@isAdmin", false);
+            }
+            else
+            {
+                UpdateUser.Parameters.AddWithValue("@isAdmin", true);
+            }
+            UpdateUser.Parameters.AddWithValue("@userID", user);
+            UpdateUser.ExecuteNonQuery();
+            //Update status and reset fields
+            UpdateCheckLabel.Text = "User updated successfully";
+            UpdateCheckLabel.ForeColor = Color.Green;
+
+            UpdateUserText.Clear();
+            UpdatePassText.Clear();
+            populateAccountList();
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void UpdateRecpCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (UpdateAdminCheckBox.Checked == true)
+            {
+                //UpdateRecpCheckBox.Checked = true;
+                UpdateAdminCheckBox.Checked = false;
+                
+            } else
+            {
+                UpdateRecpCheckBox.Checked = true;
+            }
+        }
+
+        private void UpdateAdminCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (UpdateRecpCheckBox.Checked == true)
+            {
+                //UpdateAdminCheckBox.Checked = true;
+                UpdateRecpCheckBox.Checked = false;
+                
+            } else
+            {
+                UpdateAdminCheckBox.Checked = true;
+            }
+
+        }
+
+        private void UpdatePassLabel_Click(object sender, EventArgs e)
+        {
+        }
+        
+                private void addWardStatusBox_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -422,6 +537,5 @@ namespace group6_291
             conn.Close();
             //Update status and reset fields
             populateWardList();
-        }
     }
 }
