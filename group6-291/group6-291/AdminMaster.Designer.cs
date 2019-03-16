@@ -30,6 +30,7 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
+            this.refreshAccountList = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -133,10 +134,11 @@
             this.deleteWardButton = new System.Windows.Forms.Button();
             this.wardActionTabs = new System.Windows.Forms.TabControl();
             this.addWardTab = new System.Windows.Forms.TabPage();
-            this.AddWard = new System.Windows.Forms.Button();
+            this.addWardRequestInfo = new System.Windows.Forms.Label();
+            this.addWardCapInfo = new System.Windows.Forms.Label();
+            this.addWardInfo = new System.Windows.Forms.Label();
+            this.addWardButt = new System.Windows.Forms.Button();
             this.addWardButton = new System.Windows.Forms.Button();
-            this.addWardStatus = new System.Windows.Forms.Label();
-            this.addWardStatusBox = new System.Windows.Forms.TextBox();
             this.AddWardCapacityBox = new System.Windows.Forms.TextBox();
             this.addWardNameBox = new System.Windows.Forms.TextBox();
             this.addWardType = new System.Windows.Forms.Label();
@@ -162,7 +164,8 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.refreshAccountList = new System.Windows.Forms.Button();
+            this.addWardReset = new System.Windows.Forms.Button();
+            this.wardListRefresh = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -207,6 +210,16 @@
             this.UserAccTab.Size = new System.Drawing.Size(806, 487);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
+            // 
+            // refreshAccountList
+            // 
+            this.refreshAccountList.Location = new System.Drawing.Point(130, 458);
+            this.refreshAccountList.Name = "refreshAccountList";
+            this.refreshAccountList.Size = new System.Drawing.Size(99, 23);
+            this.refreshAccountList.TabIndex = 67;
+            this.refreshAccountList.Text = "Refresh";
+            this.refreshAccountList.UseVisualStyleBackColor = true;
+            this.refreshAccountList.Click += new System.EventHandler(this.refreshAccountList_Click);
             // 
             // button4
             // 
@@ -1159,6 +1172,7 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.WardTab.Controls.Add(this.wardListRefresh);
             this.WardTab.Controls.Add(this.deleteWardButton);
             this.WardTab.Controls.Add(this.wardActionTabs);
             this.WardTab.Controls.Add(this.wardListBox);
@@ -1175,12 +1189,13 @@
             // 
             // deleteWardButton
             // 
-            this.deleteWardButton.Location = new System.Drawing.Point(155, 460);
+            this.deleteWardButton.Location = new System.Drawing.Point(6, 461);
             this.deleteWardButton.Name = "deleteWardButton";
             this.deleteWardButton.Size = new System.Drawing.Size(75, 23);
             this.deleteWardButton.TabIndex = 66;
             this.deleteWardButton.Text = "Delete Ward";
             this.deleteWardButton.UseVisualStyleBackColor = true;
+            this.deleteWardButton.Click += new System.EventHandler(this.deleteWardButton_Click);
             // 
             // wardActionTabs
             // 
@@ -1194,10 +1209,12 @@
             // 
             // addWardTab
             // 
-            this.addWardTab.Controls.Add(this.AddWard);
+            this.addWardTab.Controls.Add(this.addWardReset);
+            this.addWardTab.Controls.Add(this.addWardRequestInfo);
+            this.addWardTab.Controls.Add(this.addWardCapInfo);
+            this.addWardTab.Controls.Add(this.addWardInfo);
+            this.addWardTab.Controls.Add(this.addWardButt);
             this.addWardTab.Controls.Add(this.addWardButton);
-            this.addWardTab.Controls.Add(this.addWardStatus);
-            this.addWardTab.Controls.Add(this.addWardStatusBox);
             this.addWardTab.Controls.Add(this.AddWardCapacityBox);
             this.addWardTab.Controls.Add(this.addWardNameBox);
             this.addWardTab.Controls.Add(this.addWardType);
@@ -1209,15 +1226,41 @@
             this.addWardTab.TabIndex = 0;
             this.addWardTab.Text = "Add";
             this.addWardTab.UseVisualStyleBackColor = true;
+            this.addWardTab.Click += new System.EventHandler(this.addWardTab_Click);
             // 
-            // AddWard
+            // addWardRequestInfo
             // 
-            this.AddWard.Location = new System.Drawing.Point(7, 145);
-            this.AddWard.Name = "AddWard";
-            this.AddWard.Size = new System.Drawing.Size(99, 23);
-            this.AddWard.TabIndex = 48;
-            this.AddWard.Text = "Add Ward";
-            this.AddWard.UseVisualStyleBackColor = true;
+            this.addWardRequestInfo.AutoSize = true;
+            this.addWardRequestInfo.Location = new System.Drawing.Point(6, 122);
+            this.addWardRequestInfo.Name = "addWardRequestInfo";
+            this.addWardRequestInfo.Size = new System.Drawing.Size(0, 13);
+            this.addWardRequestInfo.TabIndex = 52;
+            // 
+            // addWardCapInfo
+            // 
+            this.addWardCapInfo.AutoSize = true;
+            this.addWardCapInfo.Location = new System.Drawing.Point(116, 76);
+            this.addWardCapInfo.Name = "addWardCapInfo";
+            this.addWardCapInfo.Size = new System.Drawing.Size(0, 13);
+            this.addWardCapInfo.TabIndex = 50;
+            // 
+            // addWardInfo
+            // 
+            this.addWardInfo.AutoSize = true;
+            this.addWardInfo.Location = new System.Drawing.Point(113, 37);
+            this.addWardInfo.Name = "addWardInfo";
+            this.addWardInfo.Size = new System.Drawing.Size(0, 13);
+            this.addWardInfo.TabIndex = 49;
+            // 
+            // addWardButt
+            // 
+            this.addWardButt.Location = new System.Drawing.Point(6, 96);
+            this.addWardButt.Name = "addWardButt";
+            this.addWardButt.Size = new System.Drawing.Size(99, 23);
+            this.addWardButt.TabIndex = 48;
+            this.addWardButt.Text = "Add Ward";
+            this.addWardButt.UseVisualStyleBackColor = true;
+            this.addWardButt.Click += new System.EventHandler(this.addWardButt_Click);
             // 
             // addWardButton
             // 
@@ -1227,22 +1270,6 @@
             this.addWardButton.TabIndex = 47;
             this.addWardButton.Text = "Add Ward";
             this.addWardButton.UseVisualStyleBackColor = true;
-            // 
-            // addWardStatus
-            // 
-            this.addWardStatus.AutoSize = true;
-            this.addWardStatus.Location = new System.Drawing.Point(3, 93);
-            this.addWardStatus.Name = "addWardStatus";
-            this.addWardStatus.Size = new System.Drawing.Size(40, 13);
-            this.addWardStatus.TabIndex = 46;
-            this.addWardStatus.Text = "Status:";
-            // 
-            // addWardStatusBox
-            // 
-            this.addWardStatusBox.Location = new System.Drawing.Point(6, 109);
-            this.addWardStatusBox.Name = "addWardStatusBox";
-            this.addWardStatusBox.Size = new System.Drawing.Size(100, 20);
-            this.addWardStatusBox.TabIndex = 45;
             // 
             // AddWardCapacityBox
             // 
@@ -1257,6 +1284,7 @@
             this.addWardNameBox.Name = "addWardNameBox";
             this.addWardNameBox.Size = new System.Drawing.Size(100, 20);
             this.addWardNameBox.TabIndex = 41;
+            this.addWardNameBox.TextChanged += new System.EventHandler(this.addWardNameBox_TextChanged);
             // 
             // addWardType
             // 
@@ -1481,15 +1509,25 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // refreshAccountList
+            // addWardReset
             // 
-            this.refreshAccountList.Location = new System.Drawing.Point(130, 458);
-            this.refreshAccountList.Name = "refreshAccountList";
-            this.refreshAccountList.Size = new System.Drawing.Size(99, 23);
-            this.refreshAccountList.TabIndex = 67;
-            this.refreshAccountList.Text = "Refresh";
-            this.refreshAccountList.UseVisualStyleBackColor = true;
-            this.refreshAccountList.Click += new System.EventHandler(this.refreshAccountList_Click);
+            this.addWardReset.Location = new System.Drawing.Point(434, 343);
+            this.addWardReset.Name = "addWardReset";
+            this.addWardReset.Size = new System.Drawing.Size(99, 23);
+            this.addWardReset.TabIndex = 53;
+            this.addWardReset.Text = "Reset";
+            this.addWardReset.UseVisualStyleBackColor = true;
+            this.addWardReset.Click += new System.EventHandler(this.addWardReset_Click);
+            // 
+            // wardListRefresh
+            // 
+            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
+            this.wardListRefresh.Name = "wardListRefresh";
+            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
+            this.wardListRefresh.TabIndex = 67;
+            this.wardListRefresh.Text = "Refresh";
+            this.wardListRefresh.UseVisualStyleBackColor = true;
+            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
             // 
             // AdminMaster
             // 
@@ -1572,8 +1610,6 @@
         private System.Windows.Forms.TabControl wardActionTabs;
         private System.Windows.Forms.TabPage addWardTab;
         private System.Windows.Forms.Button addWardButton;
-        private System.Windows.Forms.Label addWardStatus;
-        private System.Windows.Forms.TextBox addWardStatusBox;
         private System.Windows.Forms.TextBox AddWardCapacityBox;
         private System.Windows.Forms.TextBox addWardNameBox;
         private System.Windows.Forms.Label addWardType;
@@ -1657,7 +1693,7 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.Button AddWard;
+        private System.Windows.Forms.Button addWardButt;
         private System.Windows.Forms.Button WardUpdateButton;
         private System.Windows.Forms.Label usernameInfo;
         private System.Windows.Forms.Label passwordInfo;
@@ -1665,5 +1701,10 @@
         private System.Windows.Forms.Label checkboxInfo;
         private System.Windows.Forms.Button resetUserButton;
         private System.Windows.Forms.Button refreshAccountList;
+        private System.Windows.Forms.Label addWardRequestInfo;
+        private System.Windows.Forms.Label addWardCapInfo;
+        private System.Windows.Forms.Label addWardInfo;
+        private System.Windows.Forms.Button addWardReset;
+        private System.Windows.Forms.Button wardListRefresh;
     }
 }
