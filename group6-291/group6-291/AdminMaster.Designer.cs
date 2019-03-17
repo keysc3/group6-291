@@ -309,7 +309,6 @@
             this.usernameInfo.Name = "usernameInfo";
             this.usernameInfo.Size = new System.Drawing.Size(0, 13);
             this.usernameInfo.TabIndex = 50;
-            this.usernameInfo.Click += new System.EventHandler(this.usernameInfo_Click);
             // 
             // recepCheckbox
             // 
@@ -356,7 +355,6 @@
             this.addUsername.Name = "addUsername";
             this.addUsername.Size = new System.Drawing.Size(100, 20);
             this.addUsername.TabIndex = 41;
-            this.addUsername.TextChanged += new System.EventHandler(this.addUsername_TextChanged);
             // 
             // label15
             // 
@@ -397,7 +395,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // UpdatePassLabel
             // 
@@ -408,7 +405,6 @@
             this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
             this.UpdatePassLabel.TabIndex = 66;
             this.UpdatePassLabel.Text = "Password:";
-            this.UpdatePassLabel.Click += new System.EventHandler(this.UpdatePassLabel_Click);
             // 
             // UpdatePassLabelText
             // 
@@ -501,7 +497,6 @@
             this.AccountUpdateLabel.Size = new System.Drawing.Size(83, 20);
             this.AccountUpdateLabel.TabIndex = 55;
             this.AccountUpdateLabel.Text = "Username";
-            this.AccountUpdateLabel.Click += new System.EventHandler(this.AccountUpdateLabel_Click);
             // 
             // label22
             // 
@@ -538,7 +533,6 @@
             this.vScrollBar2.Name = "vScrollBar2";
             this.vScrollBar2.Size = new System.Drawing.Size(17, 394);
             this.vScrollBar2.TabIndex = 54;
-            this.vScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar2_Scroll);
             // 
             // label33
             // 
@@ -1278,7 +1272,6 @@
             this.addWardTab.TabIndex = 0;
             this.addWardTab.Text = "Add";
             this.addWardTab.UseVisualStyleBackColor = true;
-            this.addWardTab.Click += new System.EventHandler(this.addWardTab_Click);
             // 
             // addWardReset
             // 
@@ -1346,7 +1339,6 @@
             this.addWardNameBox.Name = "addWardNameBox";
             this.addWardNameBox.Size = new System.Drawing.Size(100, 20);
             this.addWardNameBox.TabIndex = 41;
-            this.addWardNameBox.TextChanged += new System.EventHandler(this.addWardNameBox_TextChanged);
             // 
             // addWardType
             // 

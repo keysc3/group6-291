@@ -37,6 +37,7 @@ namespace group6_291
             populateWardList();
         }
 
+        //Admin Account Functions
 
         //Purpose: Populate the account list box with all the registered users
         private void populateAccountList()
@@ -52,38 +53,6 @@ namespace group6_291
             accountListBox.DataSource = ds.Tables[0];
             accountListBox.DisplayMember = "username";
             conn.Close();
-        }
-
-        //Purpose: Populate the ward list box with all the registered wards
-        private void populateWardList()
-        {
-            //Open connection and create a dataset from the query
-            SqlConnection conn = new SqlConnection(Globals.conn);
-            conn.Open();
-            DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
-            //Fill the dataset, sort it, and bind it to the list box
-            adapter.Fill(ds);
-            ds.Tables[0].DefaultView.Sort = "wardName asc";
-            wardListBox.DataSource = ds.Tables[0];
-            wardListBox.DisplayMember = "wardName";
-            conn.Close();
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void vScrollBar2_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
-
-        private void addUsername_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         //Purpose: Change the Username textbox's error label if it is invalid after user leaves the texbox
@@ -248,11 +217,6 @@ namespace group6_291
             requestInfo.Text = "";
         }
 
-        private void usernameInfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void deleteAccountButton_Click(object sender, EventArgs e)
         {
             DataRowView accViewItem = accountListBox.SelectedItem as DataRowView;
@@ -273,11 +237,6 @@ namespace group6_291
         private void refreshAccountList_Click(object sender, EventArgs e)
         {
             populateAccountList();
-        }
-
-        private void AccountUpdateLabel_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void accountListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -302,16 +261,20 @@ namespace group6_291
             AccountUpdateLabel.Text = user;
         }
 
-        private void UpdateAccountButton_Click(object sender, EventArgs e) //update here
+        //Purpose: Update selected account on update button click
+        private void UpdateAccountButton_Click(object sender, EventArgs e)
         {
+            //Get selected itme values
             DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
             string user = drvItem["username"].ToString();
             string pass = drvItem["password"].ToString();
 
+            //Make sure a role is checked
             if (UpdateRecpCheckBox.Checked == false && UpdateAdminCheckBox.Checked == false)
             {
                 UpdateCheckLabel.Text = "*Please select a role";
                 UpdateCheckLabel.ForeColor = Color.Red;
+                return;
             }
             
             //update user database
@@ -357,11 +320,7 @@ namespace group6_291
 
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-           
-        }
-
+        //Purpose: Change checkbox value based on reception checkbox change 
         private void UpdateRecpCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (UpdateAdminCheckBox.Checked == true)
@@ -375,6 +334,7 @@ namespace group6_291
             }
         }
 
+        //Purpose: Change checkbox value based on admin checkbox change 
         private void UpdateAdminCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (UpdateRecpCheckBox.Checked == true)
@@ -389,35 +349,37 @@ namespace group6_291
 
         }
 
-        private void UpdatePassLabel_Click(object sender, EventArgs e)
-        {
-        }
+        //Admin Ward Functions
         
-                private void addWardStatusBox_TextChanged(object sender, EventArgs e)
+        //Purpose: Populate the ward list box with all the registered wards
+        private void populateWardList()
         {
-
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "wardName asc";
+            wardListBox.DataSource = ds.Tables[0];
+            wardListBox.DisplayMember = "wardName";
+            conn.Close();
         }
 
-        private void addWardNameBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addWardStatusBox_Leave(object sender, EventArgs e)
-        {
-
-        }
-
+        //Purpose: make sure ward name is available and valid after being inputed
         private void addWardNameBox_Leave(object sender, EventArgs e)
         {
             wardIsValid();
         }
 
+        //Purpose: make sure ward capacity is valid after being inputed
         private void addWardCapacityBox_Leave(object sender, EventArgs e)
         {
             capacityIsValid();
         }
 
+        //Purpose: Check if a ward name is available to use
         private bool wardIsValid()
         {
             string inputedWardName = addWardNameBox.Text;
@@ -459,6 +421,7 @@ namespace group6_291
             }
         }
 
+        //Purpose: Check if a capacity is valid
         private bool capacityIsValid()
         {
             int capacity;
@@ -484,11 +447,7 @@ namespace group6_291
             }
         }
 
-        private void addWardTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Purpose: Add a ward to the Ward table if all input is valid
         private void addWardButt_Click(object sender, EventArgs e)
         {
             //Make sure ward name and capacity are valid
@@ -516,7 +475,7 @@ namespace group6_291
             }
         }
 
-        //Purpose: Reset all reporting and input fields
+        //Purpose: Reset all add ward reporting and input fields
         private void resetAddWardFields()
         {
             addWardNameBox.Text = "";
@@ -525,19 +484,23 @@ namespace group6_291
             addWardCapInfo.Text = "";
         }
 
+        //Purpose: Reset all add ward reporting and input fields when reset button is clicked
         private void addWardReset_Click(object sender, EventArgs e)
         {
             resetAddWardFields();
             addWardRequestInfo.Text = "";
         }
 
+        //Purpose: Refresh the ward list on refresh button click
         private void wardListRefresh_Click(object sender, EventArgs e)
         {
             populateWardList();
         }
 
+        //Purpose: Delete the selected ward on delete click
         private void deleteWardButton_Click(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
 
@@ -553,8 +516,10 @@ namespace group6_291
             addWardInfo.Text = "";
         }
 
+        //Purpose: Update selected ward with inputed info on update click
         private void WardUpdateButton_Click(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
             int overallCap = Int32.Parse(wardViewItem["overall_capacity"].ToString());
@@ -564,11 +529,14 @@ namespace group6_291
             conn.Open();
             SqlCommand updateWard = new SqlCommand("update [Ward] set wardName = @newWardName, overall_capacity = @newOverallCap where wardName = @oldWardName", conn);
             updateWard.Parameters.AddWithValue("@oldWardName", wardName);
+            
+            //Use new ward name if one is given
             if (updateWardNameBox.Text.Length > 0)
                 updateWard.Parameters.AddWithValue("@newWardName", updateWardNameBox.Text);
             else
                 updateWard.Parameters.AddWithValue("@newWardName", wardName);
 
+            //Use new capacity if a valid one is given
             int newCapacity;
             if (updateWardCapacityBox.Text.Length > 0)
             {
@@ -604,29 +572,32 @@ namespace group6_291
             populateWardList();
         }
 
+        //Purpose: Reset all update ward reporting and input fields
         private void resetUpdateWardFields()
         {
             updateWardNameBox.Text = "";
             updateWardCapacityBox.Text = "";
         }
 
+        //Purpose: Update ward update tabs information when a new ward is selected
         private void wardListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
             string overallCap = wardViewItem["overall_capacity"].ToString();
             string currentCap = wardViewItem["current_capacity"].ToString();
-
+            //Update labels
             updateCurrentName.Text = wardName;
             updateCurrentCap.Text = currentCap;
             updateOverallCap.Text = overallCap;
-
+            //Check if ward is full or not
             if (Int32.Parse(overallCap) == Int32.Parse(currentCap))
                 updateCurrentStatus.Text = "Full";
             else
                 updateCurrentStatus.Text = "Not Full";
         }
-
+        //Purpose: Reset all add ward reporting and input fields on reset click
         private void resetUpdateWard_Click(object sender, EventArgs e)
         {
             resetUpdateWardFields();
