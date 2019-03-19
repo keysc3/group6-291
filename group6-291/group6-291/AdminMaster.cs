@@ -57,18 +57,6 @@ namespace group6_291
             ds.Tables[0].DefaultView.Sort = "firstName asc";
             DoctorListBox.DataSource = ds.Tables[0];
             DoctorListBox.DisplayMember = "Name";
-
-            DataTable Department = new DataTable("Department");
-            SqlDataAdapter adap = new SqlDataAdapter("Select * from [Department]", conn);
-            adap.Fill(Department);
-            foreach (DataRow items in Department.Rows)
-            {
-                DoctorDeptBox.Items.Add(items[0].ToString());
-                DoctorUpdDeptBox.Items.Add(items[0].ToString());
-            }
-            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
-            string departmentName = DoctorList["departmentName"].ToString();
-            DoctorUpdDeptBox.SelectedIndex = DoctorUpdDeptBox.FindStringExact(departmentName);
             conn.Close();
         }
 
@@ -633,6 +621,10 @@ namespace group6_291
 
         private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DoctorErrorLabel.Text = "";
+            DoctorUpdateError.Text = "";
+            DoctorDeptBox.Items.Clear();
+            DoctorUpdDeptBox.Items.Clear();
             DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
             string firstName = DoctorList["firstName"].ToString();
             string lastName = DoctorList["lastName"].ToString();
@@ -646,7 +638,21 @@ namespace group6_291
             DoctorUpdSpec.Text = specialization;
             DoctorUpdDuty.Text = duties;
 
-           
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataTable Department = new DataTable("Department");
+            SqlDataAdapter adap = new SqlDataAdapter("Select * from [Department]", conn);
+            adap.Fill(Department);
+            foreach (DataRow items in Department.Rows)
+            {
+                DoctorDeptBox.Items.Add(items[0].ToString());
+                DoctorUpdDeptBox.Items.Add(items[0].ToString());
+            }
+            string departmentName1 = DoctorList["departmentName"].ToString();
+            //DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
+            conn.Close();
+            DoctorUpdDeptBox.SelectedIndex = -1;
+            DoctorDeptBox.SelectedIndex = -1;
         }
 
         private void UpdateDoctorButton_Click(object sender, EventArgs e)
@@ -679,17 +685,18 @@ namespace group6_291
                 SqlCommand updateDoctor = new SqlCommand(sql, conn);
                 updateDoctor.Parameters.AddWithValue("@firstName", DoctorUpdFirstName.Text);
                 updateDoctor.Parameters.AddWithValue("@lastName", DoctorUpdLastName.Text);
-                updateDoctor.Parameters.AddWithValue("@department", DoctorUpdDeptBox.SelectedIndex.ToString());
+                updateDoctor.Parameters.AddWithValue("@department", DoctorUpdDeptBox.SelectedItem.ToString());
                 updateDoctor.Parameters.AddWithValue("@spec", DoctorUpdSpec.Text);
                 updateDoctor.Parameters.AddWithValue("@duty", DoctorUpdDuty.Text);
                 updateDoctor.Parameters.AddWithValue("@doctorID", Int32.Parse(doctorID));
                 updateDoctor.ExecuteNonQuery();
                 conn.Close();
                 //Update status and reset fields
-                DoctorErrorLabel.Text = "Doctor updated successfully";
-                DoctorErrorLabel.ForeColor = Color.Green;
                 //resetDoctorAddFields();
                 populateDoctorList();
+                DoctorUpdateError.Text = "Doctor updated successfully";
+                DoctorUpdateError.ForeColor = Color.Green;
+                
             }
         }
 
@@ -711,16 +718,17 @@ namespace group6_291
                     "values (@firstName, @lastName, @department, @spec, @duty)", conn);
                 addDoctor.Parameters.AddWithValue("@firstName", DoctorFirstNameText.Text);
                 addDoctor.Parameters.AddWithValue("@lastName", DoctorLastNameText.Text);
-                addDoctor.Parameters.AddWithValue("@department", DoctorDeptBox.SelectedIndex.ToString());
+                addDoctor.Parameters.AddWithValue("@department", DoctorDeptBox.SelectedItem.ToString());
                 addDoctor.Parameters.AddWithValue("@spec", DoctorSpecText.Text);
                 addDoctor.Parameters.AddWithValue("@duty", DoctorDutyText.Text);
                 addDoctor.ExecuteNonQuery();
                 conn.Close();
                 //Update status and reset fields
-                DoctorErrorLabel.Text = "Doctor added successfully";
-                DoctorErrorLabel.ForeColor = Color.Green;
                 resetDoctorAddFields();
                 populateDoctorList();
+                DoctorErrorLabel.Text = "Doctor added successfully";
+                DoctorErrorLabel.ForeColor = Color.Green;
+
             }
         }
 
