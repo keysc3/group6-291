@@ -170,6 +170,53 @@
             this.wardListScrollBar = new System.Windows.Forms.VScrollBar();
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
+            this.DoctorTab = new System.Windows.Forms.TabPage();
+            this.DoctorListRefresh = new System.Windows.Forms.Button();
+            this.DeleteDoctorButton = new System.Windows.Forms.Button();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DoctorDeptBox = new System.Windows.Forms.ComboBox();
+            this.DoctorErrorLabel = new System.Windows.Forms.Label();
+            this.DoctorLastNameText = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.DoctorDutyText = new System.Windows.Forms.RichTextBox();
+            this.DoctorDutyLabel = new System.Windows.Forms.Label();
+            this.DoctorSpecText = new System.Windows.Forms.TextBox();
+            this.DoctorSpecLabel = new System.Windows.Forms.Label();
+            this.AddDoctorReset = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.AddDoctorButton = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.DoctorFirstNameText = new System.Windows.Forms.TextBox();
+            this.DoctorDeptLabel = new System.Windows.Forms.Label();
+            this.DoctorNameLabel = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.DoctorUpdDeptBox = new System.Windows.Forms.ComboBox();
+            this.DoctorUpdateError = new System.Windows.Forms.Label();
+            this.DoctorUpdLastName = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.DoctorUpdDuty = new System.Windows.Forms.RichTextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.DoctorUpdSpec = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.UpdateDoctorReset = new System.Windows.Forms.Button();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.UpdateDoctorButton = new System.Windows.Forms.Button();
+            this.DoctorUpdFirstName = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
+            this.DoctorListBox = new System.Windows.Forms.ListBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.vScrollBar4 = new System.Windows.Forms.VScrollBar();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
@@ -184,6 +231,10 @@
             this.wardActionTabs.SuspendLayout();
             this.addWardTab.SuspendLayout();
             this.updateWardTab.SuspendLayout();
+            this.DoctorTab.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl
@@ -192,6 +243,7 @@
             this.TabControl.Controls.Add(this.PatientRegTab);
             this.TabControl.Controls.Add(this.PatientRecTab);
             this.TabControl.Controls.Add(this.WardTab);
+            this.TabControl.Controls.Add(this.DoctorTab);
             this.TabControl.Location = new System.Drawing.Point(18, 36);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -1578,6 +1630,460 @@
             this.wardManagementTitle.TabIndex = 46;
             this.wardManagementTitle.Text = "Ward Management";
             // 
+            // DoctorTab
+            // 
+            this.DoctorTab.Controls.Add(this.DoctorListRefresh);
+            this.DoctorTab.Controls.Add(this.DeleteDoctorButton);
+            this.DoctorTab.Controls.Add(this.tabControl3);
+            this.DoctorTab.Controls.Add(this.DoctorListBox);
+            this.DoctorTab.Controls.Add(this.label56);
+            this.DoctorTab.Controls.Add(this.vScrollBar4);
+            this.DoctorTab.Controls.Add(this.label57);
+            this.DoctorTab.Controls.Add(this.label58);
+            this.DoctorTab.Location = new System.Drawing.Point(4, 22);
+            this.DoctorTab.Name = "DoctorTab";
+            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DoctorTab.Size = new System.Drawing.Size(806, 487);
+            this.DoctorTab.TabIndex = 4;
+            this.DoctorTab.Text = "Doctor Management";
+            this.DoctorTab.UseVisualStyleBackColor = true;
+            // 
+            // DoctorListRefresh
+            // 
+            this.DoctorListRefresh.Location = new System.Drawing.Point(136, 456);
+            this.DoctorListRefresh.Name = "DoctorListRefresh";
+            this.DoctorListRefresh.Size = new System.Drawing.Size(93, 23);
+            this.DoctorListRefresh.TabIndex = 75;
+            this.DoctorListRefresh.Text = "Refresh";
+            this.DoctorListRefresh.UseVisualStyleBackColor = true;
+            this.DoctorListRefresh.Click += new System.EventHandler(this.DoctorListRefresh_Click);
+            // 
+            // DeleteDoctorButton
+            // 
+            this.DeleteDoctorButton.Location = new System.Drawing.Point(36, 456);
+            this.DeleteDoctorButton.Name = "DeleteDoctorButton";
+            this.DeleteDoctorButton.Size = new System.Drawing.Size(94, 23);
+            this.DeleteDoctorButton.TabIndex = 74;
+            this.DeleteDoctorButton.Text = "Delete";
+            this.DeleteDoctorButton.UseVisualStyleBackColor = true;
+            this.DeleteDoctorButton.Click += new System.EventHandler(this.DeleteDoctorButton_Click);
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Controls.Add(this.tabPage3);
+            this.tabControl3.Controls.Add(this.tabPage5);
+            this.tabControl3.Location = new System.Drawing.Point(252, 104);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(548, 355);
+            this.tabControl3.TabIndex = 73;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.DoctorDeptBox);
+            this.tabPage3.Controls.Add(this.DoctorErrorLabel);
+            this.tabPage3.Controls.Add(this.DoctorLastNameText);
+            this.tabPage3.Controls.Add(this.label43);
+            this.tabPage3.Controls.Add(this.DoctorDutyText);
+            this.tabPage3.Controls.Add(this.DoctorDutyLabel);
+            this.tabPage3.Controls.Add(this.DoctorSpecText);
+            this.tabPage3.Controls.Add(this.DoctorSpecLabel);
+            this.tabPage3.Controls.Add(this.AddDoctorReset);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.label42);
+            this.tabPage3.Controls.Add(this.AddDoctorButton);
+            this.tabPage3.Controls.Add(this.button7);
+            this.tabPage3.Controls.Add(this.DoctorFirstNameText);
+            this.tabPage3.Controls.Add(this.DoctorDeptLabel);
+            this.tabPage3.Controls.Add(this.DoctorNameLabel);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(540, 329);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Add";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // DoctorDeptBox
+            // 
+            this.DoctorDeptBox.FormattingEnabled = true;
+            this.DoctorDeptBox.Location = new System.Drawing.Point(9, 70);
+            this.DoctorDeptBox.Name = "DoctorDeptBox";
+            this.DoctorDeptBox.Size = new System.Drawing.Size(123, 21);
+            this.DoctorDeptBox.TabIndex = 62;
+            // 
+            // DoctorErrorLabel
+            // 
+            this.DoctorErrorLabel.AutoSize = true;
+            this.DoctorErrorLabel.Location = new System.Drawing.Point(10, 262);
+            this.DoctorErrorLabel.Name = "DoctorErrorLabel";
+            this.DoctorErrorLabel.Size = new System.Drawing.Size(29, 13);
+            this.DoctorErrorLabel.TabIndex = 61;
+            this.DoctorErrorLabel.Text = "Error";
+            // 
+            // DoctorLastNameText
+            // 
+            this.DoctorLastNameText.Location = new System.Drawing.Point(138, 31);
+            this.DoctorLastNameText.Name = "DoctorLastNameText";
+            this.DoctorLastNameText.Size = new System.Drawing.Size(116, 20);
+            this.DoctorLastNameText.TabIndex = 60;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(135, 15);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(61, 13);
+            this.label43.TabIndex = 59;
+            this.label43.Text = "Last Name:";
+            // 
+            // DoctorDutyText
+            // 
+            this.DoctorDutyText.Location = new System.Drawing.Point(9, 156);
+            this.DoctorDutyText.Name = "DoctorDutyText";
+            this.DoctorDutyText.Size = new System.Drawing.Size(163, 99);
+            this.DoctorDutyText.TabIndex = 58;
+            this.DoctorDutyText.Text = "";
+            // 
+            // DoctorDutyLabel
+            // 
+            this.DoctorDutyLabel.AutoSize = true;
+            this.DoctorDutyLabel.Location = new System.Drawing.Point(6, 140);
+            this.DoctorDutyLabel.Name = "DoctorDutyLabel";
+            this.DoctorDutyLabel.Size = new System.Drawing.Size(40, 13);
+            this.DoctorDutyLabel.TabIndex = 57;
+            this.DoctorDutyLabel.Text = "Duties:";
+            // 
+            // DoctorSpecText
+            // 
+            this.DoctorSpecText.Location = new System.Drawing.Point(9, 113);
+            this.DoctorSpecText.Name = "DoctorSpecText";
+            this.DoctorSpecText.Size = new System.Drawing.Size(123, 20);
+            this.DoctorSpecText.TabIndex = 55;
+            // 
+            // DoctorSpecLabel
+            // 
+            this.DoctorSpecLabel.AutoSize = true;
+            this.DoctorSpecLabel.Location = new System.Drawing.Point(6, 96);
+            this.DoctorSpecLabel.Name = "DoctorSpecLabel";
+            this.DoctorSpecLabel.Size = new System.Drawing.Size(75, 13);
+            this.DoctorSpecLabel.TabIndex = 54;
+            this.DoctorSpecLabel.Text = "Specialization:";
+            // 
+            // AddDoctorReset
+            // 
+            this.AddDoctorReset.Location = new System.Drawing.Point(119, 287);
+            this.AddDoctorReset.Name = "AddDoctorReset";
+            this.AddDoctorReset.Size = new System.Drawing.Size(99, 23);
+            this.AddDoctorReset.TabIndex = 53;
+            this.AddDoctorReset.Text = "Reset";
+            this.AddDoctorReset.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 122);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(0, 13);
+            this.label18.TabIndex = 52;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(116, 76);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(0, 13);
+            this.label21.TabIndex = 50;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(113, 37);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(0, 13);
+            this.label42.TabIndex = 49;
+            // 
+            // AddDoctorButton
+            // 
+            this.AddDoctorButton.Location = new System.Drawing.Point(10, 287);
+            this.AddDoctorButton.Name = "AddDoctorButton";
+            this.AddDoctorButton.Size = new System.Drawing.Size(99, 23);
+            this.AddDoctorButton.TabIndex = 48;
+            this.AddDoctorButton.Text = "Add Doctor";
+            this.AddDoctorButton.UseVisualStyleBackColor = true;
+            this.AddDoctorButton.Click += new System.EventHandler(this.AddDoctorButton_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(479, 372);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 47;
+            this.button7.Text = "Add Ward";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // DoctorFirstNameText
+            // 
+            this.DoctorFirstNameText.Location = new System.Drawing.Point(9, 31);
+            this.DoctorFirstNameText.Name = "DoctorFirstNameText";
+            this.DoctorFirstNameText.Size = new System.Drawing.Size(123, 20);
+            this.DoctorFirstNameText.TabIndex = 41;
+            // 
+            // DoctorDeptLabel
+            // 
+            this.DoctorDeptLabel.AutoSize = true;
+            this.DoctorDeptLabel.Location = new System.Drawing.Point(6, 54);
+            this.DoctorDeptLabel.Name = "DoctorDeptLabel";
+            this.DoctorDeptLabel.Size = new System.Drawing.Size(65, 13);
+            this.DoctorDeptLabel.TabIndex = 44;
+            this.DoctorDeptLabel.Text = "Department:";
+            // 
+            // DoctorNameLabel
+            // 
+            this.DoctorNameLabel.AutoSize = true;
+            this.DoctorNameLabel.Location = new System.Drawing.Point(6, 15);
+            this.DoctorNameLabel.Name = "DoctorNameLabel";
+            this.DoctorNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.DoctorNameLabel.TabIndex = 43;
+            this.DoctorNameLabel.Text = "First Name:";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.DoctorUpdDeptBox);
+            this.tabPage5.Controls.Add(this.DoctorUpdateError);
+            this.tabPage5.Controls.Add(this.DoctorUpdLastName);
+            this.tabPage5.Controls.Add(this.label46);
+            this.tabPage5.Controls.Add(this.DoctorUpdDuty);
+            this.tabPage5.Controls.Add(this.label47);
+            this.tabPage5.Controls.Add(this.DoctorUpdSpec);
+            this.tabPage5.Controls.Add(this.label48);
+            this.tabPage5.Controls.Add(this.UpdateDoctorReset);
+            this.tabPage5.Controls.Add(this.label49);
+            this.tabPage5.Controls.Add(this.label50);
+            this.tabPage5.Controls.Add(this.label51);
+            this.tabPage5.Controls.Add(this.UpdateDoctorButton);
+            this.tabPage5.Controls.Add(this.DoctorUpdFirstName);
+            this.tabPage5.Controls.Add(this.label52);
+            this.tabPage5.Controls.Add(this.label53);
+            this.tabPage5.Controls.Add(this.button8);
+            this.tabPage5.Controls.Add(this.label45);
+            this.tabPage5.Controls.Add(this.button10);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(540, 329);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "Update";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // DoctorUpdDeptBox
+            // 
+            this.DoctorUpdDeptBox.FormattingEnabled = true;
+            this.DoctorUpdDeptBox.Location = new System.Drawing.Point(9, 69);
+            this.DoctorUpdDeptBox.Name = "DoctorUpdDeptBox";
+            this.DoctorUpdDeptBox.Size = new System.Drawing.Size(123, 21);
+            this.DoctorUpdDeptBox.TabIndex = 80;
+            // 
+            // DoctorUpdateError
+            // 
+            this.DoctorUpdateError.AutoSize = true;
+            this.DoctorUpdateError.Location = new System.Drawing.Point(10, 261);
+            this.DoctorUpdateError.Name = "DoctorUpdateError";
+            this.DoctorUpdateError.Size = new System.Drawing.Size(29, 13);
+            this.DoctorUpdateError.TabIndex = 79;
+            this.DoctorUpdateError.Text = "Error";
+            // 
+            // DoctorUpdLastName
+            // 
+            this.DoctorUpdLastName.Location = new System.Drawing.Point(138, 30);
+            this.DoctorUpdLastName.Name = "DoctorUpdLastName";
+            this.DoctorUpdLastName.Size = new System.Drawing.Size(116, 20);
+            this.DoctorUpdLastName.TabIndex = 78;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(135, 14);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(61, 13);
+            this.label46.TabIndex = 77;
+            this.label46.Text = "Last Name:";
+            // 
+            // DoctorUpdDuty
+            // 
+            this.DoctorUpdDuty.Location = new System.Drawing.Point(9, 155);
+            this.DoctorUpdDuty.Name = "DoctorUpdDuty";
+            this.DoctorUpdDuty.Size = new System.Drawing.Size(163, 99);
+            this.DoctorUpdDuty.TabIndex = 76;
+            this.DoctorUpdDuty.Text = "";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(6, 139);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(40, 13);
+            this.label47.TabIndex = 75;
+            this.label47.Text = "Duties:";
+            // 
+            // DoctorUpdSpec
+            // 
+            this.DoctorUpdSpec.Location = new System.Drawing.Point(9, 112);
+            this.DoctorUpdSpec.Name = "DoctorUpdSpec";
+            this.DoctorUpdSpec.Size = new System.Drawing.Size(123, 20);
+            this.DoctorUpdSpec.TabIndex = 74;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(6, 95);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(75, 13);
+            this.label48.TabIndex = 73;
+            this.label48.Text = "Specialization:";
+            // 
+            // UpdateDoctorReset
+            // 
+            this.UpdateDoctorReset.Location = new System.Drawing.Point(119, 286);
+            this.UpdateDoctorReset.Name = "UpdateDoctorReset";
+            this.UpdateDoctorReset.Size = new System.Drawing.Size(99, 23);
+            this.UpdateDoctorReset.TabIndex = 72;
+            this.UpdateDoctorReset.Text = "Reset";
+            this.UpdateDoctorReset.UseVisualStyleBackColor = true;
+            this.UpdateDoctorReset.Click += new System.EventHandler(this.UpdateDoctorReset_Click);
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(6, 124);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(0, 13);
+            this.label49.TabIndex = 71;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(116, 75);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(0, 13);
+            this.label50.TabIndex = 70;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(113, 36);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(0, 13);
+            this.label51.TabIndex = 69;
+            // 
+            // UpdateDoctorButton
+            // 
+            this.UpdateDoctorButton.Location = new System.Drawing.Point(10, 286);
+            this.UpdateDoctorButton.Name = "UpdateDoctorButton";
+            this.UpdateDoctorButton.Size = new System.Drawing.Size(99, 23);
+            this.UpdateDoctorButton.TabIndex = 68;
+            this.UpdateDoctorButton.Text = "Update Doctor";
+            this.UpdateDoctorButton.UseVisualStyleBackColor = true;
+            this.UpdateDoctorButton.Click += new System.EventHandler(this.UpdateDoctorButton_Click);
+            // 
+            // DoctorUpdFirstName
+            // 
+            this.DoctorUpdFirstName.Location = new System.Drawing.Point(9, 30);
+            this.DoctorUpdFirstName.Name = "DoctorUpdFirstName";
+            this.DoctorUpdFirstName.Size = new System.Drawing.Size(123, 20);
+            this.DoctorUpdFirstName.TabIndex = 65;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(6, 53);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(65, 13);
+            this.label52.TabIndex = 67;
+            this.label52.Text = "Department:";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(6, 14);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(60, 13);
+            this.label53.TabIndex = 66;
+            this.label53.Text = "First Name:";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(433, 344);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 23);
+            this.button8.TabIndex = 64;
+            this.button8.Text = "Reset";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(7, 228);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(0, 13);
+            this.label45.TabIndex = 63;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(495, 378);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 53;
+            this.button10.Text = "Update Ward";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // DoctorListBox
+            // 
+            this.DoctorListBox.FormattingEnabled = true;
+            this.DoctorListBox.Location = new System.Drawing.Point(5, 60);
+            this.DoctorListBox.Name = "DoctorListBox";
+            this.DoctorListBox.Size = new System.Drawing.Size(224, 394);
+            this.DoctorListBox.TabIndex = 72;
+            this.DoctorListBox.SelectedIndexChanged += new System.EventHandler(this.DoctorListBox_SelectedIndexChanged);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label56.Location = new System.Drawing.Point(5, 14);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(102, 24);
+            this.label56.TabIndex = 71;
+            this.label56.Text = "Doctor List:";
+            // 
+            // vScrollBar4
+            // 
+            this.vScrollBar4.Location = new System.Drawing.Point(232, 60);
+            this.vScrollBar4.Name = "vScrollBar4";
+            this.vScrollBar4.Size = new System.Drawing.Size(17, 394);
+            this.vScrollBar4.TabIndex = 70;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label57.Location = new System.Drawing.Point(252, 60);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(132, 24);
+            this.label57.TabIndex = 69;
+            this.label57.Text = "Doctor Actions";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.label58.Location = new System.Drawing.Point(547, 7);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(259, 31);
+            this.label58.TabIndex = 68;
+            this.label58.Text = "Doctor Management";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -1620,6 +2126,13 @@
             this.addWardTab.PerformLayout();
             this.updateWardTab.ResumeLayout(false);
             this.updateWardTab.PerformLayout();
+            this.DoctorTab.ResumeLayout(false);
+            this.DoctorTab.PerformLayout();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1770,5 +2283,52 @@
         private System.Windows.Forms.Label updateSelectedCurrentCap;
         private System.Windows.Forms.Label wardUpdateReqInfo;
         private System.Windows.Forms.Button resetUpdateWard;
+        private System.Windows.Forms.TabPage DoctorTab;
+        private System.Windows.Forms.Button DoctorListRefresh;
+        private System.Windows.Forms.Button DeleteDoctorButton;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button AddDoctorReset;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Button AddDoctorButton;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox DoctorFirstNameText;
+        private System.Windows.Forms.Label DoctorDeptLabel;
+        private System.Windows.Forms.Label DoctorNameLabel;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.ListBox DoctorListBox;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.VScrollBar vScrollBar4;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox DoctorSpecText;
+        private System.Windows.Forms.Label DoctorSpecLabel;
+        private System.Windows.Forms.RichTextBox DoctorDutyText;
+        private System.Windows.Forms.Label DoctorDutyLabel;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox DoctorLastNameText;
+        private System.Windows.Forms.Label DoctorErrorLabel;
+        private System.Windows.Forms.ComboBox DoctorDeptBox;
+        private System.Windows.Forms.ComboBox DoctorUpdDeptBox;
+        private System.Windows.Forms.Label DoctorUpdateError;
+        private System.Windows.Forms.TextBox DoctorUpdLastName;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.RichTextBox DoctorUpdDuty;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox DoctorUpdSpec;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Button UpdateDoctorReset;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Button UpdateDoctorButton;
+        private System.Windows.Forms.TextBox DoctorUpdFirstName;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
     }
 }
