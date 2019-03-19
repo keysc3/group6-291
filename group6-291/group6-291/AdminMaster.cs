@@ -35,6 +35,7 @@ namespace group6_291
             AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
             wardListBox.SelectedIndexChanged += new EventHandler(wardListBox_SelectedIndexChanged);
             populateWardList();
+            populatePatientList();
         }
 
 
@@ -632,5 +633,203 @@ namespace group6_291
             resetUpdateWardFields();
             wardUpdateReqInfo.Text = "";
         }
+
+
+        // ====================Patient Registration===================
+
+        //Purpose: Populate the Patient list box with all the registered patients
+        private void populatePatientList()
+        {
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT *, CONCAT(lastName, ', ', firstName) as fullName FROM [Patient]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "fullName asc";
+            registerListBox.DataSource = ds.Tables[0];
+            registerListBox.DisplayMember = "fullName";
+            conn.Close();
+        }
+
+        //Purpose: Reset all reporting and input fields for Patient Registration
+        private void resetAddRegisterFields()
+        {
+            addSINBox.Text = "";
+            addPatientTypeBox.SelectedIndex = -1;
+            addFirstNameBox.Text = "";
+            addLastNameBox.Text = "";
+            addStreetBox.Text = "";
+            addCityBox.Text = "";
+            addProvinceBox.Text = "";
+            addCountryBox.Text = "";
+            addGenderBox.SelectedIndex = -1;
+            addDOBBox.Text = "";
+            addAdmitDateBox.Text = "";
+            addDepartDateBox.Text = "";
+            addInsuranceBox.Text = "";
+            addHomePhoneBox.Text = "";
+            addCellphoneBox.Text = "";
+            addNotesBox.Text = "";
+        }
+
+        //Purpose: Reset all reporting fields INCLUDING the add user response when reset button is clicked
+        private void resetRegisterButton_Click(object sender, EventArgs e)
+        {
+            resetAddRegisterFields();
+            addRegisterInfo.Text = "";
+            addRegisterRequestInfo.Text = "";
+        }
+
+        //Purpose: Add a new patient registration to the Patient and Registration table in the database when the Add button is clicked
+        private void addRegisterButton_Click(object sender, EventArgs e)
+        {
+            //Clear error/success info everytime add button is clicked
+            addRegisterInfo.Text = "";
+            addRegisterRequestInfo.Text = "";
+
+            //If all criteria for every field is met, add user to databse
+            if (fieldsAreValid())
+            {
+                //Insert into database
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+
+                //Check if patient already exists in Patient Table
+                if (patientIsValid())
+                {
+                    SqlCommand addPatient = new SqlCommand(@"INSERT into [Patient] (patientSIN, patientType, firstName, lastName, street, city, province, country, sex, dateOfBirth) 
+                                                        VALUES (@SIN, @pType, @fName, @lName, @street, @city, @province, @country, @sex, @dateOfBirth)", conn);
+                    addPatient.Parameters.AddWithValue("@SIN", Int32.Parse(addSINBox.Text));
+                    addPatient.Parameters.AddWithValue("@pType", Int32.Parse(addPatientTypeBox.Text));
+                    addPatient.Parameters.AddWithValue("@fName", addFirstNameBox.Text);
+                    addPatient.Parameters.AddWithValue("@lName", addLastNameBox.Text);
+                    addPatient.Parameters.AddWithValue("@street", addStreetBox.Text);
+                    addPatient.Parameters.AddWithValue("@city", addCityBox.Text);
+                    addPatient.Parameters.AddWithValue("@province", addProvinceBox.Text);
+                    addPatient.Parameters.AddWithValue("@country", addCountryBox.Text);
+                    addPatient.Parameters.AddWithValue("@sex", addGenderBox.Text);
+                    addPatient.Parameters.AddWithValue("@dateOfBirth", addDOBBox.Text);
+                    addPatient.ExecuteNonQuery();
+                }
+
+
+                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, leaveDate, notes) VALUES (@SIN, @admitDate, @departDate, @notes)", conn);
+                addRegister.Parameters.AddWithValue("@SIN", Int32.Parse(addSINBox.Text));
+                addRegister.Parameters.AddWithValue("@admitDate", addAdmitDateBox.Text);
+
+                //Check if departure date is null
+                MaskedTextBox departDate = addDepartDateBox;
+                departDate.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                if (departDate.Text == ""){ addRegister.Parameters.AddWithValue("@departDate", DBNull.Value); }
+                else { addRegister.Parameters.AddWithValue("@departDate", addDepartDateBox.Text); }
+                //Check if notes are null
+                if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
+                else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
+
+                addRegister.ExecuteNonQuery();
+                conn.Close();
+                //Update status and reset fields
+                addRegisterRequestInfo.Text = "Patient registered successfully";
+                addRegisterRequestInfo.ForeColor = Color.Green;
+                resetAddRegisterFields();          
+            }
+            populatePatientList();
+        }
+
+        //Check all fields after add button is pressed. If there are any invalid fields, points them out.
+        private bool fieldsAreValid()
+        {
+            string inputedSIN = addSINBox.Text;
+            string inputedFName = addFirstNameBox.Text;
+            string inputedLName = addLastNameBox.Text;
+            string inputedStreet = addStreetBox.Text;
+            string inputedCity = addCityBox.Text;
+            string inputedProvince = addProvinceBox.Text;
+            string inputedCountry = addCountryBox.Text;
+            string inputedPType = addPatientTypeBox.SelectedText;
+            string inputedGender = addGenderBox.SelectedText;
+
+            addRegisterInfo.ForeColor = Color.Red;
+
+            //Check SIN against SIN constraints (all num, length = 9)
+            if (!Regex.IsMatch(inputedSIN, @"^[0-9]+$") | inputedSIN.Length != 9){
+                addRegisterInfo.Text += "*SIN must be 9 numbers\n";}
+            //Check First Name
+            if (!Regex.IsMatch(inputedFName, @"^[a-zA-Z]+$") | inputedFName.Length > 32){
+                addRegisterInfo.Text += "*First Name must be between 0 and 32 letters long.\n";}
+            //Check Last Name
+            if (!Regex.IsMatch(inputedLName, @"^[a-zA-Z]+$") | inputedLName.Length > 32){
+                addRegisterInfo.Text += "*Last Name must be between 0 and 32 letters long.\n";}
+            //Check Street (Allow for numbers and white space)
+            if (!Regex.IsMatch(inputedStreet, @"^[a-zA-Z0-9\s]+$") | inputedStreet.Length > 50){
+                addRegisterInfo.Text += "*Street must be between 0 and 50 characters long.\n";}
+            //Check City (Allow whitespace)
+            if (!Regex.IsMatch(inputedCity, @"^[a-zA-Z\s]+$") | inputedCity.Length > 50){
+                addRegisterInfo.Text += "*City must be between 0 and 50 characters long.\n";}
+            //Check Province (Allow whitespace)
+            if (!Regex.IsMatch(inputedProvince, @"^[a-zA-Z\s]+$") | inputedProvince.Length > 50){
+                addRegisterInfo.Text += "*Province must be between 0 and 50 characters long.\n";}
+            //Check Country (Allow whitespace)
+            if (!Regex.IsMatch(inputedCountry, @"^[a-zA-Z\s]+$") | inputedCountry.Length > 50){
+                addRegisterInfo.Text += "*Country must be between 0 and 50 characters long.\n";}
+            //Check DOB, Admit Date, and Depart Date: 1. Valid date, 1.5 Depart is completely empty or full, 2. DOB < Admit < Depart
+            dateIsValid();
+            //Check Patient Type, error if nothing chosen
+            if (addPatientTypeBox.SelectedItem == null){
+                addRegisterInfo.Text += "*Please choose a Patient Type.\n";}
+            //Check Gender, error if nothing chosen
+            if (addGenderBox.SelectedItem == null){
+                addRegisterInfo.Text += "*Please choose a Gender.\n";}
+
+            //If there are any warnings, return false.
+            if (addRegisterInfo.Text.Length > 0){return false;}
+            else{return true;}
+        }
+
+        //For Patient Table (no dupes): If SIN already exists, do not add to Patient Table.
+        private bool patientIsValid()
+        {
+            string inputedSIN =  addSINBox.Text;
+            //Check to see if the patient record already exists in Patient Table
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand checkSIN = new SqlCommand("select count(*) from [Patient] where patientSin = @patientSin", conn);
+            checkSIN.Parameters.AddWithValue("@patientSin", inputedSIN);
+            int SINExist = (int)checkSIN.ExecuteScalar();
+            //Record (SIN) already exists
+            if (SINExist > 0){
+                addRegisterInfo.Text = "*SIN already exists, no new record was created.";
+                addRegisterInfo.ForeColor = Color.Red;
+                return false;
+            }
+            else{return true;}
+        }
+
+        //Checks two dates to see if "Later" date is earlier than the "Earlier" date, returns false
+        private bool dateIsValid()
+        {
+            DateTime inputedDOB;
+            DateTime inputedAdmitDate;
+            DateTime inputedDepartDate;
+            //Check if entry is empty or incorrect
+            if (!addDOBBox.MaskCompleted | !DateTime.TryParse(addDOBBox.Text, out inputedDOB)){ addRegisterInfo.Text += "*Invalid Date of Birth.\n";}
+
+            //Check if entry is empty or incorrect, or admission date is earlier than birth date
+            if (!addAdmitDateBox.MaskCompleted | !DateTime.TryParse(addAdmitDateBox.Text, out inputedAdmitDate) | DateTime.Compare(inputedDOB, inputedAdmitDate) > 0) {
+                addRegisterInfo.Text += "*Invalid Admission Date.\n"; }
+
+            //Check if entry is completely empty (OK)
+            MaskedTextBox departDate = addDepartDateBox;
+            departDate.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            if (departDate.Text == "") {return true;}
+
+            //If entry is not completely empty, check for partial input, or if departure date incorrect or is earlier than admission date
+            else if (!DateTime.TryParse(addDepartDateBox.Text, out inputedDepartDate) | DateTime.Compare(inputedAdmitDate, inputedDepartDate) > 0)
+            { addRegisterInfo.Text += "*Invalid Departure Date.\n"; }
+            return true;
+        }
+
     }
 }
