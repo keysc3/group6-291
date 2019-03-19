@@ -1,0 +1,16 @@
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\bin\Debug\group6-291.exe.config
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\bin\Debug\group6-291.exe
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\bin\Debug\group6-291.pdb
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.AdminHome.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.AdminMaster.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.Form1.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.Home.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.Properties.Resources.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6_291.WardManager.resources
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6-291.csproj.GenerateResource.Cache
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6-291.exe
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6-291.pdb
+C:\Users\ijoke\Desktop\CMPT291Proj\group6-291\group6-291\group6-291\obj\Debug\group6-291.csprojResolveAssemblyReference.cache
+C:\Users\ijoke\Downloads\2018 SCHOOL FILES\Winter 2019\group6-291\group6-291\group6-291\bin\Debug\group6-291.exe.config
+C:\Users\ijoke\Downloads\2018 SCHOOL FILES\Winter 2019\group6-291\group6-291\group6-291\obj\Debug\group6-291.exe
+C:\Users\ijoke\Downloads\2018 SCHOOL FILES\Winter 2019\group6-291\group6-291\group6-291\obj\Debug\group6-291.pdb
