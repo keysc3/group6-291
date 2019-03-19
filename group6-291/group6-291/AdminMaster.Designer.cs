@@ -1707,6 +1707,7 @@
             // 
             // DoctorDeptBox
             // 
+            this.DoctorDeptBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DoctorDeptBox.FormattingEnabled = true;
             this.DoctorDeptBox.Location = new System.Drawing.Point(9, 70);
             this.DoctorDeptBox.Name = "DoctorDeptBox";
@@ -1879,6 +1880,7 @@
             // 
             // DoctorUpdDeptBox
             // 
+            this.DoctorUpdDeptBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DoctorUpdDeptBox.FormattingEnabled = true;
             this.DoctorUpdDeptBox.Location = new System.Drawing.Point(9, 69);
             this.DoctorUpdDeptBox.Name = "DoctorUpdDeptBox";
