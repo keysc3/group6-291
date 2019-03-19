@@ -35,7 +35,29 @@ namespace group6_291
             AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
             wardListBox.SelectedIndexChanged += new EventHandler(wardListBox_SelectedIndexChanged);
             populateWardList();
+            populateDoctorList();
             populatePatientList();
+
+        }
+
+        //Admin Account Functions
+
+        //Purpose: Populate the account list box with all the registered users
+        private void populateDoctorList()
+        {
+            DoctorErrorLabel.Text = "";
+            DoctorUpdateError.Text = "";
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select (firstName + lastName) AS Name, * from [Doctor]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "firstName asc";
+            DoctorListBox.DataSource = ds.Tables[0];
+            DoctorListBox.DisplayMember = "Name";
+            conn.Close();
         }
 
 
@@ -53,38 +75,6 @@ namespace group6_291
             accountListBox.DataSource = ds.Tables[0];
             accountListBox.DisplayMember = "username";
             conn.Close();
-        }
-
-        //Purpose: Populate the ward list box with all the registered wards
-        private void populateWardList()
-        {
-            //Open connection and create a dataset from the query
-            SqlConnection conn = new SqlConnection(Globals.conn);
-            conn.Open();
-            DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
-            //Fill the dataset, sort it, and bind it to the list box
-            adapter.Fill(ds);
-            ds.Tables[0].DefaultView.Sort = "wardName asc";
-            wardListBox.DataSource = ds.Tables[0];
-            wardListBox.DisplayMember = "wardName";
-            conn.Close();
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void vScrollBar2_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
-
-        private void addUsername_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         //Purpose: Change the Username textbox's error label if it is invalid after user leaves the texbox
@@ -249,11 +239,6 @@ namespace group6_291
             requestInfo.Text = "";
         }
 
-        private void usernameInfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void deleteAccountButton_Click(object sender, EventArgs e)
         {
             DataRowView accViewItem = accountListBox.SelectedItem as DataRowView;
@@ -276,11 +261,6 @@ namespace group6_291
             populateAccountList();
         }
 
-        private void AccountUpdateLabel_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void accountListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
@@ -290,7 +270,7 @@ namespace group6_291
 
             if (admin.Equals("True"))
             {
-                
+
                 UpdateRecpCheckBox.Checked = false;
                 UpdateAdminCheckBox.Checked = true;
             }
@@ -303,86 +283,78 @@ namespace group6_291
             AccountUpdateLabel.Text = user;
         }
 
-        private void UpdateAccountButton_Click(object sender, EventArgs e) //update here
+        //Purpose: Update selected account on update button click
+        private void UpdateAccountButton_Click(object sender, EventArgs e)
         {
+            //Get selected itme values
             DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
             string user = drvItem["username"].ToString();
             string pass = drvItem["password"].ToString();
 
+            //Make sure a role is checked
             if (UpdateRecpCheckBox.Checked == false && UpdateAdminCheckBox.Checked == false)
             {
                 UpdateCheckLabel.Text = "*Please select a role";
                 UpdateCheckLabel.ForeColor = Color.Red;
-            }
-            
-            //update user database
-            SqlConnection conn = new SqlConnection(Globals.conn);
-            conn.Open();
-            var sql = "UPDATE [User] SET username = @username, password = @password, isAdmin= @isAdmin where username=@userID";// repeat for all variables
-
-            SqlCommand UpdateUser = new SqlCommand(sql, conn);
-
-            if (UpdateUserText.Text.Length > 0)
-            {
-                UpdateUser.Parameters.AddWithValue("@username", UpdateUserText.Text);
-            } else
-            {
-                UpdateUser.Parameters.AddWithValue("@username", user);
+                return;
             }
 
-            if (UpdatePassText.Text.Length > 0)
+            if (UpdateUserText.TextLength.Equals(0) || UpdatePassText.TextLength.Equals(0))
             {
-                UpdateUser.Parameters.AddWithValue("@password", UpdatePassText.Text);
-            } else
-            {
-                UpdateUser.Parameters.AddWithValue("@password", pass);
-            }
-        
-            if (UpdateRecpCheckBox.Checked)
-            {
-                UpdateUser.Parameters.AddWithValue("@isAdmin", false);
+                UpdateCheckLabel.Text = "Cannot have empty fields";
+                UpdateCheckLabel.ForeColor = Color.Red;
             }
             else
             {
-                UpdateUser.Parameters.AddWithValue("@isAdmin", true);
+                
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+                var sql = "UPDATE [User] SET username = @username, password = @password, isAdmin= @isAdmin where username=@userID";// repeat for all variables
+                SqlCommand UpdateUser = new SqlCommand(sql, conn);
+                UpdateUser.Parameters.AddWithValue("@username", UpdateUserText.Text);
+                UpdateUser.Parameters.AddWithValue("@password", UpdatePassText.Text);
+                if (UpdateRecpCheckBox.Checked)
+                {
+                    UpdateUser.Parameters.AddWithValue("@isAdmin", false);
+                }
+                else
+                {
+                    UpdateUser.Parameters.AddWithValue("@isAdmin", true);
+                }
+                UpdateUser.Parameters.AddWithValue("@userID", user);
+                UpdateUser.ExecuteNonQuery();
+                //Update status and reset fields
+                UpdateCheckLabel.Text = "User updated successfully";
+                UpdateCheckLabel.ForeColor = Color.Green;
+
+                UpdateUserText.Clear();
+                UpdatePassText.Clear();
+                populateAccountList();
             }
-            UpdateUser.Parameters.AddWithValue("@userID", user);
-            UpdateUser.ExecuteNonQuery();
-            //Update status and reset fields
-            UpdateCheckLabel.Text = "User updated successfully";
-            UpdateCheckLabel.ForeColor = Color.Green;
-
-            UpdateUserText.Clear();
-            UpdatePassText.Clear();
-            populateAccountList();
-
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-           
-        }
-
+        //Purpose: Change checkbox value based on reception checkbox change 
         private void UpdateRecpCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (UpdateAdminCheckBox.Checked == true)
             {
                 //UpdateRecpCheckBox.Checked = true;
                 UpdateAdminCheckBox.Checked = false;
-                
+
             } else
             {
                 UpdateRecpCheckBox.Checked = true;
             }
         }
 
+        //Purpose: Change checkbox value based on admin checkbox change 
         private void UpdateAdminCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (UpdateRecpCheckBox.Checked == true)
             {
                 //UpdateAdminCheckBox.Checked = true;
                 UpdateRecpCheckBox.Checked = false;
-                
+
             } else
             {
                 UpdateAdminCheckBox.Checked = true;
@@ -390,35 +362,37 @@ namespace group6_291
 
         }
 
-        private void UpdatePassLabel_Click(object sender, EventArgs e)
+        //Admin Ward Functions
+
+        //Purpose: Populate the ward list box with all the registered wards
+        private void populateWardList()
         {
-        }
-        
-                private void addWardStatusBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addWardNameBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addWardStatusBox_Leave(object sender, EventArgs e)
-        {
-
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "wardName asc";
+            wardListBox.DataSource = ds.Tables[0];
+            wardListBox.DisplayMember = "wardName";
+            conn.Close();
         }
 
+        //Purpose: make sure ward name is available and valid after being inputed
         private void addWardNameBox_Leave(object sender, EventArgs e)
         {
             wardIsValid();
         }
 
+        //Purpose: make sure ward capacity is valid after being inputed
         private void addWardCapacityBox_Leave(object sender, EventArgs e)
         {
             capacityIsValid();
         }
 
+        //Purpose: Check if a ward name is available to use
         private bool wardIsValid()
         {
             string inputedWardName = addWardNameBox.Text;
@@ -460,6 +434,7 @@ namespace group6_291
             }
         }
 
+        //Purpose: Check if a capacity is valid
         private bool capacityIsValid()
         {
             int capacity;
@@ -485,11 +460,7 @@ namespace group6_291
             }
         }
 
-        private void addWardTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Purpose: Add a ward to the Ward table if all input is valid
         private void addWardButt_Click(object sender, EventArgs e)
         {
             //Make sure ward name and capacity are valid
@@ -517,7 +488,7 @@ namespace group6_291
             }
         }
 
-        //Purpose: Reset all reporting and input fields
+        //Purpose: Reset all add ward reporting and input fields
         private void resetAddWardFields()
         {
             addWardNameBox.Text = "";
@@ -526,19 +497,23 @@ namespace group6_291
             addWardCapInfo.Text = "";
         }
 
+        //Purpose: Reset all add ward reporting and input fields when reset button is clicked
         private void addWardReset_Click(object sender, EventArgs e)
         {
             resetAddWardFields();
             addWardRequestInfo.Text = "";
         }
 
+        //Purpose: Refresh the ward list on refresh button click
         private void wardListRefresh_Click(object sender, EventArgs e)
         {
             populateWardList();
         }
 
+        //Purpose: Delete the selected ward on delete click
         private void deleteWardButton_Click(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
 
@@ -554,8 +529,10 @@ namespace group6_291
             addWardInfo.Text = "";
         }
 
+        //Purpose: Update selected ward with inputed info on update click
         private void WardUpdateButton_Click(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
             int overallCap = Int32.Parse(wardViewItem["overall_capacity"].ToString());
@@ -565,11 +542,14 @@ namespace group6_291
             conn.Open();
             SqlCommand updateWard = new SqlCommand("update [Ward] set wardName = @newWardName, overall_capacity = @newOverallCap where wardName = @oldWardName", conn);
             updateWard.Parameters.AddWithValue("@oldWardName", wardName);
+
+            //Use new ward name if one is given
             if (updateWardNameBox.Text.Length > 0)
                 updateWard.Parameters.AddWithValue("@newWardName", updateWardNameBox.Text);
             else
                 updateWard.Parameters.AddWithValue("@newWardName", wardName);
 
+            //Use new capacity if a valid one is given
             int newCapacity;
             if (updateWardCapacityBox.Text.Length > 0)
             {
@@ -605,35 +585,189 @@ namespace group6_291
             populateWardList();
         }
 
+        //Purpose: Reset all update ward reporting and input fields
         private void resetUpdateWardFields()
         {
             updateWardNameBox.Text = "";
             updateWardCapacityBox.Text = "";
         }
 
+        //Purpose: Update ward update tabs information when a new ward is selected
         private void wardListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
             string overallCap = wardViewItem["overall_capacity"].ToString();
             string currentCap = wardViewItem["current_capacity"].ToString();
-
+            //Update labels
             updateCurrentName.Text = wardName;
             updateCurrentCap.Text = currentCap;
             updateOverallCap.Text = overallCap;
-
+            //Check if ward is full or not
             if (Int32.Parse(overallCap) == Int32.Parse(currentCap))
                 updateCurrentStatus.Text = "Full";
             else
                 updateCurrentStatus.Text = "Not Full";
         }
 
+
+        //Purpose: Reset all add ward reporting and input fields on reset click
         private void resetUpdateWard_Click(object sender, EventArgs e)
         {
             resetUpdateWardFields();
             wardUpdateReqInfo.Text = "";
         }
 
+        private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DoctorErrorLabel.Text = "";
+            DoctorUpdateError.Text = "";
+            DoctorDeptBox.Items.Clear();
+            DoctorUpdDeptBox.Items.Clear();
+            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
+            string firstName = DoctorList["firstName"].ToString();
+            string lastName = DoctorList["lastName"].ToString();
+            string departmentName = DoctorList["departmentName"].ToString();
+            string specialization = DoctorList["specialization"].ToString();
+            string duties = DoctorList["duties"].ToString();
+
+            DoctorUpdFirstName.Text = firstName;
+            DoctorUpdLastName.Text = lastName;
+            DoctorUpdDeptBox.SelectedIndex = DoctorUpdDeptBox.FindStringExact(departmentName);
+            DoctorUpdSpec.Text = specialization;
+            DoctorUpdDuty.Text = duties;
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataTable Department = new DataTable("Department");
+            SqlDataAdapter adap = new SqlDataAdapter("Select * from [Department]", conn);
+            adap.Fill(Department);
+            foreach (DataRow items in Department.Rows)
+            {
+                DoctorDeptBox.Items.Add(items[0].ToString());
+                DoctorUpdDeptBox.Items.Add(items[0].ToString());
+            }
+            string departmentName1 = DoctorList["departmentName"].ToString();
+            //DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
+            conn.Close();
+            DoctorUpdDeptBox.SelectedIndex = -1;
+            DoctorDeptBox.SelectedIndex = -1;
+        }
+
+        private void UpdateDoctorButton_Click(object sender, EventArgs e)
+        {
+
+            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
+            string doctorID = DoctorList["doctorID"].ToString();
+            DoctorUpdateError.Text = doctorID;
+            string firstName = DoctorList["firstName"].ToString();
+            string lastName = DoctorList["lastName"].ToString();
+            string departmentName = DoctorList["departmentName"].ToString();
+            string specialization = DoctorList["specialization"].ToString();
+            string duties = DoctorList["duties"].ToString();
+            
+            if (DoctorUpdFirstName.TextLength.Equals(0) || DoctorUpdLastName.TextLength.Equals(0)
+               || DoctorUpdDeptBox.SelectedIndex == -1 || DoctorUpdSpec.TextLength.Equals(0) ||
+               DoctorUpdDuty.TextLength.Equals(0))
+            {
+                DoctorUpdateError.Text = "Cannot have empty fields";
+                DoctorUpdateError.ForeColor = Color.Red;
+            }
+            else
+            {
+                //Update database
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+                var sql = "UPDATE [Doctor] SET firstName=@firstName, lastName=@lastName, departmentName=@department, "
+                    + "specialization=@spec, duties =@duty where doctorID=@doctorID";// repeat for all variables
+
+                SqlCommand updateDoctor = new SqlCommand(sql, conn);
+                updateDoctor.Parameters.AddWithValue("@firstName", DoctorUpdFirstName.Text);
+                updateDoctor.Parameters.AddWithValue("@lastName", DoctorUpdLastName.Text);
+                updateDoctor.Parameters.AddWithValue("@department", DoctorUpdDeptBox.SelectedItem.ToString());
+                updateDoctor.Parameters.AddWithValue("@spec", DoctorUpdSpec.Text);
+                updateDoctor.Parameters.AddWithValue("@duty", DoctorUpdDuty.Text);
+                updateDoctor.Parameters.AddWithValue("@doctorID", Int32.Parse(doctorID));
+                updateDoctor.ExecuteNonQuery();
+                conn.Close();
+                //Update status and reset fields
+                //resetDoctorAddFields();
+                populateDoctorList();
+                DoctorUpdateError.Text = "Doctor updated successfully";
+                DoctorUpdateError.ForeColor = Color.Green;
+                
+            }
+        }
+
+        private void AddDoctorButton_Click(object sender, EventArgs e)
+        {
+
+            if (DoctorFirstNameText.TextLength.Equals(0) || DoctorLastNameText.TextLength.Equals(0)
+                || DoctorDeptBox.SelectedIndex == -1 || DoctorDutyText.TextLength.Equals(0) ||
+                DoctorSpecText.TextLength.Equals(0)) {
+                DoctorErrorLabel.Text = "Cannot have empty fields";
+                DoctorErrorLabel.ForeColor = Color.Red;
+            }
+            else{
+                //Insert into database
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+                SqlCommand addDoctor = new SqlCommand("insert into [Doctor] (firstName, lastName, departmentName, specialization, duties)" +
+                    "values (@firstName, @lastName, @department, @spec, @duty)", conn);
+                addDoctor.Parameters.AddWithValue("@firstName", DoctorFirstNameText.Text);
+                addDoctor.Parameters.AddWithValue("@lastName", DoctorLastNameText.Text);
+                addDoctor.Parameters.AddWithValue("@department", DoctorDeptBox.SelectedItem.ToString());
+                addDoctor.Parameters.AddWithValue("@spec", DoctorSpecText.Text);
+                addDoctor.Parameters.AddWithValue("@duty", DoctorDutyText.Text);
+                addDoctor.ExecuteNonQuery();
+                conn.Close();
+                //Update status and reset fields
+                resetDoctorAddFields();
+                populateDoctorList();
+                DoctorErrorLabel.Text = "Doctor added successfully";
+                DoctorErrorLabel.ForeColor = Color.Green;
+
+            }
+        }
+
+        private void resetDoctorAddFields()
+        {
+            DoctorFirstNameText.Text = "";
+            DoctorLastNameText.Text = "";
+            DoctorDeptBox.SelectedIndex.Equals(0);
+            DoctorDutyText.Text = "";
+            DoctorSpecText.Text = "";
+        }
+
+        private void UpdateDoctorReset_Click(object sender, EventArgs e)
+        {
+            DoctorUpdFirstName.Text = "";
+            DoctorUpdLastName.Text = "";
+            DoctorUpdDeptBox.SelectedIndex.Equals(0);
+            DoctorUpdSpec.Text = "";
+            DoctorUpdDuty.Text = "";
+        }
+
+        private void DoctorListRefresh_Click(object sender, EventArgs e)
+        {
+            populateDoctorList();
+        }
+
+        private void DeleteDoctorButton_Click(object sender, EventArgs e)
+        {
+            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
+            int doctorID = Int32.Parse(DoctorList["doctorID"].ToString());
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand addWard = new SqlCommand("delete from [Doctor] where doctorID=@doctorID", conn);
+            addWard.Parameters.AddWithValue("@doctorID", doctorID);
+            addWard.ExecuteNonQuery();
+            conn.Close();
+            //Update status and reset fields
+            populateDoctorList();
+        }
 
         // ====================Patient Registration===================
 
@@ -690,13 +824,8 @@ namespace group6_291
             addRegisterRequestInfo.Text = "";
 
             //If all criteria for every field is met, add user to databse
-            if (fieldsAreValid())
-            {
-                //Insert into database
-                SqlConnection conn = new SqlConnection(Globals.conn);
-                conn.Open();
-
-                //Check if patient already exists in Patient Table
+            if (fieldsAreValid()){
+                            //Check if patient already exists in Patient Table
                 if (patientIsValid())
                 {
                     SqlCommand addPatient = new SqlCommand(@"INSERT into [Patient] (patientSIN, patientType, firstName, lastName, street, city, province, country, sex, dateOfBirth) 
@@ -830,6 +959,5 @@ namespace group6_291
             { addRegisterInfo.Text += "*Invalid Departure Date.\n"; }
             return true;
         }
-
     }
 }
