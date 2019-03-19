@@ -649,9 +649,9 @@ namespace group6_291
                 DoctorUpdDeptBox.Items.Add(items[0].ToString());
             }
             string departmentName1 = DoctorList["departmentName"].ToString();
-            //DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
+            DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
             conn.Close();
-            DoctorUpdDeptBox.SelectedIndex = -1;
+            //DoctorUpdDeptBox.SelectedIndex = -1;
             DoctorDeptBox.SelectedIndex = -1;
         }
 
