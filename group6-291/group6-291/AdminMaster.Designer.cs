@@ -1287,7 +1287,7 @@
             // 
             // deleteWardButton
             // 
-            this.deleteWardButton.Location = new System.Drawing.Point(6, 461);
+            this.deleteWardButton.Location = new System.Drawing.Point(74, 461);
             this.deleteWardButton.Name = "deleteWardButton";
             this.deleteWardButton.Size = new System.Drawing.Size(75, 23);
             this.deleteWardButton.TabIndex = 66;
@@ -1592,6 +1592,7 @@
             this.wardListBox.Name = "wardListBox";
             this.wardListBox.Size = new System.Drawing.Size(224, 394);
             this.wardListBox.TabIndex = 50;
+            this.wardListBox.SelectedIndexChanged += new System.EventHandler(this.wardListBox_SelectedIndexChanged_1);
             // 
             // wardListLabel
             // 
