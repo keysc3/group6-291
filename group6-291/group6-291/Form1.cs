@@ -61,8 +61,8 @@ namespace group6_291
                 {
                     //Home RegisterPatient = new Home();
                     //RegisterPatient.Show();
-                    AdminMaster Admin = new AdminMaster();
-                    Admin.Show();
+                    ReceptionistMaster Recep = new ReceptionistMaster();
+                    Recep.Show();
                     this.Hide();
 
                     //loginResponseLabel.Text = "Receptionist logged in";
