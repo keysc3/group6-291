@@ -73,7 +73,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.addGenderBox = new System.Windows.Forms.ComboBox();
-            this.addSINBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.addNotesBox = new System.Windows.Forms.RichTextBox();
@@ -224,6 +223,7 @@
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.addSINBox = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -269,7 +269,7 @@
             this.UserAccTab.Controls.Add(this.label34);
             this.UserAccTab.Location = new System.Drawing.Point(4, 22);
             this.UserAccTab.Name = "UserAccTab";
-            this.UserAccTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.UserAccTab.Padding = new System.Windows.Forms.Padding(3);
             this.UserAccTab.Size = new System.Drawing.Size(806, 487);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
@@ -320,7 +320,7 @@
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(535, 368);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add";
@@ -448,7 +448,7 @@
             this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(535, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
@@ -615,6 +615,7 @@
             // PatientRegTab
             // 
             this.PatientRegTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PatientRegTab.Controls.Add(this.addSINBox);
             this.PatientRegTab.Controls.Add(this.addCellphoneBox);
             this.PatientRegTab.Controls.Add(this.addHomePhoneBox);
             this.PatientRegTab.Controls.Add(this.addDOBBox);
@@ -623,7 +624,6 @@
             this.PatientRegTab.Controls.Add(this.label2);
             this.PatientRegTab.Controls.Add(this.label3);
             this.PatientRegTab.Controls.Add(this.addGenderBox);
-            this.PatientRegTab.Controls.Add(this.addSINBox);
             this.PatientRegTab.Controls.Add(this.label4);
             this.PatientRegTab.Controls.Add(this.label13);
             this.PatientRegTab.Controls.Add(this.addNotesBox);
@@ -656,7 +656,7 @@
             this.PatientRegTab.Controls.Add(this.label5);
             this.PatientRegTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRegTab.Name = "PatientRegTab";
-            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3);
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
@@ -664,7 +664,7 @@
             // addCellphoneBox
             // 
             this.addCellphoneBox.Location = new System.Drawing.Point(400, 180);
-            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addCellphoneBox.Mask = "000-0000";
             this.addCellphoneBox.Name = "addCellphoneBox";
             this.addCellphoneBox.Size = new System.Drawing.Size(101, 20);
@@ -673,7 +673,7 @@
             // addHomePhoneBox
             // 
             this.addHomePhoneBox.Location = new System.Drawing.Point(281, 180);
-            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addHomePhoneBox.Mask = "000-0000";
             this.addHomePhoneBox.Name = "addHomePhoneBox";
             this.addHomePhoneBox.Size = new System.Drawing.Size(101, 20);
@@ -682,7 +682,7 @@
             // addDOBBox
             // 
             this.addDOBBox.Location = new System.Drawing.Point(641, 68);
-            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2);
             this.addDOBBox.Mask = "00/00/0000";
             this.addDOBBox.Name = "addDOBBox";
             this.addDOBBox.Size = new System.Drawing.Size(101, 20);
@@ -734,13 +734,6 @@
             this.addGenderBox.Name = "addGenderBox";
             this.addGenderBox.Size = new System.Drawing.Size(100, 21);
             this.addGenderBox.TabIndex = 164;
-            // 
-            // addSINBox
-            // 
-            this.addSINBox.Location = new System.Drawing.Point(281, 68);
-            this.addSINBox.Name = "addSINBox";
-            this.addSINBox.Size = new System.Drawing.Size(100, 20);
-            this.addSINBox.TabIndex = 147;
             // 
             // label4
             // 
@@ -1015,7 +1008,7 @@
             this.PatientRecTab.Controls.Add(this.label28);
             this.PatientRecTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRecTab.Name = "PatientRecTab";
-            this.PatientRecTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PatientRecTab.Padding = new System.Windows.Forms.Padding(3);
             this.PatientRecTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRecTab.TabIndex = 3;
             this.PatientRecTab.Text = "Patient Records";
@@ -1069,7 +1062,7 @@
             this.tabPage4.Controls.Add(this.label25);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(541, 368);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Update";
@@ -1349,7 +1342,7 @@
             this.WardTab.Controls.Add(this.wardManagementTitle);
             this.WardTab.Location = new System.Drawing.Point(4, 22);
             this.WardTab.Name = "WardTab";
-            this.WardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.WardTab.Padding = new System.Windows.Forms.Padding(3);
             this.WardTab.Size = new System.Drawing.Size(806, 487);
             this.WardTab.TabIndex = 1;
             this.WardTab.Text = "Ward Details";
@@ -1398,7 +1391,7 @@
             this.addWardTab.Controls.Add(this.addWardName);
             this.addWardTab.Location = new System.Drawing.Point(4, 22);
             this.addWardTab.Name = "addWardTab";
-            this.addWardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.addWardTab.Padding = new System.Windows.Forms.Padding(3);
             this.addWardTab.Size = new System.Drawing.Size(539, 373);
             this.addWardTab.TabIndex = 0;
             this.addWardTab.Text = "Add";
@@ -1509,7 +1502,7 @@
             this.updateWardTab.Controls.Add(this.updateWardName);
             this.updateWardTab.Location = new System.Drawing.Point(4, 22);
             this.updateWardTab.Name = "updateWardTab";
-            this.updateWardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.updateWardTab.Padding = new System.Windows.Forms.Padding(3);
             this.updateWardTab.Size = new System.Drawing.Size(539, 373);
             this.updateWardTab.TabIndex = 1;
             this.updateWardTab.Text = "Update";
@@ -1722,7 +1715,7 @@
             this.DoctorTab.Controls.Add(this.label58);
             this.DoctorTab.Location = new System.Drawing.Point(4, 22);
             this.DoctorTab.Name = "DoctorTab";
-            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3);
             this.DoctorTab.Size = new System.Drawing.Size(806, 487);
             this.DoctorTab.TabIndex = 4;
             this.DoctorTab.Text = "Doctor Management";
@@ -1779,7 +1772,7 @@
             this.tabPage3.Controls.Add(this.DoctorNameLabel);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(540, 329);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Add";
@@ -1952,7 +1945,7 @@
             this.tabPage5.Controls.Add(this.button10);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(540, 329);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Update";
@@ -2175,6 +2168,13 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
+            // addSINBox
+            // 
+            this.addSINBox.Location = new System.Drawing.Point(281, 68);
+            this.addSINBox.Name = "addSINBox";
+            this.addSINBox.Size = new System.Drawing.Size(100, 20);
+            this.addSINBox.TabIndex = 169;
+            // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2393,7 +2393,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox addGenderBox;
-        private System.Windows.Forms.TextBox addSINBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         //private System.Windows.Forms.Label label14;
@@ -2421,5 +2420,6 @@
         private System.Windows.Forms.TextBox addLastNameBox;
         private System.Windows.Forms.TextBox addFirstNameBox;
         private System.Windows.Forms.Button addRegisterButton;
+        private System.Windows.Forms.TextBox addSINBox;
     }
 }
