@@ -809,8 +809,8 @@ namespace group6_291
             addCountryBox.Text = "";
             addGenderBox.SelectedIndex = -1;
             addDOBBox.Text = "";
-            addAdmitDateBox.Text = "";
-            addDepartDateBox.Text = "";
+            //addAdmitDateBox.Text = "";
+            //addDepartDateBox.Text = "";
             addInsuranceBox.Text = "";
             addHomePhoneBox.Text = "";
             addCellphoneBox.Text = "";
@@ -857,19 +857,20 @@ namespace group6_291
                     addPatient.ExecuteNonQuery();
                 }
 
-                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, leaveDate, notes) VALUES (@SIN, @admitDate, @departDate, @notes)", conn);
+                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
                 addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
-                addRegister.Parameters.AddWithValue("@admitDate", addAdmitDateBox.Text);
+                addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
 
                 //Check if departure date is null
-                MaskedTextBox departDate = addDepartDateBox;
+                /*MaskedTextBox departDate = addDepartDateBox;
                 departDate.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
                 if (departDate.Text == "") { addRegister.Parameters.AddWithValue("@departDate", DBNull.Value); }
                 else
                 {
                     departDate.TextMaskFormat = MaskFormat.IncludePromptAndLiterals;
                     addRegister.Parameters.AddWithValue("@departDate", addDepartDateBox.Text);
-                }
+                }*/
+
                 //Check if notes are null
                 if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
                 else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
@@ -976,12 +977,13 @@ namespace group6_291
         private bool dateIsValid()
         {
             DateTime inputedDOB;
-            DateTime inputedAdmitDate;
-            DateTime inputedDepartDate;
+            //DateTime inputedAdmitDate;
+            //DateTime inputedDepartDate;
             //Check if entry is empty or incorrect
             if (!addDOBBox.MaskCompleted | !DateTime.TryParse(addDOBBox.Text, out inputedDOB)) { addRegisterInfo.Text += "*Invalid Date of Birth.\n"; }
 
             //Check if entry is empty or incorrect, or admission date is earlier than birth date
+            /*
             if (!addAdmitDateBox.MaskCompleted | !DateTime.TryParse(addAdmitDateBox.Text, out inputedAdmitDate) | DateTime.Compare(inputedDOB, inputedAdmitDate) > 0)
             {
                 addRegisterInfo.Text += "*Invalid Admission Date.\n";
@@ -999,6 +1001,7 @@ namespace group6_291
             if (!DateTime.TryParse(addDepartDateBox.Text, out inputedDepartDate) | DateTime.Compare(inputedAdmitDate, inputedDepartDate) > 0)
             {
                 addRegisterInfo.Text += "*Invalid Departure Date.\n"; }
+            */
             return true;
         }
 
