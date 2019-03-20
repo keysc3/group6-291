@@ -41,11 +41,12 @@ namespace group6_291
 
         private void currentPatientsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Get selected ward values
+            //
             DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
             int regID = Int32.Parse(currPatient["registerID"].ToString());
             populateAssignDoctor(regID);
             populateUnassignDoctor(regID);
+            FillWardBox(regID);
             medicalCaseTextBox.Text = "";
         }
 
@@ -178,6 +179,87 @@ namespace group6_291
             releasePatient.ExecuteNonQuery();
             conn.Close();
             populateCurrentPatientBox();
+        }
+
+        private void FillWardBox(int regID)
+        {
+            NewWardBox.SelectedIndex = -1;
+            NewWardBox.DataSource = null;
+
+            DataSet ward = new DataSet();
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand getAvailWards = new SqlCommand("Select * from [Ward] where current_capacity < overall_capacity and wardName not in (select wardName from Patient_Ward where registerID = @regID and dateOut is null)", conn);
+            SqlDataAdapter adap = new SqlDataAdapter();
+            getAvailWards.Parameters.AddWithValue("@regID", regID);
+            adap.SelectCommand = getAvailWards; 
+            adap.Fill(ward);
+            ward.Tables[0].DefaultView.Sort = "wardName asc";
+            NewWardBox.DataSource = ward.Tables[0];
+            NewWardBox.DisplayMember = "wardName";
+            conn.Close();
+            NewWardBox.SelectedIndex = -1;
+        }
+
+        private void SubmitNewWard_Click(object sender, EventArgs e)
+        {
+            if (NewWardBox.SelectedIndex > -1)
+            {
+                DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
+                DataRowView selectedWard = NewWardBox.SelectedItem as DataRowView;
+                int regID = Int32.Parse(currPatient["registerID"].ToString());
+                string newWardName = selectedWard["wardName"].ToString();
+
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+
+                SqlCommand getWard = new SqlCommand("select wardName from Patient_ward where registerID = @regID and dateOut is null", conn);
+                getWard.Parameters.AddWithValue("@regID", regID);
+                SqlDataReader wardReader = getWard.ExecuteReader();
+
+                string oldWardName = "";
+                while (wardReader.Read())
+                {
+                    oldWardName = wardReader["wardName"].ToString();
+                }
+                wardReader.Close();
+
+                SqlCommand decWard = new SqlCommand("update Ward set current_capacity = current_capacity - 1 where wardName = @oldWardName", conn);
+                decWard.Parameters.AddWithValue("@oldWardName", oldWardName);
+                decWard.ExecuteNonQuery();
+
+                SqlCommand changeWard = new SqlCommand("insert into Patient_Ward (registerID, wardName, dateIn) values (@regID, @wardName, @dateIn)", conn);
+                changeWard.Parameters.AddWithValue("@regID", regID);
+                changeWard.Parameters.AddWithValue("@wardName", newWardName);
+                changeWard.Parameters.AddWithValue("@dateIn", DateTime.Now);
+                changeWard.ExecuteNonQuery();
+
+                //Update capacity of ward patient is tranferred to
+                SqlCommand updateCapacity1 = new SqlCommand("update Ward set current_capacity = current_capacity + 1 where wardName = @wardname", conn);
+                updateCapacity1.Parameters.AddWithValue("@wardname", newWardName);
+                updateCapacity1.ExecuteNonQuery();
+
+                //Update dateout of ward patient is was in
+                SqlCommand updateDateOut = new SqlCommand("update Patient_Ward set dateOut = @dateOut where registerID = @regID and wardName = @oldWardName", conn);
+                updateDateOut.Parameters.AddWithValue("@oldWardname", oldWardName);
+                updateDateOut.Parameters.AddWithValue("@regID", regID);
+                updateDateOut.Parameters.AddWithValue("@dateOut", DateTime.Now);
+                updateDateOut.ExecuteNonQuery();
+                conn.Close();
+
+
+                wardSuccess.Text = "Ward assigned successfully";
+                wardSuccess.ForeColor = Color.Green;
+                wardErrorLabel.Text = "";
+                currentPatientsBox_SelectedIndexChanged(sender, e);
+            }
+            else
+            {
+                wardErrorLabel.Text = "*Select a ward";
+                wardErrorLabel.ForeColor = Color.Red;
+                wardSuccess.Text = "";
+            }
         }
     }
 }
