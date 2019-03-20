@@ -64,6 +64,7 @@
             this.FirstNameBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.test = new System.Windows.Forms.Button();
+            this.PatientRecTab = new System.Windows.Forms.TabPage();
             this.CurentPatientsTab = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.updatePatientInfo = new System.Windows.Forms.TabPage();
@@ -93,29 +94,29 @@
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.managePatientWard = new System.Windows.Forms.TabPage();
+            this.managePatientDoc = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.miscDetailsTextBox = new System.Windows.Forms.TextBox();
+            this.miscDetailsLabel = new System.Windows.Forms.Label();
+            this.unassignErrorLabel = new System.Windows.Forms.Label();
+            this.manageDocSuccess = new System.Windows.Forms.Label();
+            this.medicalErrorLabel = new System.Windows.Forms.Label();
+            this.unassignDocButton = new System.Windows.Forms.Button();
+            this.assignDocButton = new System.Windows.Forms.Button();
+            this.medicalCaseTextBox = new System.Windows.Forms.TextBox();
+            this.medicalCaseLabel = new System.Windows.Forms.Label();
+            this.unassignDocBox = new System.Windows.Forms.ComboBox();
+            this.unassignDocLabel = new System.Windows.Forms.Label();
+            this.assignDocBox = new System.Windows.Forms.ComboBox();
+            this.assignDocLabel = new System.Windows.Forms.Label();
+            this.releasePatientTab = new System.Windows.Forms.TabPage();
             this.currentPatientsBox = new System.Windows.Forms.ListBox();
             this.label26 = new System.Windows.Forms.Label();
             this.vScrollBar3 = new System.Windows.Forms.VScrollBar();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.PatientRecTab = new System.Windows.Forms.TabPage();
-            this.releasePatientTab = new System.Windows.Forms.TabPage();
-            this.managePatientWard = new System.Windows.Forms.TabPage();
-            this.managePatientDoc = new System.Windows.Forms.TabPage();
-            this.assignDocLabel = new System.Windows.Forms.Label();
-            this.assignDocBox = new System.Windows.Forms.ComboBox();
-            this.unassignDocLabel = new System.Windows.Forms.Label();
-            this.unassignDocBox = new System.Windows.Forms.ComboBox();
-            this.medicalCaseLabel = new System.Windows.Forms.Label();
-            this.medicalCaseTextBox = new System.Windows.Forms.TextBox();
-            this.assignDocButton = new System.Windows.Forms.Button();
-            this.unassignDocButton = new System.Windows.Forms.Button();
-            this.medicalErrorLabel = new System.Windows.Forms.Label();
-            this.manageDocSuccess = new System.Windows.Forms.Label();
-            this.unassignErrorLabel = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.miscDetailsTextBox = new System.Windows.Forms.TextBox();
-            this.miscDetailsLabel = new System.Windows.Forms.Label();
+            this.releaseButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -463,9 +464,19 @@
             this.test.Text = "Add";
             this.test.UseVisualStyleBackColor = true;
             // 
+            // PatientRecTab
+            // 
+            this.PatientRecTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PatientRecTab.Location = new System.Drawing.Point(4, 22);
+            this.PatientRecTab.Name = "PatientRecTab";
+            this.PatientRecTab.Size = new System.Drawing.Size(806, 487);
+            this.PatientRecTab.TabIndex = 4;
+            this.PatientRecTab.Text = "Patient Records";
+            // 
             // CurentPatientsTab
             // 
             this.CurentPatientsTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.CurentPatientsTab.Controls.Add(this.releaseButton);
             this.CurentPatientsTab.Controls.Add(this.tabControl2);
             this.CurentPatientsTab.Controls.Add(this.currentPatientsBox);
             this.CurentPatientsTab.Controls.Add(this.label26);
@@ -744,6 +755,165 @@
             this.label25.TabIndex = 54;
             this.label25.Text = "Selected Account: ";
             // 
+            // managePatientWard
+            // 
+            this.managePatientWard.Location = new System.Drawing.Point(4, 22);
+            this.managePatientWard.Name = "managePatientWard";
+            this.managePatientWard.Size = new System.Drawing.Size(541, 368);
+            this.managePatientWard.TabIndex = 3;
+            this.managePatientWard.Text = "Manage Ward";
+            this.managePatientWard.UseVisualStyleBackColor = true;
+            // 
+            // managePatientDoc
+            // 
+            this.managePatientDoc.Controls.Add(this.label10);
+            this.managePatientDoc.Controls.Add(this.miscDetailsTextBox);
+            this.managePatientDoc.Controls.Add(this.miscDetailsLabel);
+            this.managePatientDoc.Controls.Add(this.unassignErrorLabel);
+            this.managePatientDoc.Controls.Add(this.manageDocSuccess);
+            this.managePatientDoc.Controls.Add(this.medicalErrorLabel);
+            this.managePatientDoc.Controls.Add(this.unassignDocButton);
+            this.managePatientDoc.Controls.Add(this.assignDocButton);
+            this.managePatientDoc.Controls.Add(this.medicalCaseTextBox);
+            this.managePatientDoc.Controls.Add(this.medicalCaseLabel);
+            this.managePatientDoc.Controls.Add(this.unassignDocBox);
+            this.managePatientDoc.Controls.Add(this.unassignDocLabel);
+            this.managePatientDoc.Controls.Add(this.assignDocBox);
+            this.managePatientDoc.Controls.Add(this.assignDocLabel);
+            this.managePatientDoc.Location = new System.Drawing.Point(4, 22);
+            this.managePatientDoc.Name = "managePatientDoc";
+            this.managePatientDoc.Size = new System.Drawing.Size(541, 368);
+            this.managePatientDoc.TabIndex = 4;
+            this.managePatientDoc.Text = "Manage Doctors";
+            this.managePatientDoc.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(134, 138);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 13);
+            this.label10.TabIndex = 13;
+            // 
+            // miscDetailsTextBox
+            // 
+            this.miscDetailsTextBox.Location = new System.Drawing.Point(6, 132);
+            this.miscDetailsTextBox.Name = "miscDetailsTextBox";
+            this.miscDetailsTextBox.Size = new System.Drawing.Size(121, 20);
+            this.miscDetailsTextBox.TabIndex = 12;
+            // 
+            // miscDetailsLabel
+            // 
+            this.miscDetailsLabel.AutoSize = true;
+            this.miscDetailsLabel.Location = new System.Drawing.Point(6, 115);
+            this.miscDetailsLabel.Name = "miscDetailsLabel";
+            this.miscDetailsLabel.Size = new System.Drawing.Size(64, 13);
+            this.miscDetailsLabel.TabIndex = 11;
+            this.miscDetailsLabel.Text = "Misc Details";
+            // 
+            // unassignErrorLabel
+            // 
+            this.unassignErrorLabel.AutoSize = true;
+            this.unassignErrorLabel.Location = new System.Drawing.Point(404, 33);
+            this.unassignErrorLabel.Name = "unassignErrorLabel";
+            this.unassignErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.unassignErrorLabel.TabIndex = 10;
+            // 
+            // manageDocSuccess
+            // 
+            this.manageDocSuccess.AutoSize = true;
+            this.manageDocSuccess.Location = new System.Drawing.Point(6, 340);
+            this.manageDocSuccess.Name = "manageDocSuccess";
+            this.manageDocSuccess.Size = new System.Drawing.Size(0, 13);
+            this.manageDocSuccess.TabIndex = 9;
+            // 
+            // medicalErrorLabel
+            // 
+            this.medicalErrorLabel.AutoSize = true;
+            this.medicalErrorLabel.Location = new System.Drawing.Point(134, 88);
+            this.medicalErrorLabel.Name = "medicalErrorLabel";
+            this.medicalErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.medicalErrorLabel.TabIndex = 8;
+            // 
+            // unassignDocButton
+            // 
+            this.unassignDocButton.Location = new System.Drawing.Point(322, 60);
+            this.unassignDocButton.Name = "unassignDocButton";
+            this.unassignDocButton.Size = new System.Drawing.Size(75, 23);
+            this.unassignDocButton.TabIndex = 7;
+            this.unassignDocButton.Text = "Unassign";
+            this.unassignDocButton.UseVisualStyleBackColor = true;
+            this.unassignDocButton.Click += new System.EventHandler(this.unassignDocButton_Click);
+            // 
+            // assignDocButton
+            // 
+            this.assignDocButton.Location = new System.Drawing.Point(52, 158);
+            this.assignDocButton.Name = "assignDocButton";
+            this.assignDocButton.Size = new System.Drawing.Size(75, 23);
+            this.assignDocButton.TabIndex = 6;
+            this.assignDocButton.Text = "Assign";
+            this.assignDocButton.UseVisualStyleBackColor = true;
+            this.assignDocButton.Click += new System.EventHandler(this.assignDocButton_Click);
+            // 
+            // medicalCaseTextBox
+            // 
+            this.medicalCaseTextBox.Location = new System.Drawing.Point(6, 82);
+            this.medicalCaseTextBox.Name = "medicalCaseTextBox";
+            this.medicalCaseTextBox.Size = new System.Drawing.Size(121, 20);
+            this.medicalCaseTextBox.TabIndex = 5;
+            // 
+            // medicalCaseLabel
+            // 
+            this.medicalCaseLabel.AutoSize = true;
+            this.medicalCaseLabel.Location = new System.Drawing.Point(6, 65);
+            this.medicalCaseLabel.Name = "medicalCaseLabel";
+            this.medicalCaseLabel.Size = new System.Drawing.Size(74, 13);
+            this.medicalCaseLabel.TabIndex = 4;
+            this.medicalCaseLabel.Text = "Medical Case:";
+            // 
+            // unassignDocBox
+            // 
+            this.unassignDocBox.FormattingEnabled = true;
+            this.unassignDocBox.Location = new System.Drawing.Point(276, 26);
+            this.unassignDocBox.Name = "unassignDocBox";
+            this.unassignDocBox.Size = new System.Drawing.Size(121, 21);
+            this.unassignDocBox.TabIndex = 3;
+            // 
+            // unassignDocLabel
+            // 
+            this.unassignDocLabel.AutoSize = true;
+            this.unassignDocLabel.Location = new System.Drawing.Point(273, 9);
+            this.unassignDocLabel.Name = "unassignDocLabel";
+            this.unassignDocLabel.Size = new System.Drawing.Size(89, 13);
+            this.unassignDocLabel.TabIndex = 2;
+            this.unassignDocLabel.Text = "Unassign Doctor:";
+            // 
+            // assignDocBox
+            // 
+            this.assignDocBox.FormattingEnabled = true;
+            this.assignDocBox.Location = new System.Drawing.Point(6, 26);
+            this.assignDocBox.Name = "assignDocBox";
+            this.assignDocBox.Size = new System.Drawing.Size(121, 21);
+            this.assignDocBox.TabIndex = 1;
+            // 
+            // assignDocLabel
+            // 
+            this.assignDocLabel.AutoSize = true;
+            this.assignDocLabel.Location = new System.Drawing.Point(3, 9);
+            this.assignDocLabel.Name = "assignDocLabel";
+            this.assignDocLabel.Size = new System.Drawing.Size(76, 13);
+            this.assignDocLabel.TabIndex = 0;
+            this.assignDocLabel.Text = "Assign Doctor:";
+            // 
+            // releasePatientTab
+            // 
+            this.releasePatientTab.Location = new System.Drawing.Point(4, 22);
+            this.releasePatientTab.Name = "releasePatientTab";
+            this.releasePatientTab.Size = new System.Drawing.Size(541, 368);
+            this.releasePatientTab.TabIndex = 2;
+            this.releasePatientTab.Text = "Release";
+            this.releasePatientTab.UseVisualStyleBackColor = true;
+            // 
             // currentPatientsBox
             // 
             this.currentPatientsBox.FormattingEnabled = true;
@@ -790,173 +960,15 @@
             this.label28.TabIndex = 67;
             this.label28.Text = "Current Patients";
             // 
-            // PatientRecTab
+            // releaseButton
             // 
-            this.PatientRecTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.PatientRecTab.Location = new System.Drawing.Point(4, 22);
-            this.PatientRecTab.Name = "PatientRecTab";
-            this.PatientRecTab.Size = new System.Drawing.Size(806, 487);
-            this.PatientRecTab.TabIndex = 4;
-            this.PatientRecTab.Text = "Patient Records";
-            // 
-            // releasePatientTab
-            // 
-            this.releasePatientTab.Location = new System.Drawing.Point(4, 22);
-            this.releasePatientTab.Name = "releasePatientTab";
-            this.releasePatientTab.Size = new System.Drawing.Size(541, 368);
-            this.releasePatientTab.TabIndex = 2;
-            this.releasePatientTab.Text = "Release";
-            this.releasePatientTab.UseVisualStyleBackColor = true;
-            // 
-            // managePatientWard
-            // 
-            this.managePatientWard.Location = new System.Drawing.Point(4, 22);
-            this.managePatientWard.Name = "managePatientWard";
-            this.managePatientWard.Size = new System.Drawing.Size(541, 368);
-            this.managePatientWard.TabIndex = 3;
-            this.managePatientWard.Text = "Manage Ward";
-            this.managePatientWard.UseVisualStyleBackColor = true;
-            // 
-            // managePatientDoc
-            // 
-            this.managePatientDoc.Controls.Add(this.label10);
-            this.managePatientDoc.Controls.Add(this.miscDetailsTextBox);
-            this.managePatientDoc.Controls.Add(this.miscDetailsLabel);
-            this.managePatientDoc.Controls.Add(this.unassignErrorLabel);
-            this.managePatientDoc.Controls.Add(this.manageDocSuccess);
-            this.managePatientDoc.Controls.Add(this.medicalErrorLabel);
-            this.managePatientDoc.Controls.Add(this.unassignDocButton);
-            this.managePatientDoc.Controls.Add(this.assignDocButton);
-            this.managePatientDoc.Controls.Add(this.medicalCaseTextBox);
-            this.managePatientDoc.Controls.Add(this.medicalCaseLabel);
-            this.managePatientDoc.Controls.Add(this.unassignDocBox);
-            this.managePatientDoc.Controls.Add(this.unassignDocLabel);
-            this.managePatientDoc.Controls.Add(this.assignDocBox);
-            this.managePatientDoc.Controls.Add(this.assignDocLabel);
-            this.managePatientDoc.Location = new System.Drawing.Point(4, 22);
-            this.managePatientDoc.Name = "managePatientDoc";
-            this.managePatientDoc.Size = new System.Drawing.Size(541, 368);
-            this.managePatientDoc.TabIndex = 4;
-            this.managePatientDoc.Text = "Manage Doctors";
-            this.managePatientDoc.UseVisualStyleBackColor = true;
-            // 
-            // assignDocLabel
-            // 
-            this.assignDocLabel.AutoSize = true;
-            this.assignDocLabel.Location = new System.Drawing.Point(3, 9);
-            this.assignDocLabel.Name = "assignDocLabel";
-            this.assignDocLabel.Size = new System.Drawing.Size(76, 13);
-            this.assignDocLabel.TabIndex = 0;
-            this.assignDocLabel.Text = "Assign Doctor:";
-            // 
-            // assignDocBox
-            // 
-            this.assignDocBox.FormattingEnabled = true;
-            this.assignDocBox.Location = new System.Drawing.Point(6, 26);
-            this.assignDocBox.Name = "assignDocBox";
-            this.assignDocBox.Size = new System.Drawing.Size(121, 21);
-            this.assignDocBox.TabIndex = 1;
-            // 
-            // unassignDocLabel
-            // 
-            this.unassignDocLabel.AutoSize = true;
-            this.unassignDocLabel.Location = new System.Drawing.Point(273, 9);
-            this.unassignDocLabel.Name = "unassignDocLabel";
-            this.unassignDocLabel.Size = new System.Drawing.Size(89, 13);
-            this.unassignDocLabel.TabIndex = 2;
-            this.unassignDocLabel.Text = "Unassign Doctor:";
-            // 
-            // unassignDocBox
-            // 
-            this.unassignDocBox.FormattingEnabled = true;
-            this.unassignDocBox.Location = new System.Drawing.Point(276, 26);
-            this.unassignDocBox.Name = "unassignDocBox";
-            this.unassignDocBox.Size = new System.Drawing.Size(121, 21);
-            this.unassignDocBox.TabIndex = 3;
-            // 
-            // medicalCaseLabel
-            // 
-            this.medicalCaseLabel.AutoSize = true;
-            this.medicalCaseLabel.Location = new System.Drawing.Point(6, 65);
-            this.medicalCaseLabel.Name = "medicalCaseLabel";
-            this.medicalCaseLabel.Size = new System.Drawing.Size(74, 13);
-            this.medicalCaseLabel.TabIndex = 4;
-            this.medicalCaseLabel.Text = "Medical Case:";
-            // 
-            // medicalCaseTextBox
-            // 
-            this.medicalCaseTextBox.Location = new System.Drawing.Point(6, 82);
-            this.medicalCaseTextBox.Name = "medicalCaseTextBox";
-            this.medicalCaseTextBox.Size = new System.Drawing.Size(121, 20);
-            this.medicalCaseTextBox.TabIndex = 5;
-            // 
-            // assignDocButton
-            // 
-            this.assignDocButton.Location = new System.Drawing.Point(52, 158);
-            this.assignDocButton.Name = "assignDocButton";
-            this.assignDocButton.Size = new System.Drawing.Size(75, 23);
-            this.assignDocButton.TabIndex = 6;
-            this.assignDocButton.Text = "Assign";
-            this.assignDocButton.UseVisualStyleBackColor = true;
-            this.assignDocButton.Click += new System.EventHandler(this.assignDocButton_Click);
-            // 
-            // unassignDocButton
-            // 
-            this.unassignDocButton.Location = new System.Drawing.Point(322, 60);
-            this.unassignDocButton.Name = "unassignDocButton";
-            this.unassignDocButton.Size = new System.Drawing.Size(75, 23);
-            this.unassignDocButton.TabIndex = 7;
-            this.unassignDocButton.Text = "Unassign";
-            this.unassignDocButton.UseVisualStyleBackColor = true;
-            this.unassignDocButton.Click += new System.EventHandler(this.unassignDocButton_Click);
-            // 
-            // medicalErrorLabel
-            // 
-            this.medicalErrorLabel.AutoSize = true;
-            this.medicalErrorLabel.Location = new System.Drawing.Point(134, 88);
-            this.medicalErrorLabel.Name = "medicalErrorLabel";
-            this.medicalErrorLabel.Size = new System.Drawing.Size(0, 13);
-            this.medicalErrorLabel.TabIndex = 8;
-            // 
-            // manageDocSuccess
-            // 
-            this.manageDocSuccess.AutoSize = true;
-            this.manageDocSuccess.Location = new System.Drawing.Point(6, 340);
-            this.manageDocSuccess.Name = "manageDocSuccess";
-            this.manageDocSuccess.Size = new System.Drawing.Size(0, 13);
-            this.manageDocSuccess.TabIndex = 9;
-            // 
-            // unassignErrorLabel
-            // 
-            this.unassignErrorLabel.AutoSize = true;
-            this.unassignErrorLabel.Location = new System.Drawing.Point(404, 33);
-            this.unassignErrorLabel.Name = "unassignErrorLabel";
-            this.unassignErrorLabel.Size = new System.Drawing.Size(0, 13);
-            this.unassignErrorLabel.TabIndex = 10;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(134, 138);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(0, 13);
-            this.label10.TabIndex = 13;
-            // 
-            // miscDetailsTextBox
-            // 
-            this.miscDetailsTextBox.Location = new System.Drawing.Point(6, 132);
-            this.miscDetailsTextBox.Name = "miscDetailsTextBox";
-            this.miscDetailsTextBox.Size = new System.Drawing.Size(121, 20);
-            this.miscDetailsTextBox.TabIndex = 12;
-            // 
-            // miscDetailsLabel
-            // 
-            this.miscDetailsLabel.AutoSize = true;
-            this.miscDetailsLabel.Location = new System.Drawing.Point(6, 115);
-            this.miscDetailsLabel.Name = "miscDetailsLabel";
-            this.miscDetailsLabel.Size = new System.Drawing.Size(64, 13);
-            this.miscDetailsLabel.TabIndex = 11;
-            this.miscDetailsLabel.Text = "Misc Details";
+            this.releaseButton.Location = new System.Drawing.Point(138, 458);
+            this.releaseButton.Name = "releaseButton";
+            this.releaseButton.Size = new System.Drawing.Size(90, 23);
+            this.releaseButton.TabIndex = 73;
+            this.releaseButton.Text = "Release Patient";
+            this.releaseButton.UseVisualStyleBackColor = true;
+            this.releaseButton.Click += new System.EventHandler(this.releaseButton_Click);
             // 
             // ReceptionistMaster
             // 
@@ -1073,5 +1085,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox miscDetailsTextBox;
         private System.Windows.Forms.Label miscDetailsLabel;
+        private System.Windows.Forms.Button releaseButton;
     }
 }
