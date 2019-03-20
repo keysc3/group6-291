@@ -66,6 +66,7 @@
             this.test = new System.Windows.Forms.Button();
             this.PatientRecTab = new System.Windows.Forms.TabPage();
             this.CurentPatientsTab = new System.Windows.Forms.TabPage();
+            this.releaseButton = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.updatePatientInfo = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -95,6 +96,11 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.managePatientWard = new System.Windows.Forms.TabPage();
+            this.wardErrorLabel = new System.Windows.Forms.Label();
+            this.wardSuccess = new System.Windows.Forms.Label();
+            this.SubmitNewWard = new System.Windows.Forms.Button();
+            this.NewWardBox = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.managePatientDoc = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.miscDetailsTextBox = new System.Windows.Forms.TextBox();
@@ -116,12 +122,16 @@
             this.vScrollBar3 = new System.Windows.Forms.VScrollBar();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.releaseButton = new System.Windows.Forms.Button();
+            this.currentPatWardLabel = new System.Windows.Forms.Label();
+            this.currentPatWard = new System.Windows.Forms.Label();
+            this.currentPatDateInLabel = new System.Windows.Forms.Label();
+            this.currentPatDateIn = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.updatePatientInfo.SuspendLayout();
+            this.managePatientWard.SuspendLayout();
             this.managePatientDoc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -490,6 +500,16 @@
             this.CurentPatientsTab.TabIndex = 3;
             this.CurentPatientsTab.Text = "Current Patients";
             // 
+            // releaseButton
+            // 
+            this.releaseButton.Location = new System.Drawing.Point(138, 458);
+            this.releaseButton.Name = "releaseButton";
+            this.releaseButton.Size = new System.Drawing.Size(90, 23);
+            this.releaseButton.TabIndex = 73;
+            this.releaseButton.Text = "Release Patient";
+            this.releaseButton.UseVisualStyleBackColor = true;
+            this.releaseButton.Click += new System.EventHandler(this.releaseButton_Click);
+            // 
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.updatePatientInfo);
@@ -757,12 +777,67 @@
             // 
             // managePatientWard
             // 
+            this.managePatientWard.Controls.Add(this.currentPatDateIn);
+            this.managePatientWard.Controls.Add(this.currentPatDateInLabel);
+            this.managePatientWard.Controls.Add(this.currentPatWard);
+            this.managePatientWard.Controls.Add(this.currentPatWardLabel);
+            this.managePatientWard.Controls.Add(this.wardErrorLabel);
+            this.managePatientWard.Controls.Add(this.wardSuccess);
+            this.managePatientWard.Controls.Add(this.SubmitNewWard);
+            this.managePatientWard.Controls.Add(this.NewWardBox);
+            this.managePatientWard.Controls.Add(this.label15);
             this.managePatientWard.Location = new System.Drawing.Point(4, 22);
             this.managePatientWard.Name = "managePatientWard";
             this.managePatientWard.Size = new System.Drawing.Size(541, 368);
             this.managePatientWard.TabIndex = 3;
             this.managePatientWard.Text = "Manage Ward";
             this.managePatientWard.UseVisualStyleBackColor = true;
+            // 
+            // wardErrorLabel
+            // 
+            this.wardErrorLabel.AutoSize = true;
+            this.wardErrorLabel.Location = new System.Drawing.Point(103, 32);
+            this.wardErrorLabel.Name = "wardErrorLabel";
+            this.wardErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.wardErrorLabel.TabIndex = 7;
+            // 
+            // wardSuccess
+            // 
+            this.wardSuccess.AutoSize = true;
+            this.wardSuccess.Location = new System.Drawing.Point(5, 76);
+            this.wardSuccess.Name = "wardSuccess";
+            this.wardSuccess.Size = new System.Drawing.Size(0, 13);
+            this.wardSuccess.TabIndex = 6;
+            // 
+            // SubmitNewWard
+            // 
+            this.SubmitNewWard.Location = new System.Drawing.Point(41, 50);
+            this.SubmitNewWard.Margin = new System.Windows.Forms.Padding(2);
+            this.SubmitNewWard.Name = "SubmitNewWard";
+            this.SubmitNewWard.Size = new System.Drawing.Size(56, 19);
+            this.SubmitNewWard.TabIndex = 5;
+            this.SubmitNewWard.Text = "Submit";
+            this.SubmitNewWard.UseVisualStyleBackColor = true;
+            this.SubmitNewWard.Click += new System.EventHandler(this.SubmitNewWard_Click);
+            // 
+            // NewWardBox
+            // 
+            this.NewWardBox.FormattingEnabled = true;
+            this.NewWardBox.Location = new System.Drawing.Point(5, 25);
+            this.NewWardBox.Margin = new System.Windows.Forms.Padding(2);
+            this.NewWardBox.Name = "NewWardBox";
+            this.NewWardBox.Size = new System.Drawing.Size(92, 21);
+            this.NewWardBox.TabIndex = 4;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(2, 10);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "NewWard";
             // 
             // managePatientDoc
             // 
@@ -960,15 +1035,41 @@
             this.label28.TabIndex = 67;
             this.label28.Text = "Current Patients";
             // 
-            // releaseButton
+            // currentPatWardLabel
             // 
-            this.releaseButton.Location = new System.Drawing.Point(138, 458);
-            this.releaseButton.Name = "releaseButton";
-            this.releaseButton.Size = new System.Drawing.Size(90, 23);
-            this.releaseButton.TabIndex = 73;
-            this.releaseButton.Text = "Release Patient";
-            this.releaseButton.UseVisualStyleBackColor = true;
-            this.releaseButton.Click += new System.EventHandler(this.releaseButton_Click);
+            this.currentPatWardLabel.AutoSize = true;
+            this.currentPatWardLabel.Location = new System.Drawing.Point(5, 170);
+            this.currentPatWardLabel.Name = "currentPatWardLabel";
+            this.currentPatWardLabel.Size = new System.Drawing.Size(73, 13);
+            this.currentPatWardLabel.TabIndex = 8;
+            this.currentPatWardLabel.Text = "Current Ward:";
+            // 
+            // currentPatWard
+            // 
+            this.currentPatWard.AutoSize = true;
+            this.currentPatWard.Location = new System.Drawing.Point(84, 170);
+            this.currentPatWard.Name = "currentPatWard";
+            this.currentPatWard.Size = new System.Drawing.Size(58, 13);
+            this.currentPatWard.TabIndex = 9;
+            this.currentPatWard.Text = "wardName";
+            // 
+            // currentPatDateInLabel
+            // 
+            this.currentPatDateInLabel.AutoSize = true;
+            this.currentPatDateInLabel.Location = new System.Drawing.Point(5, 197);
+            this.currentPatDateInLabel.Name = "currentPatDateInLabel";
+            this.currentPatDateInLabel.Size = new System.Drawing.Size(45, 13);
+            this.currentPatDateInLabel.TabIndex = 10;
+            this.currentPatDateInLabel.Text = "Date In:";
+            // 
+            // currentPatDateIn
+            // 
+            this.currentPatDateIn.AutoSize = true;
+            this.currentPatDateIn.Location = new System.Drawing.Point(87, 197);
+            this.currentPatDateIn.Name = "currentPatDateIn";
+            this.currentPatDateIn.Size = new System.Drawing.Size(37, 13);
+            this.currentPatDateIn.TabIndex = 11;
+            this.currentPatDateIn.Text = "dateIn";
             // 
             // ReceptionistMaster
             // 
@@ -988,6 +1089,8 @@
             this.tabControl2.ResumeLayout(false);
             this.updatePatientInfo.ResumeLayout(false);
             this.updatePatientInfo.PerformLayout();
+            this.managePatientWard.ResumeLayout(false);
+            this.managePatientWard.PerformLayout();
             this.managePatientDoc.ResumeLayout(false);
             this.managePatientDoc.PerformLayout();
             this.ResumeLayout(false);
@@ -1086,5 +1189,14 @@
         private System.Windows.Forms.TextBox miscDetailsTextBox;
         private System.Windows.Forms.Label miscDetailsLabel;
         private System.Windows.Forms.Button releaseButton;
+        private System.Windows.Forms.Button SubmitNewWard;
+        private System.Windows.Forms.ComboBox NewWardBox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label wardSuccess;
+        private System.Windows.Forms.Label wardErrorLabel;
+        private System.Windows.Forms.Label currentPatDateIn;
+        private System.Windows.Forms.Label currentPatDateInLabel;
+        private System.Windows.Forms.Label currentPatWard;
+        private System.Windows.Forms.Label currentPatWardLabel;
     }
 }
