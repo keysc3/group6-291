@@ -1011,7 +1011,7 @@ namespace group6_291
 
         private void addSINBox_TextChanged(object sender, EventArgs e)
         {
-            if (addSINBox.Text.Length > 0)
+            if (addSINBox.Text.Length == 9)
             {
                 DataSet patientSINs = new DataSet();
                 DataTable matchingSINs = patientList.Tables[0].Clone();
