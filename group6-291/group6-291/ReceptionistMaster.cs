@@ -44,6 +44,25 @@ namespace group6_291
             //
             DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
             int regID = Int32.Parse(currPatient["registerID"].ToString());
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlCommand getWard = new SqlCommand("select wardName, dateIn from Patient_Ward where registerID = @regID and dateOut is null", conn);
+            getWard.Parameters.AddWithValue("@regID", regID);
+            SqlDataReader wardReader = getWard.ExecuteReader();
+            if (wardReader.HasRows)
+            {
+                wardReader.Read();
+                currentPatWard.Text = wardReader["wardName"].ToString();
+                currentPatDateIn.Text = wardReader["dateIn"].ToString();
+            }
+            else
+            {
+                currentPatWard.Text = "N/A";
+                currentPatDateIn.Text = "N/A";
+            }
+            conn.Close();
             populateAssignDoctor(regID);
             populateUnassignDoctor(regID);
             FillWardBox(regID);
@@ -214,7 +233,7 @@ namespace group6_291
                 SqlConnection conn = new SqlConnection(Globals.conn);
                 conn.Open();
 
-                SqlCommand getWard = new SqlCommand("select wardName from Patient_ward where registerID = @regID and dateOut is null", conn);
+                SqlCommand getWard = new SqlCommand("select wardName from Patient_Ward where registerID = @regID and dateOut is null", conn);
                 getWard.Parameters.AddWithValue("@regID", regID);
                 SqlDataReader wardReader = getWard.ExecuteReader();
 
