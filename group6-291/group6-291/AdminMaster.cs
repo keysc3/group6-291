@@ -14,6 +14,7 @@ namespace group6_291
 {
     public partial class AdminMaster : Form
     {
+        DataSet patientList = new DataSet();
         public AdminMaster()
         {
 
@@ -34,6 +35,8 @@ namespace group6_291
             addWardNameBox.Leave += new EventHandler(addWardNameBox_Leave);
             AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
             wardListBox.SelectedIndexChanged += new EventHandler(wardListBox_SelectedIndexChanged);
+            addSINBox.TextChanged += new EventHandler(addSINBox_TextChanged);
+            registerListBox.DoubleClick += new EventHandler(registerListBox_DoubleClick);
             populateWardList();
             populateDoctorList();
             populatePatientList();
@@ -783,15 +786,16 @@ namespace group6_291
         //Purpose: Populate the Patient list box with all the registered patients
         private void populatePatientList()
         {
+            patientList.Clear();
             //Open connection and create a dataset from the query
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
-            DataSet ds = new DataSet();
+            
             SqlDataAdapter adapter = new SqlDataAdapter("SELECT *, CONCAT(lastName, ', ', firstName) as fullName FROM [Patient]", conn);
             //Fill the dataset, sort it, and bind it to the list box
-            adapter.Fill(ds);
-            ds.Tables[0].DefaultView.Sort = "fullName asc";
-            registerListBox.DataSource = ds.Tables[0];
+            adapter.Fill(patientList);
+            patientList.Tables[0].DefaultView.Sort = "fullName asc";
+            registerListBox.DataSource = patientList.Tables[0];
             registerListBox.DisplayMember = "fullName";
             conn.Close();
         }
@@ -815,6 +819,7 @@ namespace group6_291
             addHomePhoneBox.Text = "";
             addCellphoneBox.Text = "";
             addNotesBox.Text = "";
+            populatePatientList();
         }
 
         //Purpose: Reset all reporting fields INCLUDING the add user response when reset button is clicked
@@ -882,7 +887,6 @@ namespace group6_291
                 addRegisterRequestInfo.ForeColor = Color.Green;
                 resetAddRegisterFields();
             }
-            populatePatientList();
         }
 
         //Check all fields after add button is pressed. If there are any invalid fields, points them out.
@@ -1005,5 +1009,56 @@ namespace group6_291
             return true;
         }
 
+        private void addSINBox_TextChanged(object sender, EventArgs e)
+        {
+            if (addSINBox.Text.Length == 9)
+            {
+                DataSet patientSINs = new DataSet();
+                DataTable matchingSINs = patientList.Tables[0].Clone();
+                foreach (DataRow row in patientList.Tables[0].Rows)
+                {
+                    if (row["patientSIN"].ToString().StartsWith(addSINBox.Text))
+                        matchingSINs.ImportRow(row);
+                }
+                patientSINs.Tables.Add(matchingSINs);
+                patientSINs.Tables[0].DefaultView.Sort = "fullName asc";
+                registerListBox.DataSource = patientSINs.Tables[0];
+                registerListBox.DisplayMember = "fullName";
+            }
+        }
+
+        private void registerListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (registerListBox.SelectedItem != null)
+            {
+                DataRowView registrantList = registerListBox.SelectedItem as DataRowView;
+                int patientType = Int32.Parse(registrantList["patientType"].ToString());
+                addSINBox.Text = registrantList["patientSIN"].ToString();
+                if (patientType == 0)
+                    addPatientTypeBox.SelectedIndex = 0;
+                else if (patientType == 1)
+                    addPatientTypeBox.SelectedIndex = 1;
+                else
+                    addPatientTypeBox.SelectedIndex = 2;
+
+                addFirstNameBox.Text = registrantList["firstName"].ToString();
+                addLastNameBox.Text = registrantList["lastName"].ToString();
+                addStreetBox.Text = registrantList["street"].ToString();
+                addCityBox.Text = registrantList["city"].ToString();
+                addProvinceBox.Text = registrantList["province"].ToString();
+                addCountryBox.Text = registrantList["country"].ToString();
+                if(registrantList["sex"].ToString().Equals("Male"))
+                    addGenderBox.SelectedIndex = 0;
+                else
+                    addGenderBox.SelectedIndex = 1;
+                addDOBBox.Text = Convert.ToDateTime(registrantList["dateOfBirth"]).ToString("dd/MM/yyyy");
+                //addAdmitDateBox.Text = "";
+                //addDepartDateBox.Text = "";
+                addInsuranceBox.Text = "";
+                addHomePhoneBox.Text = "";
+                addCellphoneBox.Text = "";
+                addNotesBox.Text = "";
+            }
+        }
     }
 }
