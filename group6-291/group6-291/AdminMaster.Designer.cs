@@ -1519,8 +1519,12 @@
             // 
             // deleteWardButton
             // 
+<<<<<<< HEAD
+            this.deleteWardButton.Location = new System.Drawing.Point(74, 461);
+=======
             this.deleteWardButton.Location = new System.Drawing.Point(8, 567);
             this.deleteWardButton.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> upstream/master
             this.deleteWardButton.Name = "deleteWardButton";
             this.deleteWardButton.Size = new System.Drawing.Size(100, 28);
             this.deleteWardButton.TabIndex = 66;
@@ -1856,6 +1860,7 @@
             this.wardListBox.Name = "wardListBox";
             this.wardListBox.Size = new System.Drawing.Size(297, 484);
             this.wardListBox.TabIndex = 50;
+            this.wardListBox.SelectedIndexChanged += new System.EventHandler(this.wardListBox_SelectedIndexChanged_1);
             // 
             // wardListLabel
             // 
@@ -2170,7 +2175,6 @@
             // 
             // DoctorUpdDeptBox
             // 
-            this.DoctorUpdDeptBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DoctorUpdDeptBox.FormattingEnabled = true;
             this.DoctorUpdDeptBox.Location = new System.Drawing.Point(12, 85);
             this.DoctorUpdDeptBox.Margin = new System.Windows.Forms.Padding(4);

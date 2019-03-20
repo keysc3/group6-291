@@ -379,6 +379,12 @@ namespace group6_291
             conn.Close();
         }
 
+        private void wardListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            addWardNameBox.Text = "";
+            AddWardCapacityBox.Text = "";
+        }
+
         //Purpose: make sure ward name is available and valid after being inputed
         private void addWardNameBox_Leave(object sender, EventArgs e)
         {
@@ -484,6 +490,7 @@ namespace group6_291
                 addWardRequestInfo.Text = "Ward added successfully";
                 addWardRequestInfo.ForeColor = Color.Green;
                 resetAddWardFields();
+                populateWardList();
             }
         }
 
@@ -526,6 +533,7 @@ namespace group6_291
             populateWardList();
             wardUpdateReqInfo.Text = "";
             addWardInfo.Text = "";
+            populateWardList();
         }
 
         //Purpose: Update selected ward with inputed info on update click
@@ -648,9 +656,9 @@ namespace group6_291
                 DoctorUpdDeptBox.Items.Add(items[0].ToString());
             }
             string departmentName1 = DoctorList["departmentName"].ToString();
-            //DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
+            DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
             conn.Close();
-            DoctorUpdDeptBox.SelectedIndex = -1;
+            //DoctorUpdDeptBox.SelectedIndex = -1;
             DoctorDeptBox.SelectedIndex = -1;
         }
 
