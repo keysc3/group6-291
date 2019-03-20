@@ -118,7 +118,7 @@ namespace group6_291
                 unassignDoc.Parameters.AddWithValue("@registerID", regID);
                 unassignDoc.ExecuteNonQuery();
                 conn.Close();
-                manageDocSuccess.Text = "Success";
+                manageDocSuccess.Text = "Doctor unassigned successfully";
                 manageDocSuccess.ForeColor = Color.Green;
                 medicalErrorLabel.Text = "";
                 unassignErrorLabel.Text = "";
@@ -157,12 +157,27 @@ namespace group6_291
                     assignDoc.Parameters.AddWithValue("@miscDetails", miscDetailsTextBox.Text);
                 assignDoc.ExecuteNonQuery();
                 conn.Close();
-                manageDocSuccess.Text = "Success";
+                manageDocSuccess.Text = "Doctor assigned successfully";
                 manageDocSuccess.ForeColor = Color.Green;
                 medicalErrorLabel.Text = "";
                 unassignErrorLabel.Text = "";
                 currentPatientsBox_SelectedIndexChanged(sender, e);
             }
+        }
+
+        private void releaseButton_Click(object sender, EventArgs e)
+        {
+            DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
+            int regID = Int32.Parse(currPatient["registerID"].ToString());
+
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand releasePatient = new SqlCommand("update Register set leaveDate = @leaveDate where registerID = @registerID", conn);
+            releasePatient.Parameters.AddWithValue("@leaveDate", DateTime.Now);
+            releasePatient.Parameters.AddWithValue("@registerID", regID);
+            releasePatient.ExecuteNonQuery();
+            conn.Close();
+            populateCurrentPatientBox();
         }
     }
 }
