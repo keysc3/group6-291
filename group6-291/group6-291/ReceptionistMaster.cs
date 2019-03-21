@@ -63,10 +63,55 @@ namespace group6_291
                 currentPatDateIn.Text = "N/A";
             }
             conn.Close();
+            currentPatientName.Text = currPatient["fullName"].ToString();
             populateAssignDoctor(regID);
             populateUnassignDoctor(regID);
             FillWardBox(regID);
             medicalCaseTextBox.Text = "";
+        }
+
+        private void currentWardPatientList()
+        {
+            if (NewWardBox.SelectedIndex < 0)
+            {
+                dataGridView1.Hide();
+            }
+            else
+            {
+                DataRowView selectedNewWard = NewWardBox.SelectedItem as DataRowView;
+                string wardName = selectedNewWard["wardName"].ToString();
+
+                DataSet patientsInWard = new DataSet();
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+
+                SqlCommand getWard = new SqlCommand("select concat(firstName, ' ', lastName) as Name from Patient, Register where Patient.patientSIN = Register.patientSIN and Register.leaveDate is null and Register.registerID in (select registerID from Patient_Ward where dateOut is null and wardName = @wardName)", conn);
+                getWard.Parameters.AddWithValue("@wardName", wardName);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = getWard;
+                adapter.Fill(patientsInWard);
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = patientsInWard.Tables[0];
+
+                int rowCount = dataGridView1.RowCount;
+                if (rowCount > 0)
+                {
+                    dataGridView1.Show();
+                    int totalRowHeight = dataGridView1.ColumnHeadersHeight;
+                    if (rowCount > 8)
+                    {
+                        totalRowHeight += dataGridView1.Rows[0].Height * 8;
+                        dataGridView1.Height = totalRowHeight;
+                    }
+                    else
+                    {
+                        totalRowHeight += dataGridView1.Rows[0].Height * (dataGridView1.RowCount+1);
+                        dataGridView1.Height = totalRowHeight;
+                    }
+                }
+                else
+                    dataGridView1.Hide();
+            }
         }
 
         private void populateAssignDoctor(int regID)
@@ -279,6 +324,23 @@ namespace group6_291
                 wardErrorLabel.ForeColor = Color.Red;
                 wardSuccess.Text = "";
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void NewWardBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentWardPatientList();
+            if(NewWardBox.SelectedIndex > -1)
+            {
+                DataRowView selectedNewWard = NewWardBox.SelectedItem as DataRowView;
+                currentSelectedWard.Text = selectedNewWard["wardName"].ToString();
+            }
+            else
+                currentSelectedWard.Text = "N/A";
         }
     }
 }

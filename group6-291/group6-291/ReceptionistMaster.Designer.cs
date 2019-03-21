@@ -96,6 +96,10 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.managePatientWard = new System.Windows.Forms.TabPage();
+            this.currentPatDateIn = new System.Windows.Forms.Label();
+            this.currentPatDateInLabel = new System.Windows.Forms.Label();
+            this.currentPatWard = new System.Windows.Forms.Label();
+            this.currentPatWardLabel = new System.Windows.Forms.Label();
             this.wardErrorLabel = new System.Windows.Forms.Label();
             this.wardSuccess = new System.Windows.Forms.Label();
             this.SubmitNewWard = new System.Windows.Forms.Button();
@@ -122,10 +126,11 @@
             this.vScrollBar3 = new System.Windows.Forms.VScrollBar();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.currentPatWardLabel = new System.Windows.Forms.Label();
-            this.currentPatWard = new System.Windows.Forms.Label();
-            this.currentPatDateInLabel = new System.Windows.Forms.Label();
-            this.currentPatDateIn = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.currentPatientName = new System.Windows.Forms.Label();
+            this.updateSelectedWard = new System.Windows.Forms.Label();
+            this.currentSelectedWard = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -133,6 +138,7 @@
             this.updatePatientInfo.SuspendLayout();
             this.managePatientWard.SuspendLayout();
             this.managePatientDoc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -777,6 +783,11 @@
             // 
             // managePatientWard
             // 
+            this.managePatientWard.Controls.Add(this.currentSelectedWard);
+            this.managePatientWard.Controls.Add(this.label17);
+            this.managePatientWard.Controls.Add(this.currentPatientName);
+            this.managePatientWard.Controls.Add(this.updateSelectedWard);
+            this.managePatientWard.Controls.Add(this.dataGridView1);
             this.managePatientWard.Controls.Add(this.currentPatDateIn);
             this.managePatientWard.Controls.Add(this.currentPatDateInLabel);
             this.managePatientWard.Controls.Add(this.currentPatWard);
@@ -793,10 +804,46 @@
             this.managePatientWard.Text = "Manage Ward";
             this.managePatientWard.UseVisualStyleBackColor = true;
             // 
+            // currentPatDateIn
+            // 
+            this.currentPatDateIn.AutoSize = true;
+            this.currentPatDateIn.Location = new System.Drawing.Point(83, 65);
+            this.currentPatDateIn.Name = "currentPatDateIn";
+            this.currentPatDateIn.Size = new System.Drawing.Size(37, 13);
+            this.currentPatDateIn.TabIndex = 11;
+            this.currentPatDateIn.Text = "dateIn";
+            // 
+            // currentPatDateInLabel
+            // 
+            this.currentPatDateInLabel.AutoSize = true;
+            this.currentPatDateInLabel.Location = new System.Drawing.Point(4, 65);
+            this.currentPatDateInLabel.Name = "currentPatDateInLabel";
+            this.currentPatDateInLabel.Size = new System.Drawing.Size(45, 13);
+            this.currentPatDateInLabel.TabIndex = 10;
+            this.currentPatDateInLabel.Text = "Date In:";
+            // 
+            // currentPatWard
+            // 
+            this.currentPatWard.AutoSize = true;
+            this.currentPatWard.Location = new System.Drawing.Point(83, 38);
+            this.currentPatWard.Name = "currentPatWard";
+            this.currentPatWard.Size = new System.Drawing.Size(58, 13);
+            this.currentPatWard.TabIndex = 9;
+            this.currentPatWard.Text = "wardName";
+            // 
+            // currentPatWardLabel
+            // 
+            this.currentPatWardLabel.AutoSize = true;
+            this.currentPatWardLabel.Location = new System.Drawing.Point(4, 38);
+            this.currentPatWardLabel.Name = "currentPatWardLabel";
+            this.currentPatWardLabel.Size = new System.Drawing.Size(73, 13);
+            this.currentPatWardLabel.TabIndex = 8;
+            this.currentPatWardLabel.Text = "Current Ward:";
+            // 
             // wardErrorLabel
             // 
             this.wardErrorLabel.AutoSize = true;
-            this.wardErrorLabel.Location = new System.Drawing.Point(103, 32);
+            this.wardErrorLabel.Location = new System.Drawing.Point(100, 198);
             this.wardErrorLabel.Name = "wardErrorLabel";
             this.wardErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.wardErrorLabel.TabIndex = 7;
@@ -804,17 +851,17 @@
             // wardSuccess
             // 
             this.wardSuccess.AutoSize = true;
-            this.wardSuccess.Location = new System.Drawing.Point(5, 76);
+            this.wardSuccess.Location = new System.Drawing.Point(5, 174);
             this.wardSuccess.Name = "wardSuccess";
             this.wardSuccess.Size = new System.Drawing.Size(0, 13);
             this.wardSuccess.TabIndex = 6;
             // 
             // SubmitNewWard
             // 
-            this.SubmitNewWard.Location = new System.Drawing.Point(41, 50);
+            this.SubmitNewWard.Location = new System.Drawing.Point(8, 140);
             this.SubmitNewWard.Margin = new System.Windows.Forms.Padding(2);
             this.SubmitNewWard.Name = "SubmitNewWard";
-            this.SubmitNewWard.Size = new System.Drawing.Size(56, 19);
+            this.SubmitNewWard.Size = new System.Drawing.Size(92, 23);
             this.SubmitNewWard.TabIndex = 5;
             this.SubmitNewWard.Text = "Submit";
             this.SubmitNewWard.UseVisualStyleBackColor = true;
@@ -823,21 +870,22 @@
             // NewWardBox
             // 
             this.NewWardBox.FormattingEnabled = true;
-            this.NewWardBox.Location = new System.Drawing.Point(5, 25);
+            this.NewWardBox.Location = new System.Drawing.Point(8, 115);
             this.NewWardBox.Margin = new System.Windows.Forms.Padding(2);
             this.NewWardBox.Name = "NewWardBox";
             this.NewWardBox.Size = new System.Drawing.Size(92, 21);
             this.NewWardBox.TabIndex = 4;
+            this.NewWardBox.SelectedIndexChanged += new System.EventHandler(this.NewWardBox_SelectedIndexChanged);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(2, 10);
+            this.label15.Location = new System.Drawing.Point(5, 100);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 13);
+            this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 3;
-            this.label15.Text = "NewWard";
+            this.label15.Text = "New Ward:";
             // 
             // managePatientDoc
             // 
@@ -1035,41 +1083,64 @@
             this.label28.TabIndex = 67;
             this.label28.Text = "Current Patients";
             // 
-            // currentPatWardLabel
+            // dataGridView1
             // 
-            this.currentPatWardLabel.AutoSize = true;
-            this.currentPatWardLabel.Location = new System.Drawing.Point(5, 170);
-            this.currentPatWardLabel.Name = "currentPatWardLabel";
-            this.currentPatWardLabel.Size = new System.Drawing.Size(73, 13);
-            this.currentPatWardLabel.TabIndex = 8;
-            this.currentPatWardLabel.Text = "Current Ward:";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(249, 38);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 39);
+            this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // currentPatWard
+            // currentPatientName
             // 
-            this.currentPatWard.AutoSize = true;
-            this.currentPatWard.Location = new System.Drawing.Point(84, 170);
-            this.currentPatWard.Name = "currentPatWard";
-            this.currentPatWard.Size = new System.Drawing.Size(58, 13);
-            this.currentPatWard.TabIndex = 9;
-            this.currentPatWard.Text = "wardName";
+            this.currentPatientName.AutoSize = true;
+            this.currentPatientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentPatientName.Location = new System.Drawing.Point(82, 9);
+            this.currentPatientName.Name = "currentPatientName";
+            this.currentPatientName.Size = new System.Drawing.Size(51, 20);
+            this.currentPatientName.TabIndex = 64;
+            this.currentPatientName.Text = "Name";
             // 
-            // currentPatDateInLabel
+            // updateSelectedWard
             // 
-            this.currentPatDateInLabel.AutoSize = true;
-            this.currentPatDateInLabel.Location = new System.Drawing.Point(5, 197);
-            this.currentPatDateInLabel.Name = "currentPatDateInLabel";
-            this.currentPatDateInLabel.Size = new System.Drawing.Size(45, 13);
-            this.currentPatDateInLabel.TabIndex = 10;
-            this.currentPatDateInLabel.Text = "Date In:";
+            this.updateSelectedWard.AutoSize = true;
+            this.updateSelectedWard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateSelectedWard.Location = new System.Drawing.Point(3, 9);
+            this.updateSelectedWard.Name = "updateSelectedWard";
+            this.updateSelectedWard.Size = new System.Drawing.Size(67, 20);
+            this.updateSelectedWard.TabIndex = 63;
+            this.updateSelectedWard.Text = "Patient: ";
             // 
-            // currentPatDateIn
+            // currentSelectedWard
             // 
-            this.currentPatDateIn.AutoSize = true;
-            this.currentPatDateIn.Location = new System.Drawing.Point(87, 197);
-            this.currentPatDateIn.Name = "currentPatDateIn";
-            this.currentPatDateIn.Size = new System.Drawing.Size(37, 13);
-            this.currentPatDateIn.TabIndex = 11;
-            this.currentPatDateIn.Text = "dateIn";
+            this.currentSelectedWard.AutoSize = true;
+            this.currentSelectedWard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentSelectedWard.Location = new System.Drawing.Point(373, 9);
+            this.currentSelectedWard.Name = "currentSelectedWard";
+            this.currentSelectedWard.Size = new System.Drawing.Size(51, 20);
+            this.currentSelectedWard.TabIndex = 66;
+            this.currentSelectedWard.Text = "Name";
+            this.currentSelectedWard.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(245, 9);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(122, 20);
+            this.label17.TabIndex = 65;
+            this.label17.Text = "Selected Ward: ";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // ReceptionistMaster
             // 
@@ -1093,6 +1164,7 @@
             this.managePatientWard.PerformLayout();
             this.managePatientDoc.ResumeLayout(false);
             this.managePatientDoc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1198,5 +1270,10 @@
         private System.Windows.Forms.Label currentPatDateInLabel;
         private System.Windows.Forms.Label currentPatWard;
         private System.Windows.Forms.Label currentPatWardLabel;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label currentPatientName;
+        private System.Windows.Forms.Label updateSelectedWard;
+        private System.Windows.Forms.Label currentSelectedWard;
+        private System.Windows.Forms.Label label17;
     }
 }
