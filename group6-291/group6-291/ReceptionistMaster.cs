@@ -41,7 +41,7 @@ namespace group6_291
 
         private void currentPatientsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //
+            currentPatientDoctorsList();
             DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
             int regID = Int32.Parse(currPatient["registerID"].ToString());
 
@@ -64,17 +64,20 @@ namespace group6_291
             }
             conn.Close();
             currentPatientName.Text = currPatient["fullName"].ToString();
+            currentPatientNameDocs.Text = currPatient["fullName"].ToString();
             populateAssignDoctor(regID);
             populateUnassignDoctor(regID);
             FillWardBox(regID);
             medicalCaseTextBox.Text = "";
+            miscDetailsTextBox.Text = "";
+            surgicalDetailsBox.Text = "";
         }
 
         private void currentWardPatientList()
         {
             if (NewWardBox.SelectedIndex < 0)
             {
-                dataGridView1.Hide();
+                selectedWardGridView.Hide();
             }
             else
             {
@@ -90,27 +93,27 @@ namespace group6_291
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = getWard;
                 adapter.Fill(patientsInWard);
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = patientsInWard.Tables[0];
+                selectedWardGridView.AutoGenerateColumns = true;
+                selectedWardGridView.DataSource = patientsInWard.Tables[0];
 
-                int rowCount = dataGridView1.RowCount;
+                int rowCount = selectedWardGridView.RowCount;
                 if (rowCount > 0)
                 {
-                    dataGridView1.Show();
-                    int totalRowHeight = dataGridView1.ColumnHeadersHeight;
+                    selectedWardGridView.Show();
+                    int totalRowHeight = selectedWardGridView.ColumnHeadersHeight;
                     if (rowCount > 8)
                     {
-                        totalRowHeight += dataGridView1.Rows[0].Height * 8;
-                        dataGridView1.Height = totalRowHeight;
+                        totalRowHeight += (selectedWardGridView.Rows[0].Height * 8)-20;
+                        selectedWardGridView.Height = totalRowHeight;
                     }
                     else
                     {
-                        totalRowHeight += dataGridView1.Rows[0].Height * (dataGridView1.RowCount+1);
-                        dataGridView1.Height = totalRowHeight;
+                        totalRowHeight += (selectedWardGridView.Rows[0].Height * (rowCount + 1))-20;
+                        selectedWardGridView.Height = totalRowHeight;
                     }
                 }
                 else
-                    dataGridView1.Hide();
+                    selectedWardGridView.Hide();
             }
         }
 
@@ -161,7 +164,7 @@ namespace group6_291
 
         private void unassignDocButton_Click(object sender, EventArgs e)
         {
-            if (unassignDocBox.SelectedIndex < -1)
+            if (unassignDocBox.SelectedIndex < 0)
             {
                 unassignErrorLabel.Text = "*Invalid doctor to unassign";
                 unassignErrorLabel.ForeColor = Color.Red;
@@ -211,7 +214,7 @@ namespace group6_291
 
                 SqlConnection conn = new SqlConnection(Globals.conn);
                 conn.Open();
-                SqlCommand assignDoc = new SqlCommand("insert into Doctor_Patient (registerID, doctorID, assignedDate, medicalCase, miscDetails) values (@registerID, @doctorID, @assignedDate, @medicalCase, @miscDetails)", conn);
+                SqlCommand assignDoc = new SqlCommand("insert into Doctor_Patient (registerID, doctorID, assignedDate, medicalCase, surgicalDetails, miscDetails) values (@registerID, @doctorID, @assignedDate, @medicalCase, @surgicalDetails, @miscDetails)", conn);
                 assignDoc.Parameters.AddWithValue("@assignedDate", DateTime.Now);
                 assignDoc.Parameters.AddWithValue("@doctorID", doctorID);
                 assignDoc.Parameters.AddWithValue("@registerID", regID);
@@ -220,6 +223,12 @@ namespace group6_291
                     assignDoc.Parameters.AddWithValue("@miscDetails", DBNull.Value);
                 else
                     assignDoc.Parameters.AddWithValue("@miscDetails", miscDetailsTextBox.Text);
+
+                if (surgicalDetailsBox.Text.Length < 1)
+                    assignDoc.Parameters.AddWithValue("@surgicalDetails", DBNull.Value);
+                else
+                    assignDoc.Parameters.AddWithValue("@surgicalDetails", surgicalDetailsBox.Text);
+
                 assignDoc.ExecuteNonQuery();
                 conn.Close();
                 manageDocSuccess.Text = "Doctor assigned successfully";
@@ -342,5 +351,46 @@ namespace group6_291
             else
                 currentSelectedWard.Text = "N/A";
         }
-    }
+
+        private void currentPatientDoctorsList()
+        {
+            DataRowView currPatient = currentPatientsBox.SelectedItem as DataRowView;
+            int regID = Int32.Parse(currPatient["registerID"].ToString());
+
+            DataSet patientDoctors = new DataSet();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlCommand getWard = new SqlCommand("select concat(Doctor.firstName, ' ', Doctor.lastName)as Name, medicalCase as 'Medical Case', surgicalDetails as 'Surgical Details', miscDetails as 'Misc Details' from Doctor, Doctor_Patient where Doctor.doctorID = Doctor_Patient.doctorID and unassignedDate is null and registerID = @regID", conn);
+            getWard.Parameters.AddWithValue("@regID", regID);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = getWard;
+            adapter.Fill(patientDoctors);
+            currentDoctorsGridView.AutoGenerateColumns = true;
+            currentDoctorsGridView.DataSource = patientDoctors.Tables[0];
+
+            int rowCount = currentDoctorsGridView.RowCount;
+            if (rowCount > 0)
+            {
+                noCurrentDocs.Hide();
+                currentDoctorsGridView.Show();
+                int totalRowHeight = selectedWardGridView.ColumnHeadersHeight;
+                if (rowCount > 8)
+                {
+                    totalRowHeight += (currentDoctorsGridView.Rows[1].Height * 8)+8;
+                    currentDoctorsGridView.Height = totalRowHeight;
+                }
+                else
+                {
+                    totalRowHeight += (currentDoctorsGridView.Rows[0].Height * (rowCount + 1))+8;
+                    currentDoctorsGridView.Height = totalRowHeight;
+                }
+            }
+            else
+            {
+                currentDoctorsGridView.Hide();
+                noCurrentDocs.Show();
+            }
+        }
+        }
 }
