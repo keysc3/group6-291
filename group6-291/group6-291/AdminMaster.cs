@@ -34,7 +34,6 @@ namespace group6_291
             populateAccountList();
             addWardNameBox.Leave += new EventHandler(addWardNameBox_Leave);
             AddWardCapacityBox.Leave += new EventHandler(addWardCapacityBox_Leave);
-            wardListBox.SelectedIndexChanged += new EventHandler(wardListBox_SelectedIndexChanged);
             addSINBox.TextChanged += new EventHandler(addSINBox_TextChanged);
             registerListBox.DoubleClick += new EventHandler(registerListBox_DoubleClick);
             populateWardList();
@@ -382,12 +381,6 @@ namespace group6_291
             conn.Close();
         }
 
-        private void wardListBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            addWardNameBox.Text = "";
-            AddWardCapacityBox.Text = "";
-        }
-
         //Purpose: make sure ward name is available and valid after being inputed
         private void addWardNameBox_Leave(object sender, EventArgs e)
         {
@@ -513,12 +506,6 @@ namespace group6_291
             addWardRequestInfo.Text = "";
         }
 
-        //Purpose: Refresh the ward list on refresh button click
-        private void wardListRefresh_Click(object sender, EventArgs e)
-        {
-            populateWardList();
-        }
-
         //Purpose: Delete the selected ward on delete click
         private void deleteWardButton_Click(object sender, EventArgs e)
         {
@@ -605,6 +592,7 @@ namespace group6_291
         //Purpose: Update ward update tabs information when a new ward is selected
         private void wardListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentWardPatientInfo();
             //Get selected ward values
             DataRowView wardViewItem = wardListBox.SelectedItem as DataRowView;
             string wardName = wardViewItem["wardName"].ToString();
@@ -619,6 +607,8 @@ namespace group6_291
                 updateCurrentStatus.Text = "Full";
             else
                 updateCurrentStatus.Text = "Not Full";
+            updateWardNameBox.Text = "";
+            updateWardCapacityBox.Text = "";
         }
 
 
@@ -1058,6 +1048,50 @@ namespace group6_291
                 addHomePhoneBox.Text = "";
                 addCellphoneBox.Text = "";
                 addNotesBox.Text = "";
+            }
+        }
+
+        private void currentWardPatientInfo()
+        {
+            if (wardListBox.SelectedItem == null)
+            {
+                selectedWardGridView.Hide();
+            }
+            else
+            {
+                DataRowView selectedWard = wardListBox.SelectedItem as DataRowView;
+                string wardName = selectedWard["wardName"].ToString();
+
+                DataSet patientsInWard = new DataSet();
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+
+                SqlCommand getWard = new SqlCommand("select concat(firstName, ' ', lastName) as Name from Patient, Register where Patient.patientSIN = Register.patientSIN and Register.leaveDate is null and Register.registerID in (select registerID from Patient_Ward where dateOut is null and wardName = @wardName)", conn);
+                getWard.Parameters.AddWithValue("@wardName", wardName);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = getWard;
+                adapter.Fill(patientsInWard);
+                selectedWardGridView.AutoGenerateColumns = true;
+                selectedWardGridView.DataSource = patientsInWard.Tables[0];
+
+                int rowCount = selectedWardGridView.RowCount;
+                if (rowCount > 0)
+                {
+                    selectedWardGridView.Show();
+                    int totalRowHeight = selectedWardGridView.ColumnHeadersHeight;
+                    if (rowCount > 8)
+                    {
+                        totalRowHeight += (selectedWardGridView.Rows[0].Height * 8) - 20;
+                        selectedWardGridView.Height = totalRowHeight;
+                    }
+                    else
+                    {
+                        totalRowHeight += (selectedWardGridView.Rows[0].Height * (rowCount + 1)) - 20;
+                        selectedWardGridView.Height = totalRowHeight;
+                    }
+                }
+                else
+                    selectedWardGridView.Hide();
             }
         }
     }

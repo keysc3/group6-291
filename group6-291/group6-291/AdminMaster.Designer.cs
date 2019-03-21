@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
             this.refreshAccountList = new System.Windows.Forms.Button();
@@ -65,6 +66,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
+            this.addSINBox = new System.Windows.Forms.TextBox();
             this.addCellphoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addHomePhoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addDOBBox = new System.Windows.Forms.MaskedTextBox();
@@ -139,7 +141,6 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.WardTab = new System.Windows.Forms.TabPage();
-            this.wardListRefresh = new System.Windows.Forms.Button();
             this.deleteWardButton = new System.Windows.Forms.Button();
             this.wardActionTabs = new System.Windows.Forms.TabControl();
             this.addWardTab = new System.Windows.Forms.TabPage();
@@ -223,7 +224,9 @@
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.addSINBox = new System.Windows.Forms.TextBox();
+            this.selectedWardGridView = new System.Windows.Forms.DataGridView();
+            this.currentWardPatientsInfo = new System.Windows.Forms.Label();
+            this.currentWardPatientsLabel = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -241,6 +244,7 @@
             this.tabControl3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -660,6 +664,13 @@
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
+            // 
+            // addSINBox
+            // 
+            this.addSINBox.Location = new System.Drawing.Point(281, 68);
+            this.addSINBox.Name = "addSINBox";
+            this.addSINBox.Size = new System.Drawing.Size(100, 20);
+            this.addSINBox.TabIndex = 169;
             // 
             // addCellphoneBox
             // 
@@ -1332,7 +1343,6 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.WardTab.Controls.Add(this.wardListRefresh);
             this.WardTab.Controls.Add(this.deleteWardButton);
             this.WardTab.Controls.Add(this.wardActionTabs);
             this.WardTab.Controls.Add(this.wardListBox);
@@ -1346,16 +1356,6 @@
             this.WardTab.Size = new System.Drawing.Size(806, 487);
             this.WardTab.TabIndex = 1;
             this.WardTab.Text = "Ward Details";
-            // 
-            // wardListRefresh
-            // 
-            this.wardListRefresh.Location = new System.Drawing.Point(155, 461);
-            this.wardListRefresh.Name = "wardListRefresh";
-            this.wardListRefresh.Size = new System.Drawing.Size(75, 23);
-            this.wardListRefresh.TabIndex = 67;
-            this.wardListRefresh.Text = "Refresh";
-            this.wardListRefresh.UseVisualStyleBackColor = true;
-            this.wardListRefresh.Click += new System.EventHandler(this.wardListRefresh_Click);
             // 
             // deleteWardButton
             // 
@@ -1399,7 +1399,7 @@
             // 
             // addWardReset
             // 
-            this.addWardReset.Location = new System.Drawing.Point(434, 343);
+            this.addWardReset.Location = new System.Drawing.Point(6, 125);
             this.addWardReset.Name = "addWardReset";
             this.addWardReset.Size = new System.Drawing.Size(99, 23);
             this.addWardReset.TabIndex = 53;
@@ -1484,6 +1484,9 @@
             // 
             // updateWardTab
             // 
+            this.updateWardTab.Controls.Add(this.currentWardPatientsInfo);
+            this.updateWardTab.Controls.Add(this.currentWardPatientsLabel);
+            this.updateWardTab.Controls.Add(this.selectedWardGridView);
             this.updateWardTab.Controls.Add(this.resetUpdateWard);
             this.updateWardTab.Controls.Add(this.wardUpdateReqInfo);
             this.updateWardTab.Controls.Add(this.updateCurrentCap);
@@ -1510,7 +1513,7 @@
             // 
             // resetUpdateWard
             // 
-            this.resetUpdateWard.Location = new System.Drawing.Point(433, 344);
+            this.resetUpdateWard.Location = new System.Drawing.Point(10, 231);
             this.resetUpdateWard.Name = "resetUpdateWard";
             this.resetUpdateWard.Size = new System.Drawing.Size(100, 23);
             this.resetUpdateWard.TabIndex = 64;
@@ -1664,7 +1667,7 @@
             this.wardListBox.Name = "wardListBox";
             this.wardListBox.Size = new System.Drawing.Size(224, 394);
             this.wardListBox.TabIndex = 50;
-            this.wardListBox.SelectedIndexChanged += new System.EventHandler(this.wardListBox_SelectedIndexChanged_1);
+            this.wardListBox.SelectedIndexChanged += new System.EventHandler(this.wardListBox_SelectedIndexChanged);
             // 
             // wardListLabel
             // 
@@ -2168,12 +2171,49 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // addSINBox
+            // selectedWardGridView
             // 
-            this.addSINBox.Location = new System.Drawing.Point(281, 68);
-            this.addSINBox.Name = "addSINBox";
-            this.addSINBox.Size = new System.Drawing.Size(100, 20);
-            this.addSINBox.TabIndex = 169;
+            this.selectedWardGridView.AllowUserToAddRows = false;
+            this.selectedWardGridView.AllowUserToDeleteRows = false;
+            this.selectedWardGridView.AllowUserToOrderColumns = true;
+            this.selectedWardGridView.AllowUserToResizeColumns = false;
+            this.selectedWardGridView.AllowUserToResizeRows = false;
+            this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.selectedWardGridView.Location = new System.Drawing.Point(262, 44);
+            this.selectedWardGridView.Name = "selectedWardGridView";
+            this.selectedWardGridView.ReadOnly = true;
+            this.selectedWardGridView.RowHeadersVisible = false;
+            this.selectedWardGridView.Size = new System.Drawing.Size(240, 39);
+            this.selectedWardGridView.TabIndex = 65;
+            // 
+            // currentWardPatientsInfo
+            // 
+            this.currentWardPatientsInfo.AutoSize = true;
+            this.currentWardPatientsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentWardPatientsInfo.Location = new System.Drawing.Point(387, 12);
+            this.currentWardPatientsInfo.Name = "currentWardPatientsInfo";
+            this.currentWardPatientsInfo.Size = new System.Drawing.Size(35, 20);
+            this.currentWardPatientsInfo.TabIndex = 67;
+            this.currentWardPatientsInfo.Text = "N/A";
+            // 
+            // currentWardPatientsLabel
+            // 
+            this.currentWardPatientsLabel.AutoSize = true;
+            this.currentWardPatientsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentWardPatientsLabel.Location = new System.Drawing.Point(258, 12);
+            this.currentWardPatientsLabel.Name = "currentWardPatientsLabel";
+            this.currentWardPatientsLabel.Size = new System.Drawing.Size(132, 20);
+            this.currentWardPatientsLabel.TabIndex = 66;
+            this.currentWardPatientsLabel.Text = "Current Patients: ";
             // 
             // AdminMaster
             // 
@@ -2214,6 +2254,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2325,7 +2366,6 @@
         private System.Windows.Forms.Label addWardCapInfo;
         private System.Windows.Forms.Label addWardInfo;
         private System.Windows.Forms.Button addWardReset;
-        private System.Windows.Forms.Button wardListRefresh;
         private System.Windows.Forms.Label updateCurrentCap;
         private System.Windows.Forms.Label updateSelectedCurrentCap;
         private System.Windows.Forms.Label wardUpdateReqInfo;
@@ -2421,5 +2461,8 @@
         private System.Windows.Forms.TextBox addFirstNameBox;
         private System.Windows.Forms.Button addRegisterButton;
         private System.Windows.Forms.TextBox addSINBox;
+        private System.Windows.Forms.Label currentWardPatientsInfo;
+        private System.Windows.Forms.Label currentWardPatientsLabel;
+        private System.Windows.Forms.DataGridView selectedWardGridView;
     }
 }
