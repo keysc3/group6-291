@@ -1051,7 +1051,7 @@ namespace group6_291
                     addGenderBox.SelectedIndex = 0;
                 else
                     addGenderBox.SelectedIndex = 1;
-                addDOBBox.Text = Convert.ToDateTime(registrantList["dateOfBirth"]).ToString("dd/MM/yyyy");
+                addDOBBox.Text = Convert.ToDateTime(registrantList["dateOfBirth"]).ToString("MM/dd/yyyy");
                 //addAdmitDateBox.Text = "";
                 //addDepartDateBox.Text = "";
                 addInsuranceBox.Text = "";
