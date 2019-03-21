@@ -1083,6 +1083,7 @@ namespace group6_291
                 int rowCount = selectedWardGridView.RowCount;
                 if (rowCount > 0)
                 {
+                    currentWardPatientsInfo.Hide();
                     selectedWardGridView.Show();
                     int totalRowHeight = selectedWardGridView.ColumnHeadersHeight;
                     if (rowCount > 8)
@@ -1097,7 +1098,10 @@ namespace group6_291
                     }
                 }
                 else
+                {
                     selectedWardGridView.Hide();
+                    currentWardPatientsInfo.Show();
+                }
             }
         }
     }
