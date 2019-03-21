@@ -30,7 +30,6 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
-            this.refreshAccountList = new System.Windows.Forms.Button();
             this.deleteAccountButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -47,8 +46,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.UpdatePassLabel = new System.Windows.Forms.Label();
-            this.UpdatePassLabelText = new System.Windows.Forms.Label();
             this.UpdateCheckLabel = new System.Windows.Forms.Label();
             this.UpdateRecpCheckBox = new System.Windows.Forms.CheckBox();
             this.UpdateAdminCheckBox = new System.Windows.Forms.CheckBox();
@@ -65,6 +62,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
+            this.addSINBox = new System.Windows.Forms.TextBox();
             this.addCellphoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addHomePhoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addDOBBox = new System.Windows.Forms.MaskedTextBox();
@@ -176,10 +174,10 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.DoctorTab = new System.Windows.Forms.TabPage();
-            this.DoctorListRefresh = new System.Windows.Forms.Button();
             this.DeleteDoctorButton = new System.Windows.Forms.Button();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
             this.DoctorDeptBox = new System.Windows.Forms.ComboBox();
             this.DoctorErrorLabel = new System.Windows.Forms.Label();
             this.DoctorLastNameText = new System.Windows.Forms.TextBox();
@@ -198,6 +196,7 @@
             this.DoctorDeptLabel = new System.Windows.Forms.Label();
             this.DoctorNameLabel = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label60 = new System.Windows.Forms.Label();
             this.DoctorUpdDeptBox = new System.Windows.Forms.ComboBox();
             this.DoctorUpdateError = new System.Windows.Forms.Label();
             this.DoctorUpdLastName = new System.Windows.Forms.TextBox();
@@ -223,7 +222,7 @@
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.addSINBox = new System.Windows.Forms.TextBox();
+            this.DoctorUpdDeptError = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -259,7 +258,6 @@
             // UserAccTab
             // 
             this.UserAccTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.UserAccTab.Controls.Add(this.refreshAccountList);
             this.UserAccTab.Controls.Add(this.deleteAccountButton);
             this.UserAccTab.Controls.Add(this.tabControl1);
             this.UserAccTab.Controls.Add(this.accountListBox);
@@ -273,16 +271,6 @@
             this.UserAccTab.Size = new System.Drawing.Size(806, 487);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
-            // 
-            // refreshAccountList
-            // 
-            this.refreshAccountList.Location = new System.Drawing.Point(130, 458);
-            this.refreshAccountList.Name = "refreshAccountList";
-            this.refreshAccountList.Size = new System.Drawing.Size(99, 23);
-            this.refreshAccountList.TabIndex = 67;
-            this.refreshAccountList.Text = "Refresh";
-            this.refreshAccountList.UseVisualStyleBackColor = true;
-            this.refreshAccountList.Click += new System.EventHandler(this.refreshAccountList_Click);
             // 
             // deleteAccountButton
             // 
@@ -328,7 +316,7 @@
             // 
             // resetUserButton
             // 
-            this.resetUserButton.Location = new System.Drawing.Point(429, 339);
+            this.resetUserButton.Location = new System.Drawing.Point(6, 173);
             this.resetUserButton.Name = "resetUserButton";
             this.resetUserButton.Size = new System.Drawing.Size(100, 23);
             this.resetUserButton.TabIndex = 54;
@@ -347,7 +335,7 @@
             // requestInfo
             // 
             this.requestInfo.AutoSize = true;
-            this.requestInfo.Location = new System.Drawing.Point(3, 170);
+            this.requestInfo.Location = new System.Drawing.Point(7, 201);
             this.requestInfo.Name = "requestInfo";
             this.requestInfo.Size = new System.Drawing.Size(0, 13);
             this.requestInfo.TabIndex = 52;
@@ -434,8 +422,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.UpdatePassLabel);
-            this.tabPage2.Controls.Add(this.UpdatePassLabelText);
             this.tabPage2.Controls.Add(this.UpdateCheckLabel);
             this.tabPage2.Controls.Add(this.UpdateRecpCheckBox);
             this.tabPage2.Controls.Add(this.UpdateAdminCheckBox);
@@ -453,26 +439,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // UpdatePassLabel
-            // 
-            this.UpdatePassLabel.AutoSize = true;
-            this.UpdatePassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabel.Location = new System.Drawing.Point(243, 15);
-            this.UpdatePassLabel.Name = "UpdatePassLabel";
-            this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
-            this.UpdatePassLabel.TabIndex = 66;
-            this.UpdatePassLabel.Text = "Password:";
-            // 
-            // UpdatePassLabelText
-            // 
-            this.UpdatePassLabelText.AutoSize = true;
-            this.UpdatePassLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabelText.Location = new System.Drawing.Point(321, 15);
-            this.UpdatePassLabelText.Name = "UpdatePassLabelText";
-            this.UpdatePassLabelText.Size = new System.Drawing.Size(78, 20);
-            this.UpdatePassLabelText.TabIndex = 65;
-            this.UpdatePassLabelText.Text = "Password";
             // 
             // UpdateCheckLabel
             // 
@@ -660,6 +626,13 @@
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
+            // 
+            // addSINBox
+            // 
+            this.addSINBox.Location = new System.Drawing.Point(281, 68);
+            this.addSINBox.Name = "addSINBox";
+            this.addSINBox.Size = new System.Drawing.Size(100, 20);
+            this.addSINBox.TabIndex = 169;
             // 
             // addCellphoneBox
             // 
@@ -1705,7 +1678,6 @@
             // 
             // DoctorTab
             // 
-            this.DoctorTab.Controls.Add(this.DoctorListRefresh);
             this.DoctorTab.Controls.Add(this.DeleteDoctorButton);
             this.DoctorTab.Controls.Add(this.tabControl3);
             this.DoctorTab.Controls.Add(this.DoctorListBox);
@@ -1721,19 +1693,9 @@
             this.DoctorTab.Text = "Doctor Management";
             this.DoctorTab.UseVisualStyleBackColor = true;
             // 
-            // DoctorListRefresh
-            // 
-            this.DoctorListRefresh.Location = new System.Drawing.Point(136, 456);
-            this.DoctorListRefresh.Name = "DoctorListRefresh";
-            this.DoctorListRefresh.Size = new System.Drawing.Size(93, 23);
-            this.DoctorListRefresh.TabIndex = 75;
-            this.DoctorListRefresh.Text = "Refresh";
-            this.DoctorListRefresh.UseVisualStyleBackColor = true;
-            this.DoctorListRefresh.Click += new System.EventHandler(this.DoctorListRefresh_Click);
-            // 
             // DeleteDoctorButton
             // 
-            this.DeleteDoctorButton.Location = new System.Drawing.Point(36, 456);
+            this.DeleteDoctorButton.Location = new System.Drawing.Point(135, 458);
             this.DeleteDoctorButton.Name = "DeleteDoctorButton";
             this.DeleteDoctorButton.Size = new System.Drawing.Size(94, 23);
             this.DeleteDoctorButton.TabIndex = 74;
@@ -1753,6 +1715,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.DoctorDeptBox);
             this.tabPage3.Controls.Add(this.DoctorErrorLabel);
             this.tabPage3.Controls.Add(this.DoctorLastNameText);
@@ -1777,6 +1740,16 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Add";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label14.Location = new System.Drawing.Point(6, 143);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(45, 20);
+            this.label14.TabIndex = 63;
+            this.label14.Text = "Misc:";
             // 
             // DoctorDeptBox
             // 
@@ -1814,16 +1787,16 @@
             // 
             // DoctorDutyText
             // 
-            this.DoctorDutyText.Location = new System.Drawing.Point(9, 156);
+            this.DoctorDutyText.Location = new System.Drawing.Point(9, 192);
             this.DoctorDutyText.Name = "DoctorDutyText";
-            this.DoctorDutyText.Size = new System.Drawing.Size(163, 99);
+            this.DoctorDutyText.Size = new System.Drawing.Size(245, 63);
             this.DoctorDutyText.TabIndex = 58;
             this.DoctorDutyText.Text = "";
             // 
             // DoctorDutyLabel
             // 
             this.DoctorDutyLabel.AutoSize = true;
-            this.DoctorDutyLabel.Location = new System.Drawing.Point(6, 140);
+            this.DoctorDutyLabel.Location = new System.Drawing.Point(6, 176);
             this.DoctorDutyLabel.Name = "DoctorDutyLabel";
             this.DoctorDutyLabel.Size = new System.Drawing.Size(40, 13);
             this.DoctorDutyLabel.TabIndex = 57;
@@ -1924,6 +1897,8 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.DoctorUpdDeptError);
+            this.tabPage5.Controls.Add(this.label60);
             this.tabPage5.Controls.Add(this.DoctorUpdDeptBox);
             this.tabPage5.Controls.Add(this.DoctorUpdateError);
             this.tabPage5.Controls.Add(this.DoctorUpdLastName);
@@ -1950,6 +1925,16 @@
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Update";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label60.Location = new System.Drawing.Point(6, 145);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(45, 20);
+            this.label60.TabIndex = 81;
+            this.label60.Text = "Misc:";
             // 
             // DoctorUpdDeptBox
             // 
@@ -1986,16 +1971,16 @@
             // 
             // DoctorUpdDuty
             // 
-            this.DoctorUpdDuty.Location = new System.Drawing.Point(9, 155);
+            this.DoctorUpdDuty.Location = new System.Drawing.Point(9, 195);
             this.DoctorUpdDuty.Name = "DoctorUpdDuty";
-            this.DoctorUpdDuty.Size = new System.Drawing.Size(163, 99);
+            this.DoctorUpdDuty.Size = new System.Drawing.Size(245, 63);
             this.DoctorUpdDuty.TabIndex = 76;
             this.DoctorUpdDuty.Text = "";
             // 
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(6, 139);
+            this.label47.Location = new System.Drawing.Point(6, 179);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(40, 13);
             this.label47.TabIndex = 75;
@@ -2168,12 +2153,14 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // addSINBox
+            // DoctorUpdDeptError
             // 
-            this.addSINBox.Location = new System.Drawing.Point(281, 68);
-            this.addSINBox.Name = "addSINBox";
-            this.addSINBox.Size = new System.Drawing.Size(100, 20);
-            this.addSINBox.TabIndex = 169;
+            this.DoctorUpdDeptError.AutoSize = true;
+            this.DoctorUpdDeptError.Location = new System.Drawing.Point(138, 72);
+            this.DoctorUpdDeptError.Name = "DoctorUpdDeptError";
+            this.DoctorUpdDeptError.Size = new System.Drawing.Size(29, 13);
+            this.DoctorUpdDeptError.TabIndex = 82;
+            this.DoctorUpdDeptError.Text = "Error";
             // 
             // AdminMaster
             // 
@@ -2317,10 +2304,7 @@
         private System.Windows.Forms.Label requestInfo;
         private System.Windows.Forms.Label checkboxInfo;
         private System.Windows.Forms.Button resetUserButton;
-        private System.Windows.Forms.Button refreshAccountList;
         private System.Windows.Forms.Label UpdateCheckLabel;
-        private System.Windows.Forms.Label UpdatePassLabelText;
-        private System.Windows.Forms.Label UpdatePassLabel;
         private System.Windows.Forms.Label addWardRequestInfo;
         private System.Windows.Forms.Label addWardCapInfo;
         private System.Windows.Forms.Label addWardInfo;
@@ -2331,7 +2315,6 @@
         private System.Windows.Forms.Label wardUpdateReqInfo;
         private System.Windows.Forms.Button resetUpdateWard;
         private System.Windows.Forms.TabPage DoctorTab;
-        private System.Windows.Forms.Button DoctorListRefresh;
         private System.Windows.Forms.Button DeleteDoctorButton;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage3;
@@ -2394,7 +2377,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox addGenderBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         //private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.RichTextBox addNotesBox;
@@ -2421,5 +2403,8 @@
         private System.Windows.Forms.TextBox addFirstNameBox;
         private System.Windows.Forms.Button addRegisterButton;
         private System.Windows.Forms.TextBox addSINBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label DoctorUpdDeptError;
     }
 }

@@ -204,6 +204,7 @@ namespace group6_291
             //Make sure username and password are valid
             else if (!usernameIsValid() || !passwordIsValid())
             {
+                resetAddUserFields();
                 requestInfo.Text = "*Invalid add user request. Please fix errors!";
                 requestInfo.ForeColor = Color.Red;
             }
@@ -231,7 +232,6 @@ namespace group6_291
                 conn.Close();
             }
             populateAccountList();
-
         }
 
         //Purpose: Reset all reporting fields INCLUDING the add user response when reset button is clicked
@@ -257,22 +257,18 @@ namespace group6_291
             requestInfo.Text = "";
         }
 
-        //Purpose: Repopulate the account list box when the refresh button is clicked
-        private void refreshAccountList_Click(object sender, EventArgs e)
-        {
-            populateAccountList();
-        }
-
         private void accountListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            addUsername.Text = "";
+            addPassword.Text = "";
+            UpdateCheckLabel.Text = "";
             DataRowView drvItem = accountListBox.SelectedItem as DataRowView;
             string user = drvItem["username"].ToString();
             string admin = drvItem["isAdmin"].ToString();
             string password = drvItem["password"].ToString();
 
             if (admin.Equals("True"))
-            {
-
+            { 
                 UpdateRecpCheckBox.Checked = false;
                 UpdateAdminCheckBox.Checked = true;
             }
@@ -281,11 +277,10 @@ namespace group6_291
                 UpdateAdminCheckBox.Checked = false;
                 UpdateRecpCheckBox.Checked = true;
             }
-            UpdatePassLabelText.Text = password;
             AccountUpdateLabel.Text = user;
         }
 
-        //Purpose: Update selected account on update button click
+        //Purpose: Update selected account on update button click 
         private void UpdateAccountButton_Click(object sender, EventArgs e)
         {
             //Get selected itme values
@@ -301,38 +296,43 @@ namespace group6_291
                 return;
             }
 
-            if (UpdateUserText.TextLength.Equals(0) || UpdatePassText.TextLength.Equals(0))
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            var sql = "UPDATE [User] SET username = @username, password = @password, isAdmin= @isAdmin where username=@userID";// repeat for all variables
+            SqlCommand UpdateUser = new SqlCommand(sql, conn);
+
+            // this needs to be seperate statements
+            if (UpdateUserText.TextLength.Equals(0))
             {
-                UpdateCheckLabel.Text = "Cannot have empty fields";
-                UpdateCheckLabel.ForeColor = Color.Red;
+                UpdateUser.Parameters.AddWithValue("@username", user);
+            } else
+            {
+                UpdateUser.Parameters.AddWithValue("@username", UpdateUserText.Text);
+            }
+            if (UpdatePassText.TextLength.Equals(0))
+            {
+                UpdateUser.Parameters.AddWithValue("@password", pass);
+            } else
+            {
+                UpdateUser.Parameters.AddWithValue("@password", UpdatePassText.Text);
+            }
+            if (UpdateRecpCheckBox.Checked)
+            {
+                UpdateUser.Parameters.AddWithValue("@isAdmin", false);
             }
             else
             {
-                
-                SqlConnection conn = new SqlConnection(Globals.conn);
-                conn.Open();
-                var sql = "UPDATE [User] SET username = @username, password = @password, isAdmin= @isAdmin where username=@userID";// repeat for all variables
-                SqlCommand UpdateUser = new SqlCommand(sql, conn);
-                UpdateUser.Parameters.AddWithValue("@username", UpdateUserText.Text);
-                UpdateUser.Parameters.AddWithValue("@password", UpdatePassText.Text);
-                if (UpdateRecpCheckBox.Checked)
-                {
-                    UpdateUser.Parameters.AddWithValue("@isAdmin", false);
-                }
-                else
-                {
-                    UpdateUser.Parameters.AddWithValue("@isAdmin", true);
-                }
-                UpdateUser.Parameters.AddWithValue("@userID", user);
-                UpdateUser.ExecuteNonQuery();
-                //Update status and reset fields
-                UpdateCheckLabel.Text = "User updated successfully";
-                UpdateCheckLabel.ForeColor = Color.Green;
-
-                UpdateUserText.Clear();
-                UpdatePassText.Clear();
-                populateAccountList();
+                UpdateUser.Parameters.AddWithValue("@isAdmin", true);
             }
+            UpdateUser.Parameters.AddWithValue("@userID", user);
+            UpdateUser.ExecuteNonQuery();
+            //Update status and reset fields
+            UpdateCheckLabel.Text = "User updated successfully";
+            UpdateCheckLabel.ForeColor = Color.Green;
+            UpdateUserText.Clear();
+            UpdatePassText.Clear();
+            populateAccountList();
+            
         }
 
         //Purpose: Change checkbox value based on reception checkbox change 
@@ -631,6 +631,7 @@ namespace group6_291
 
         private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DoctorUpdDeptError.Text = "";
             DoctorErrorLabel.Text = "";
             DoctorUpdateError.Text = "";
             DoctorDeptBox.Items.Clear();
@@ -670,18 +671,22 @@ namespace group6_291
 
             DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
             string doctorID = DoctorList["doctorID"].ToString();
-            DoctorUpdateError.Text = doctorID;
+            //DoctorUpdateError.Text = doctorID;
             string firstName = DoctorList["firstName"].ToString();
             string lastName = DoctorList["lastName"].ToString();
             string departmentName = DoctorList["departmentName"].ToString();
             string specialization = DoctorList["specialization"].ToString();
             string duties = DoctorList["duties"].ToString();
-            
-            if (DoctorUpdFirstName.TextLength.Equals(0) || DoctorUpdLastName.TextLength.Equals(0)
-               || DoctorUpdDeptBox.SelectedIndex == -1 || DoctorUpdSpec.TextLength.Equals(0) ||
-               DoctorUpdDuty.TextLength.Equals(0))
+
+            if (DoctorUpdDeptBox.SelectedIndex == -1)
             {
-                DoctorUpdateError.Text = "Cannot have empty fields";
+                DoctorUpdDeptError.Text = "Select a department name";
+                DoctorUpdDeptError.ForeColor = Color.Red;
+            }
+            else if (DoctorUpdFirstName.TextLength.Equals(0) || DoctorUpdLastName.TextLength.Equals(0) 
+               || DoctorUpdSpec.TextLength.Equals(0))
+            {
+                DoctorUpdateError.Text = "Cannot have empty required fields";
                 DoctorUpdateError.ForeColor = Color.Red;
             }
             else
@@ -690,14 +695,21 @@ namespace group6_291
                 SqlConnection conn = new SqlConnection(Globals.conn);
                 conn.Open();
                 var sql = "UPDATE [Doctor] SET firstName=@firstName, lastName=@lastName, departmentName=@department, "
-                    + "specialization=@spec, duties =@duty where doctorID=@doctorID";// repeat for all variables
+                    + "specialization=@spec, duties=@duty where doctorID=@doctorID";// repeat for all variables
 
                 SqlCommand updateDoctor = new SqlCommand(sql, conn);
                 updateDoctor.Parameters.AddWithValue("@firstName", DoctorUpdFirstName.Text);
                 updateDoctor.Parameters.AddWithValue("@lastName", DoctorUpdLastName.Text);
                 updateDoctor.Parameters.AddWithValue("@department", DoctorUpdDeptBox.SelectedItem.ToString());
-                updateDoctor.Parameters.AddWithValue("@spec", DoctorUpdSpec.Text);
-                updateDoctor.Parameters.AddWithValue("@duty", DoctorUpdDuty.Text);
+                updateDoctor.Parameters.AddWithValue("@spec", specialization);
+
+                if (DoctorUpdDuty.TextLength.Equals(0))
+                {
+                    updateDoctor.Parameters.AddWithValue("@duty", DoctorUpdDuty.Text);
+                } else
+                {
+                    updateDoctor.Parameters.AddWithValue("@duty", duties);
+                }
                 updateDoctor.Parameters.AddWithValue("@doctorID", Int32.Parse(doctorID));
                 updateDoctor.ExecuteNonQuery();
                 conn.Close();
@@ -712,11 +724,10 @@ namespace group6_291
 
         private void AddDoctorButton_Click(object sender, EventArgs e)
         {
-
             if (DoctorFirstNameText.TextLength.Equals(0) || DoctorLastNameText.TextLength.Equals(0)
-                || DoctorDeptBox.SelectedIndex == -1 || DoctorDutyText.TextLength.Equals(0) ||
-                DoctorSpecText.TextLength.Equals(0)) {
-                DoctorErrorLabel.Text = "Cannot have empty fields";
+                || DoctorDeptBox.SelectedIndex == -1 || DoctorSpecText.TextLength.Equals(0))
+            {
+                DoctorErrorLabel.Text = "Cannot have empty required fields";
                 DoctorErrorLabel.ForeColor = Color.Red;
             }
             else
@@ -738,7 +749,6 @@ namespace group6_291
                 populateDoctorList();
                 DoctorErrorLabel.Text = "Doctor added successfully";
                 DoctorErrorLabel.ForeColor = Color.Green;
-
             }
         }
 
@@ -760,10 +770,6 @@ namespace group6_291
             DoctorUpdDuty.Text = "";
         }
 
-        private void DoctorListRefresh_Click(object sender, EventArgs e)
-        {
-            populateDoctorList();
-        }
 
         private void DeleteDoctorButton_Click(object sender, EventArgs e)
         {
