@@ -379,12 +379,12 @@ namespace group6_291
                 int totalRowHeight = selectedWardGridView.ColumnHeadersHeight;
                 if (rowCount > 8)
                 {
-                    totalRowHeight += (currentDoctorsGridView.Rows[1].Height * 8)+8;
+                    totalRowHeight += (currentDoctorsGridView.Rows[1].Height * 8)+10;
                     currentDoctorsGridView.Height = totalRowHeight;
                 }
                 else
                 {
-                    totalRowHeight += (currentDoctorsGridView.Rows[0].Height * (rowCount + 1))+8;
+                    totalRowHeight += (currentDoctorsGridView.Rows[0].Height * (rowCount + 1))+10;
                     currentDoctorsGridView.Height = totalRowHeight;
                 }
             }
