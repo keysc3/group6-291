@@ -30,7 +30,6 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
-            this.refreshAccountList = new System.Windows.Forms.Button();
             this.deleteAccountButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -47,8 +46,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.UpdatePassLabel = new System.Windows.Forms.Label();
-            this.UpdatePassLabelText = new System.Windows.Forms.Label();
             this.UpdateCheckLabel = new System.Windows.Forms.Label();
             this.UpdateRecpCheckBox = new System.Windows.Forms.CheckBox();
             this.UpdateAdminCheckBox = new System.Windows.Forms.CheckBox();
@@ -65,6 +62,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
+            this.addSINBox = new System.Windows.Forms.TextBox();
             this.addCellphoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addHomePhoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addDOBBox = new System.Windows.Forms.MaskedTextBox();
@@ -223,7 +221,6 @@
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.addSINBox = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -259,7 +256,6 @@
             // UserAccTab
             // 
             this.UserAccTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.UserAccTab.Controls.Add(this.refreshAccountList);
             this.UserAccTab.Controls.Add(this.deleteAccountButton);
             this.UserAccTab.Controls.Add(this.tabControl1);
             this.UserAccTab.Controls.Add(this.accountListBox);
@@ -273,16 +269,6 @@
             this.UserAccTab.Size = new System.Drawing.Size(806, 487);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
-            // 
-            // refreshAccountList
-            // 
-            this.refreshAccountList.Location = new System.Drawing.Point(130, 458);
-            this.refreshAccountList.Name = "refreshAccountList";
-            this.refreshAccountList.Size = new System.Drawing.Size(99, 23);
-            this.refreshAccountList.TabIndex = 67;
-            this.refreshAccountList.Text = "Refresh";
-            this.refreshAccountList.UseVisualStyleBackColor = true;
-            this.refreshAccountList.Click += new System.EventHandler(this.refreshAccountList_Click);
             // 
             // deleteAccountButton
             // 
@@ -328,7 +314,7 @@
             // 
             // resetUserButton
             // 
-            this.resetUserButton.Location = new System.Drawing.Point(429, 339);
+            this.resetUserButton.Location = new System.Drawing.Point(6, 173);
             this.resetUserButton.Name = "resetUserButton";
             this.resetUserButton.Size = new System.Drawing.Size(100, 23);
             this.resetUserButton.TabIndex = 54;
@@ -347,7 +333,7 @@
             // requestInfo
             // 
             this.requestInfo.AutoSize = true;
-            this.requestInfo.Location = new System.Drawing.Point(3, 170);
+            this.requestInfo.Location = new System.Drawing.Point(7, 201);
             this.requestInfo.Name = "requestInfo";
             this.requestInfo.Size = new System.Drawing.Size(0, 13);
             this.requestInfo.TabIndex = 52;
@@ -434,8 +420,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.UpdatePassLabel);
-            this.tabPage2.Controls.Add(this.UpdatePassLabelText);
             this.tabPage2.Controls.Add(this.UpdateCheckLabel);
             this.tabPage2.Controls.Add(this.UpdateRecpCheckBox);
             this.tabPage2.Controls.Add(this.UpdateAdminCheckBox);
@@ -453,26 +437,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // UpdatePassLabel
-            // 
-            this.UpdatePassLabel.AutoSize = true;
-            this.UpdatePassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabel.Location = new System.Drawing.Point(243, 15);
-            this.UpdatePassLabel.Name = "UpdatePassLabel";
-            this.UpdatePassLabel.Size = new System.Drawing.Size(82, 20);
-            this.UpdatePassLabel.TabIndex = 66;
-            this.UpdatePassLabel.Text = "Password:";
-            // 
-            // UpdatePassLabelText
-            // 
-            this.UpdatePassLabelText.AutoSize = true;
-            this.UpdatePassLabelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.UpdatePassLabelText.Location = new System.Drawing.Point(321, 15);
-            this.UpdatePassLabelText.Name = "UpdatePassLabelText";
-            this.UpdatePassLabelText.Size = new System.Drawing.Size(78, 20);
-            this.UpdatePassLabelText.TabIndex = 65;
-            this.UpdatePassLabelText.Text = "Password";
             // 
             // UpdateCheckLabel
             // 
@@ -660,6 +624,13 @@
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
+            // 
+            // addSINBox
+            // 
+            this.addSINBox.Location = new System.Drawing.Point(281, 68);
+            this.addSINBox.Name = "addSINBox";
+            this.addSINBox.Size = new System.Drawing.Size(100, 20);
+            this.addSINBox.TabIndex = 169;
             // 
             // addCellphoneBox
             // 
@@ -2168,13 +2139,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // addSINBox
-            // 
-            this.addSINBox.Location = new System.Drawing.Point(281, 68);
-            this.addSINBox.Name = "addSINBox";
-            this.addSINBox.Size = new System.Drawing.Size(100, 20);
-            this.addSINBox.TabIndex = 169;
-            // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2317,10 +2281,7 @@
         private System.Windows.Forms.Label requestInfo;
         private System.Windows.Forms.Label checkboxInfo;
         private System.Windows.Forms.Button resetUserButton;
-        private System.Windows.Forms.Button refreshAccountList;
         private System.Windows.Forms.Label UpdateCheckLabel;
-        private System.Windows.Forms.Label UpdatePassLabelText;
-        private System.Windows.Forms.Label UpdatePassLabel;
         private System.Windows.Forms.Label addWardRequestInfo;
         private System.Windows.Forms.Label addWardCapInfo;
         private System.Windows.Forms.Label addWardInfo;
