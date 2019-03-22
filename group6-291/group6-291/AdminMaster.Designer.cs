@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
             this.deleteAccountButton = new System.Windows.Forms.Button();
@@ -152,6 +152,9 @@
             this.addWardType = new System.Windows.Forms.Label();
             this.addWardName = new System.Windows.Forms.Label();
             this.updateWardTab = new System.Windows.Forms.TabPage();
+            this.currentWardPatientsInfo = new System.Windows.Forms.Label();
+            this.currentWardPatientsLabel = new System.Windows.Forms.Label();
+            this.selectedWardGridView = new System.Windows.Forms.DataGridView();
             this.resetUpdateWard = new System.Windows.Forms.Button();
             this.wardUpdateReqInfo = new System.Windows.Forms.Label();
             this.updateCurrentCap = new System.Windows.Forms.Label();
@@ -196,6 +199,7 @@
             this.DoctorDeptLabel = new System.Windows.Forms.Label();
             this.DoctorNameLabel = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.DoctorUpdDeptError = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.DoctorUpdDeptBox = new System.Windows.Forms.ComboBox();
             this.DoctorUpdateError = new System.Windows.Forms.Label();
@@ -222,10 +226,7 @@
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.selectedWardGridView = new System.Windows.Forms.DataGridView();
-            this.currentWardPatientsInfo = new System.Windows.Forms.Label();
-            this.currentWardPatientsLabel = new System.Windows.Forms.Label();
-            this.DoctorUpdDeptError = new System.Windows.Forms.Label();
+            this.lougoutAdmin = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -239,11 +240,11 @@
             this.wardActionTabs.SuspendLayout();
             this.addWardTab.SuspendLayout();
             this.updateWardTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).BeginInit();
             this.DoctorTab.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -1477,6 +1478,50 @@
             this.updateWardTab.Text = "Update";
             this.updateWardTab.UseVisualStyleBackColor = true;
             // 
+            // currentWardPatientsInfo
+            // 
+            this.currentWardPatientsInfo.AutoSize = true;
+            this.currentWardPatientsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentWardPatientsInfo.Location = new System.Drawing.Point(387, 12);
+            this.currentWardPatientsInfo.Name = "currentWardPatientsInfo";
+            this.currentWardPatientsInfo.Size = new System.Drawing.Size(35, 20);
+            this.currentWardPatientsInfo.TabIndex = 67;
+            this.currentWardPatientsInfo.Text = "N/A";
+            // 
+            // currentWardPatientsLabel
+            // 
+            this.currentWardPatientsLabel.AutoSize = true;
+            this.currentWardPatientsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentWardPatientsLabel.Location = new System.Drawing.Point(258, 12);
+            this.currentWardPatientsLabel.Name = "currentWardPatientsLabel";
+            this.currentWardPatientsLabel.Size = new System.Drawing.Size(132, 20);
+            this.currentWardPatientsLabel.TabIndex = 66;
+            this.currentWardPatientsLabel.Text = "Current Patients: ";
+            // 
+            // selectedWardGridView
+            // 
+            this.selectedWardGridView.AllowUserToAddRows = false;
+            this.selectedWardGridView.AllowUserToDeleteRows = false;
+            this.selectedWardGridView.AllowUserToOrderColumns = true;
+            this.selectedWardGridView.AllowUserToResizeColumns = false;
+            this.selectedWardGridView.AllowUserToResizeRows = false;
+            this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.selectedWardGridView.Location = new System.Drawing.Point(262, 44);
+            this.selectedWardGridView.Name = "selectedWardGridView";
+            this.selectedWardGridView.ReadOnly = true;
+            this.selectedWardGridView.RowHeadersVisible = false;
+            this.selectedWardGridView.Size = new System.Drawing.Size(240, 39);
+            this.selectedWardGridView.TabIndex = 65;
+            // 
             // resetUpdateWard
             // 
             this.resetUpdateWard.Location = new System.Drawing.Point(10, 231);
@@ -1922,6 +1967,15 @@
             this.tabPage5.Text = "Update";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // DoctorUpdDeptError
+            // 
+            this.DoctorUpdDeptError.AutoSize = true;
+            this.DoctorUpdDeptError.Location = new System.Drawing.Point(138, 72);
+            this.DoctorUpdDeptError.Name = "DoctorUpdDeptError";
+            this.DoctorUpdDeptError.Size = new System.Drawing.Size(29, 13);
+            this.DoctorUpdDeptError.TabIndex = 82;
+            this.DoctorUpdDeptError.Text = "Error";
+            // 
             // label60
             // 
             this.label60.AutoSize = true;
@@ -2143,69 +2197,28 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label1.Location = new System.Drawing.Point(664, 9);
+            this.label1.Location = new System.Drawing.Point(12, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(164, 31);
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Tools";
             // 
-            // selectedWardGridView
+            // lougoutAdmin
             // 
-            this.selectedWardGridView.AllowUserToAddRows = false;
-            this.selectedWardGridView.AllowUserToDeleteRows = false;
-            this.selectedWardGridView.AllowUserToOrderColumns = true;
-            this.selectedWardGridView.AllowUserToResizeColumns = false;
-            this.selectedWardGridView.AllowUserToResizeRows = false;
-            this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.selectedWardGridView.Location = new System.Drawing.Point(262, 44);
-            this.selectedWardGridView.Name = "selectedWardGridView";
-            this.selectedWardGridView.ReadOnly = true;
-            this.selectedWardGridView.RowHeadersVisible = false;
-            this.selectedWardGridView.Size = new System.Drawing.Size(240, 39);
-            this.selectedWardGridView.TabIndex = 65;
-            // 
-            // currentWardPatientsInfo
-            // 
-            this.currentWardPatientsInfo.AutoSize = true;
-            this.currentWardPatientsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentWardPatientsInfo.Location = new System.Drawing.Point(387, 12);
-            this.currentWardPatientsInfo.Name = "currentWardPatientsInfo";
-            this.currentWardPatientsInfo.Size = new System.Drawing.Size(35, 20);
-            this.currentWardPatientsInfo.TabIndex = 67;
-            this.currentWardPatientsInfo.Text = "N/A";
-            // 
-            // currentWardPatientsLabel
-            // 
-            this.currentWardPatientsLabel.AutoSize = true;
-            this.currentWardPatientsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentWardPatientsLabel.Location = new System.Drawing.Point(258, 12);
-            this.currentWardPatientsLabel.Name = "currentWardPatientsLabel";
-            this.currentWardPatientsLabel.Size = new System.Drawing.Size(132, 20);
-            this.currentWardPatientsLabel.TabIndex = 66;
-            this.currentWardPatientsLabel.Text = "Current Patients: ";
-            // DoctorUpdDeptError
-            // 
-            this.DoctorUpdDeptError.AutoSize = true;
-            this.DoctorUpdDeptError.Location = new System.Drawing.Point(138, 72);
-            this.DoctorUpdDeptError.Name = "DoctorUpdDeptError";
-            this.DoctorUpdDeptError.Size = new System.Drawing.Size(29, 13);
-            this.DoctorUpdDeptError.TabIndex = 82;
-            this.DoctorUpdDeptError.Text = "Error";
+            this.lougoutAdmin.Location = new System.Drawing.Point(754, 30);
+            this.lougoutAdmin.Name = "lougoutAdmin";
+            this.lougoutAdmin.Size = new System.Drawing.Size(75, 23);
+            this.lougoutAdmin.TabIndex = 4;
+            this.lougoutAdmin.Text = "Logout";
+            this.lougoutAdmin.UseVisualStyleBackColor = true;
+            this.lougoutAdmin.Click += new System.EventHandler(this.lougoutAdmin_Click);
             // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 561);
+            this.Controls.Add(this.lougoutAdmin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TabControl);
             this.Name = "AdminMaster";
@@ -2233,6 +2246,7 @@
             this.addWardTab.PerformLayout();
             this.updateWardTab.ResumeLayout(false);
             this.updateWardTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).EndInit();
             this.DoctorTab.ResumeLayout(false);
             this.DoctorTab.PerformLayout();
             this.tabControl3.ResumeLayout(false);
@@ -2240,7 +2254,6 @@
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2448,5 +2461,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label DoctorUpdDeptError;
+        private System.Windows.Forms.Button lougoutAdmin;
     }
 }

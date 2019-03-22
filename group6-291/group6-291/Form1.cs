@@ -14,7 +14,6 @@ namespace group6_291
 
     public partial class Form1 : Form
     {
-        public static int Account = 0;
         public Form1()
         {
             InitializeComponent();
@@ -50,23 +49,19 @@ namespace group6_291
             {
                 if (userReader["isAdmin"].Equals(true))
                 {
-                    Account = 1;
-                    AdminMaster Admin = new AdminMaster();
+                    AdminMaster Admin = new AdminMaster(this);
                     Admin.Show();
                     this.Hide();
-                    //add here
-                    //loginResponseLabel.Text = "Admin logged in";
                 }
                 else
                 {
-                    //Home RegisterPatient = new Home();
-                    //RegisterPatient.Show();
-                    ReceptionistMaster Recep = new ReceptionistMaster();
+                    ReceptionistMaster Recep = new ReceptionistMaster(this);
                     Recep.Show();
                     this.Hide();
 
-                    //loginResponseLabel.Text = "Receptionist logged in";
                 }
+                usernameBox.Text = "";
+                passwordBox.Text = "";
                 conn.Close();
                 return;
             }
@@ -81,5 +76,6 @@ namespace group6_291
         {
 
         }
+
     }
 }

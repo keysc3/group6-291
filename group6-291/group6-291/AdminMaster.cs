@@ -14,21 +14,15 @@ namespace group6_291
 {
     public partial class AdminMaster : Form
     {
+        Form1 loginForm;
         DataSet patientList = new DataSet();
-        public AdminMaster()
+        public AdminMaster(Form1 login)
         {
-
             InitializeComponent();
-
+            loginForm = login;
         }
         private void AdminMaster_Load(object sender, EventArgs e)
         {
-            if (Form1.Account == 0)
-            {
-                TabControl.TabPages.Remove(UserAccTab);
-                TabControl.TabPages.Remove(PatientRecTab);
-                TabControl.TabPages.Remove(WardTab);
-            }
             addUsername.Leave += new EventHandler(addUsername_Leave);
             addPassword.Leave += new EventHandler(addPassword_Leave);
             populateAccountList();
@@ -1103,6 +1097,12 @@ namespace group6_291
                     currentWardPatientsInfo.Show();
                 }
             }
+        }
+
+        private void lougoutAdmin_Click(object sender, EventArgs e)
+        {
+            loginForm.Show();
+            this.Close();
         }
     }
 }
