@@ -14,9 +14,11 @@ namespace group6_291
 {
     public partial class ReceptionistMaster : Form
     {
-        public ReceptionistMaster()
+        Form1 loginForm;
+        public ReceptionistMaster(Form1 login)
         {
             InitializeComponent();
+            loginForm = login;
         }
 
         private void ReceptionistMaster_Load(object sender, EventArgs e)
@@ -570,6 +572,12 @@ namespace group6_291
                 updatePatientErrorInfo.Text += "*Invalid Date of Birth.\n";
             }
             return true;
+        }
+
+        private void logoutRecep_Click(object sender, EventArgs e)
+        {
+            loginForm.Show();
+            this.Close();
         }
     }
 }
