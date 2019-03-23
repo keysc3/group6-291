@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
@@ -163,12 +163,19 @@
             this.DoctorTab = new System.Windows.Forms.TabPage();
             this.label30 = new System.Windows.Forms.Label();
             this.PatientGrid = new System.Windows.Forms.DataGridView();
-            this.label41 = new System.Windows.Forms.Label();
-            this.DoctorGrid = new System.Windows.Forms.DataGridView();
+            this.doctorLabel = new System.Windows.Forms.Label();
             this.DoctorListBox = new System.Windows.Forms.ListBox();
             this.label42 = new System.Windows.Forms.Label();
             this.vScrollBar4 = new System.Windows.Forms.VScrollBar();
             this.logoutRecep = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.deptName = new System.Windows.Forms.Label();
+            this.specName = new System.Windows.Forms.Label();
+            this.docDuties = new System.Windows.Forms.Label();
+            this.doctorName = new System.Windows.Forms.Label();
+            this.docErrorLabel = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -182,7 +189,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).BeginInit();
             this.DoctorTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -1028,14 +1034,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle7;
             this.selectedWardGridView.Location = new System.Drawing.Point(249, 38);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -1083,7 +1089,7 @@
             // wardErrorLabel
             // 
             this.wardErrorLabel.AutoSize = true;
-            this.wardErrorLabel.Location = new System.Drawing.Point(100, 198);
+            this.wardErrorLabel.Location = new System.Drawing.Point(108, 123);
             this.wardErrorLabel.Name = "wardErrorLabel";
             this.wardErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.wardErrorLabel.TabIndex = 7;
@@ -1129,6 +1135,7 @@
             // 
             // managePatientDoc
             // 
+            this.managePatientDoc.Controls.Add(this.docErrorLabel);
             this.managePatientDoc.Controls.Add(this.currentPatientNameDocs);
             this.managePatientDoc.Controls.Add(this.label22);
             this.managePatientDoc.Controls.Add(this.label16);
@@ -1522,10 +1529,16 @@
             // 
             // DoctorTab
             // 
+            this.DoctorTab.Controls.Add(this.doctorName);
+            this.DoctorTab.Controls.Add(this.docDuties);
+            this.DoctorTab.Controls.Add(this.specName);
+            this.DoctorTab.Controls.Add(this.deptName);
+            this.DoctorTab.Controls.Add(this.label41);
+            this.DoctorTab.Controls.Add(this.label40);
+            this.DoctorTab.Controls.Add(this.label39);
             this.DoctorTab.Controls.Add(this.label30);
             this.DoctorTab.Controls.Add(this.PatientGrid);
-            this.DoctorTab.Controls.Add(this.label41);
-            this.DoctorTab.Controls.Add(this.DoctorGrid);
+            this.DoctorTab.Controls.Add(this.doctorLabel);
             this.DoctorTab.Controls.Add(this.DoctorListBox);
             this.DoctorTab.Controls.Add(this.label42);
             this.DoctorTab.Controls.Add(this.vScrollBar4);
@@ -1541,7 +1554,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label30.Location = new System.Drawing.Point(245, 122);
+            this.label30.Location = new System.Drawing.Point(245, 167);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(103, 24);
             this.label30.TabIndex = 117;
@@ -1553,33 +1566,21 @@
             this.PatientGrid.AllowUserToDeleteRows = false;
             this.PatientGrid.AllowUserToOrderColumns = true;
             this.PatientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PatientGrid.Location = new System.Drawing.Point(249, 149);
+            this.PatientGrid.Location = new System.Drawing.Point(249, 194);
             this.PatientGrid.Name = "PatientGrid";
             this.PatientGrid.ReadOnly = true;
-            this.PatientGrid.Size = new System.Drawing.Size(444, 255);
+            this.PatientGrid.Size = new System.Drawing.Size(446, 255);
             this.PatientGrid.TabIndex = 116;
             // 
-            // label41
+            // doctorLabel
             // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label41.Location = new System.Drawing.Point(245, 39);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(70, 24);
-            this.label41.TabIndex = 115;
-            this.label41.Text = "Details:";
-            // 
-            // DoctorGrid
-            // 
-            this.DoctorGrid.AllowUserToAddRows = false;
-            this.DoctorGrid.AllowUserToDeleteRows = false;
-            this.DoctorGrid.AllowUserToOrderColumns = true;
-            this.DoctorGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DoctorGrid.Location = new System.Drawing.Point(249, 66);
-            this.DoctorGrid.Name = "DoctorGrid";
-            this.DoctorGrid.ReadOnly = true;
-            this.DoctorGrid.Size = new System.Drawing.Size(444, 53);
-            this.DoctorGrid.TabIndex = 114;
+            this.doctorLabel.AutoSize = true;
+            this.doctorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.doctorLabel.Location = new System.Drawing.Point(245, 39);
+            this.doctorLabel.Name = "doctorLabel";
+            this.doctorLabel.Size = new System.Drawing.Size(70, 24);
+            this.doctorLabel.TabIndex = 115;
+            this.doctorLabel.Text = "Doctor:";
             // 
             // DoctorListBox
             // 
@@ -1617,6 +1618,85 @@
             this.logoutRecep.UseVisualStyleBackColor = true;
             this.logoutRecep.Click += new System.EventHandler(this.logoutRecep_Click);
             // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(246, 72);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(81, 16);
+            this.label39.TabIndex = 118;
+            this.label39.Text = "Department:";
+            this.label39.Click += new System.EventHandler(this.label39_Click);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(246, 97);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(95, 16);
+            this.label40.TabIndex = 119;
+            this.label40.Text = "Specialization:";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(246, 122);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(49, 16);
+            this.label41.TabIndex = 120;
+            this.label41.Text = "Duties:";
+            // 
+            // deptName
+            // 
+            this.deptName.AutoSize = true;
+            this.deptName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deptName.Location = new System.Drawing.Point(342, 72);
+            this.deptName.Name = "deptName";
+            this.deptName.Size = new System.Drawing.Size(31, 16);
+            this.deptName.TabIndex = 121;
+            this.deptName.Text = "N/A";
+            // 
+            // specName
+            // 
+            this.specName.AutoSize = true;
+            this.specName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.specName.Location = new System.Drawing.Point(342, 97);
+            this.specName.Name = "specName";
+            this.specName.Size = new System.Drawing.Size(31, 16);
+            this.specName.TabIndex = 122;
+            this.specName.Text = "N/A";
+            // 
+            // docDuties
+            // 
+            this.docDuties.AutoSize = true;
+            this.docDuties.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.docDuties.Location = new System.Drawing.Point(342, 122);
+            this.docDuties.Name = "docDuties";
+            this.docDuties.Size = new System.Drawing.Size(31, 16);
+            this.docDuties.TabIndex = 123;
+            this.docDuties.Text = "N/A";
+            // 
+            // doctorName
+            // 
+            this.doctorName.AutoSize = true;
+            this.doctorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.doctorName.Location = new System.Drawing.Point(341, 39);
+            this.doctorName.Name = "doctorName";
+            this.doctorName.Size = new System.Drawing.Size(42, 24);
+            this.doctorName.TabIndex = 124;
+            this.doctorName.Text = "N/A";
+            // 
+            // docErrorLabel
+            // 
+            this.docErrorLabel.AutoSize = true;
+            this.docErrorLabel.Location = new System.Drawing.Point(135, 62);
+            this.docErrorLabel.Name = "docErrorLabel";
+            this.docErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.docErrorLabel.TabIndex = 67;
+            // 
             // ReceptionistMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1648,7 +1728,6 @@
             this.DoctorTab.ResumeLayout(false);
             this.DoctorTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1753,8 +1832,7 @@
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TabPage DoctorTab;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.DataGridView DoctorGrid;
+        private System.Windows.Forms.Label doctorLabel;
         private System.Windows.Forms.ListBox DoctorListBox;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.VScrollBar vScrollBar4;
@@ -1796,5 +1874,13 @@
         private System.Windows.Forms.Button addRegisterButton;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label deptName;
+        private System.Windows.Forms.Label specName;
+        private System.Windows.Forms.Label docDuties;
+        private System.Windows.Forms.Label doctorName;
+        private System.Windows.Forms.Label docErrorLabel;
     }
 }

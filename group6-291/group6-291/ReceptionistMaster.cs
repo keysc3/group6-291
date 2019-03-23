@@ -66,8 +66,7 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select concat(firstName, ' ', lastName) as Name," +
-                "doctorID from [Doctor]", conn);
+            SqlDataAdapter adapter = new SqlDataAdapter("select concat(firstName, ' ', lastName) as Name, Doctor.* from [Doctor]", conn);
             //Fill the dataset, sort it, and bind it to the list box
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "Name asc";
@@ -241,6 +240,12 @@ namespace group6_291
                 medicalErrorLabel.ForeColor = Color.Red;
                 manageDocSuccess.Text = "";
             }
+            else if (assignDocBox.SelectedIndex == -1)
+            {
+                docErrorLabel.Text = "*Please select a doctor";
+                docErrorLabel.ForeColor = Color.Red;
+                manageDocSuccess.Text = "";
+            }
             else
             {
                 DataRowView selectedAssignDoc = assignDocBox.SelectedItem as DataRowView;
@@ -271,6 +276,7 @@ namespace group6_291
                 manageDocSuccess.Text = "Doctor assigned successfully";
                 manageDocSuccess.ForeColor = Color.Green;
                 medicalErrorLabel.Text = "";
+                docErrorLabel.Text = "";
                 unassignErrorLabel.Text = "";
                 currentPatientsBox_SelectedIndexChanged(sender, e);
             }
@@ -757,42 +763,14 @@ namespace group6_291
         private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PatientGrid.Hide();
-            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
-            string Name = DoctorList["Name"].ToString();
-            string ID = DoctorList["doctorID"].ToString();
+            DataRowView selectedDoctor = DoctorListBox.SelectedItem as DataRowView;
+            doctorName.Text = selectedDoctor["Name"].ToString();
+            deptName.Text = selectedDoctor["departmentName"].ToString();
+            specName.Text = selectedDoctor["specialization"].ToString();
+            if(selectedDoctor["Name"].ToString().Length > 0)
+                docDuties.Text = selectedDoctor["duties"].ToString();
 
-            DataSet Doctors = new DataSet();
-            DataSet Doctor_Patient = new DataSet();
-            SqlConnection conn = new SqlConnection(Globals.conn);
-            conn.Open();
 
-            SqlCommand getDocotor = new SqlCommand("select concat(firstName, ' ', lastName) as Name, " +
-                "departmentName as Department_Name, specialization as Specalization, duties as Duty from [Doctor] where doctorID=@doctorID", conn);
-
-            getDocotor.Parameters.AddWithValue("@doctorID", ID);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.SelectCommand = getDocotor;
-            adapter.Fill(Doctors);
-            DoctorGrid.AutoGenerateColumns = true;
-            DoctorGrid.DataSource = Doctors.Tables[0];
-
-            int rowCount = DoctorGrid.RowCount;
-            if (rowCount > 0)
-            {
-                int totalRowHeight = DoctorGrid.ColumnHeadersHeight;
-                if (rowCount > 8)
-                {
-                    totalRowHeight += (DoctorGrid.Rows[0].Height * 8) - 20;
-                    DoctorGrid.Height = totalRowHeight;
-                }
-                else
-                {
-                    totalRowHeight += (DoctorGrid.Rows[0].Height * (rowCount + 1)) - 20;
-                    DoctorGrid.Height = totalRowHeight;
-                }
-            }
-
-            conn.Close();
             getDoctorPatient();
         }
 
@@ -984,6 +962,11 @@ namespace group6_291
                 registerListBox.DataSource = patientSINs.Tables[0];
                 registerListBox.DisplayMember = "fullName";
             }
+        }
+
+        private void label39_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
