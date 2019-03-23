@@ -25,6 +25,7 @@ namespace group6_291
         {
             populateCurrentPatientBox();
             populateWardList();
+            populateDoctorList();
             currentPatientsBox.DoubleClick += new EventHandler(currentPatientsBox_DoubleClick);
         }
 
@@ -56,7 +57,21 @@ namespace group6_291
             WardListBox.DisplayMember = "wardName";
             conn.Close();
         }
-
+        private void populateDoctorList()
+        {
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select concat(firstName, ' ', lastName) as Name," +
+                "doctorID from [Doctor]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "Name asc";
+            DoctorListBox.DataSource = ds.Tables[0];
+            DoctorListBox.DisplayMember = "Name";
+            conn.Close();
+        }
         private void currentPatientsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentPatientsInfo();
@@ -610,6 +625,12 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
 
+
+            ///SELECT firstName FROM Doctor WHERE doctorID IN
+            //(SELECT doctorID FROM Doctor_Patient WHERE registerID IN
+            //(SELECT registerID FROM Register WHERE leaveDate IS NULL))
+            //
+
             SqlCommand getWard = new SqlCommand("select concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
                 " patientType as Patient_Type, city as City from Patient, Register" +
                 " where Patient.patientSIN = Register.patientSIN and Register.leaveDate is null and Register.registerID in" +
@@ -664,7 +685,96 @@ namespace group6_291
                     }
                 }
             }
+            conn.Close();
 
         }
+
+        private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PatientGrid.Hide();
+            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
+            string Name = DoctorList["Name"].ToString();
+            string ID = DoctorList["doctorID"].ToString();
+
+            DataSet Doctors = new DataSet();
+            DataSet Doctor_Patient = new DataSet();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlCommand getDocotor = new SqlCommand("select concat(firstName, ' ', lastName) as Name, " +
+                "departmentName as Department_Name, specialization as Specalization, duties as Duty from [Doctor] where doctorID=@doctorID", conn);
+
+            getDocotor.Parameters.AddWithValue("@doctorID", ID);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = getDocotor;
+            adapter.Fill(Doctors);
+            DoctorGrid.AutoGenerateColumns = true;
+            DoctorGrid.DataSource = Doctors.Tables[0];
+
+            int rowCount = DoctorGrid.RowCount;
+            if (rowCount > 0)
+            {
+                int totalRowHeight = DoctorGrid.ColumnHeadersHeight;
+                if (rowCount > 8)
+                {
+                    totalRowHeight += (DoctorGrid.Rows[0].Height * 8) - 20;
+                    DoctorGrid.Height = totalRowHeight;
+                }
+                else
+                {
+                    totalRowHeight += (DoctorGrid.Rows[0].Height * (rowCount + 1)) - 20;
+                    DoctorGrid.Height = totalRowHeight;
+                }
+            }
+
+            conn.Close();
+            getDoctorPatient();
+        }
+
+
+        private void getDoctorPatient()
+        {
+            DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
+            string Name = DoctorList["Name"].ToString();
+            string ID = DoctorList["doctorID"].ToString();
+
+            DataSet Doctor_Patient = new DataSet();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            //query needs work for current patients, currenty only shows all patients for that doctor
+            SqlCommand getPatient = new SqlCommand("select concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
+                " patientType as Patient_Type from Patient where patientSIN in" +
+                " (SELECT patientSIN FROM Register WHERE registerID IN" +
+                " (SELECT registerID FROM Doctor_Patient where doctorID = @doctorID))", conn);
+
+            getPatient.Parameters.AddWithValue("@doctorID", ID);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = getPatient;
+            adapter.Fill(Doctor_Patient);
+            PatientGrid.AutoGenerateColumns = true;
+            PatientGrid.DataSource = Doctor_Patient.Tables[0];
+            
+            int rowCount = PatientGrid.RowCount;
+            if (rowCount > 0)
+            {
+                PatientGrid.Show();
+                int totalRowHeight = PatientGrid.ColumnHeadersHeight;
+                if (rowCount > 8)
+                {
+                    totalRowHeight += (PatientGrid.Rows[0].Height * 8) - 20;
+                    PatientGrid.Height = totalRowHeight;
+                }
+                else
+                {
+                    totalRowHeight += (PatientGrid.Rows[0].Height * (rowCount + 1)) - 20;
+                    PatientGrid.Height = totalRowHeight;
+                }
+            }
+            
+            conn.Close();
+
+        }
+
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
@@ -144,17 +144,25 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.WardListTab = new System.Windows.Forms.TabPage();
+            this.StatusLabel = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.MaxCapacityLabel = new System.Windows.Forms.Label();
+            this.CurrentPatientLabel = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.WardListGrid = new System.Windows.Forms.DataGridView();
             this.WardListBox = new System.Windows.Forms.ListBox();
             this.label23 = new System.Windows.Forms.Label();
             this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
+            this.DoctorTab = new System.Windows.Forms.TabPage();
+            this.label41 = new System.Windows.Forms.Label();
+            this.DoctorGrid = new System.Windows.Forms.DataGridView();
+            this.DoctorListBox = new System.Windows.Forms.ListBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.vScrollBar4 = new System.Windows.Forms.VScrollBar();
             this.logoutRecep = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.CurrentPatientLabel = new System.Windows.Forms.Label();
-            this.MaxCapacityLabel = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.StatusLabel = new System.Windows.Forms.Label();
+            this.PatientGrid = new System.Windows.Forms.DataGridView();
+            this.label30 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -166,6 +174,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.currentDoctorsGridView)).BeginInit();
             this.WardListTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).BeginInit();
+            this.DoctorTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -184,6 +195,7 @@
             this.TabControl.Controls.Add(this.PatientRecTab);
             this.TabControl.Controls.Add(this.CurentPatientsTab);
             this.TabControl.Controls.Add(this.WardListTab);
+            this.TabControl.Controls.Add(this.DoctorTab);
             this.TabControl.Location = new System.Drawing.Point(15, 37);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -936,14 +948,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle9;
             this.selectedWardGridView.Location = new System.Drawing.Point(249, 38);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -1330,6 +1342,66 @@
             this.WardListTab.Text = "Ward List";
             this.WardListTab.UseVisualStyleBackColor = true;
             // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.StatusLabel.Location = new System.Drawing.Point(710, 62);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(75, 24);
+            this.StatusLabel.TabIndex = 110;
+            this.StatusLabel.Text = "Not Full";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label35.Location = new System.Drawing.Point(650, 62);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(65, 24);
+            this.label35.TabIndex = 109;
+            this.label35.Text = "Status:";
+            // 
+            // MaxCapacityLabel
+            // 
+            this.MaxCapacityLabel.AutoSize = true;
+            this.MaxCapacityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.MaxCapacityLabel.Location = new System.Drawing.Point(611, 62);
+            this.MaxCapacityLabel.Name = "MaxCapacityLabel";
+            this.MaxCapacityLabel.Size = new System.Drawing.Size(40, 24);
+            this.MaxCapacityLabel.TabIndex = 108;
+            this.MaxCapacityLabel.Text = "300";
+            // 
+            // CurrentPatientLabel
+            // 
+            this.CurrentPatientLabel.AutoSize = true;
+            this.CurrentPatientLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.CurrentPatientLabel.Location = new System.Drawing.Point(406, 62);
+            this.CurrentPatientLabel.Name = "CurrentPatientLabel";
+            this.CurrentPatientLabel.Size = new System.Drawing.Size(40, 24);
+            this.CurrentPatientLabel.TabIndex = 107;
+            this.CurrentPatientLabel.Text = "300";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label29.Location = new System.Drawing.Point(442, 62);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(174, 24);
+            this.label29.TabIndex = 106;
+            this.label29.Text = "Maximum Capacity:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label25.Location = new System.Drawing.Point(238, 62);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(174, 24);
+            this.label25.TabIndex = 105;
+            this.label25.Text = "Number of Patients:";
+            // 
             // WardListGrid
             // 
             this.WardListGrid.AllowUserToAddRows = false;
@@ -1368,6 +1440,71 @@
             this.vScrollBar2.Size = new System.Drawing.Size(17, 433);
             this.vScrollBar2.TabIndex = 101;
             // 
+            // DoctorTab
+            // 
+            this.DoctorTab.Controls.Add(this.label30);
+            this.DoctorTab.Controls.Add(this.PatientGrid);
+            this.DoctorTab.Controls.Add(this.label41);
+            this.DoctorTab.Controls.Add(this.DoctorGrid);
+            this.DoctorTab.Controls.Add(this.DoctorListBox);
+            this.DoctorTab.Controls.Add(this.label42);
+            this.DoctorTab.Controls.Add(this.vScrollBar4);
+            this.DoctorTab.Location = new System.Drawing.Point(4, 22);
+            this.DoctorTab.Name = "DoctorTab";
+            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DoctorTab.Size = new System.Drawing.Size(806, 487);
+            this.DoctorTab.TabIndex = 6;
+            this.DoctorTab.Text = "Doctor List";
+            this.DoctorTab.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label41.Location = new System.Drawing.Point(245, 39);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(70, 24);
+            this.label41.TabIndex = 115;
+            this.label41.Text = "Details:";
+            // 
+            // DoctorGrid
+            // 
+            this.DoctorGrid.AllowUserToAddRows = false;
+            this.DoctorGrid.AllowUserToDeleteRows = false;
+            this.DoctorGrid.AllowUserToOrderColumns = true;
+            this.DoctorGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DoctorGrid.Location = new System.Drawing.Point(249, 66);
+            this.DoctorGrid.Name = "DoctorGrid";
+            this.DoctorGrid.ReadOnly = true;
+            this.DoctorGrid.Size = new System.Drawing.Size(444, 53);
+            this.DoctorGrid.TabIndex = 114;
+            // 
+            // DoctorListBox
+            // 
+            this.DoctorListBox.FormattingEnabled = true;
+            this.DoctorListBox.Location = new System.Drawing.Point(15, 39);
+            this.DoctorListBox.Name = "DoctorListBox";
+            this.DoctorListBox.Size = new System.Drawing.Size(182, 433);
+            this.DoctorListBox.TabIndex = 113;
+            this.DoctorListBox.SelectedIndexChanged += new System.EventHandler(this.DoctorListBox_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label42.Location = new System.Drawing.Point(27, 11);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(102, 24);
+            this.label42.TabIndex = 112;
+            this.label42.Text = "Doctor List:";
+            // 
+            // vScrollBar4
+            // 
+            this.vScrollBar4.Location = new System.Drawing.Point(200, 42);
+            this.vScrollBar4.Name = "vScrollBar4";
+            this.vScrollBar4.Size = new System.Drawing.Size(17, 433);
+            this.vScrollBar4.TabIndex = 111;
+            // 
             // logoutRecep
             // 
             this.logoutRecep.Location = new System.Drawing.Point(754, 30);
@@ -1378,65 +1515,27 @@
             this.logoutRecep.UseVisualStyleBackColor = true;
             this.logoutRecep.Click += new System.EventHandler(this.logoutRecep_Click);
             // 
-            // label25
+            // PatientGrid
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label25.Location = new System.Drawing.Point(238, 62);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(174, 24);
-            this.label25.TabIndex = 105;
-            this.label25.Text = "Number of Patients:";
+            this.PatientGrid.AllowUserToAddRows = false;
+            this.PatientGrid.AllowUserToDeleteRows = false;
+            this.PatientGrid.AllowUserToOrderColumns = true;
+            this.PatientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PatientGrid.Location = new System.Drawing.Point(249, 149);
+            this.PatientGrid.Name = "PatientGrid";
+            this.PatientGrid.ReadOnly = true;
+            this.PatientGrid.Size = new System.Drawing.Size(444, 255);
+            this.PatientGrid.TabIndex = 116;
             // 
-            // label29
+            // label30
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label29.Location = new System.Drawing.Point(442, 62);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(174, 24);
-            this.label29.TabIndex = 106;
-            this.label29.Text = "Maximum Capacity:";
-            // 
-            // CurrentPatientLabel
-            // 
-            this.CurrentPatientLabel.AutoSize = true;
-            this.CurrentPatientLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.CurrentPatientLabel.Location = new System.Drawing.Point(406, 62);
-            this.CurrentPatientLabel.Name = "CurrentPatientLabel";
-            this.CurrentPatientLabel.Size = new System.Drawing.Size(40, 24);
-            this.CurrentPatientLabel.TabIndex = 107;
-            this.CurrentPatientLabel.Text = "300";
-            // 
-            // MaxCapacityLabel
-            // 
-            this.MaxCapacityLabel.AutoSize = true;
-            this.MaxCapacityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.MaxCapacityLabel.Location = new System.Drawing.Point(611, 62);
-            this.MaxCapacityLabel.Name = "MaxCapacityLabel";
-            this.MaxCapacityLabel.Size = new System.Drawing.Size(40, 24);
-            this.MaxCapacityLabel.TabIndex = 108;
-            this.MaxCapacityLabel.Text = "300";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label35.Location = new System.Drawing.Point(650, 62);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(65, 24);
-            this.label35.TabIndex = 109;
-            this.label35.Text = "Status:";
-            // 
-            // StatusLabel
-            // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.StatusLabel.Location = new System.Drawing.Point(710, 62);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(75, 24);
-            this.StatusLabel.TabIndex = 110;
-            this.StatusLabel.Text = "Not Full";
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label30.Location = new System.Drawing.Point(245, 122);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(103, 24);
+            this.label30.TabIndex = 117;
+            this.label30.Text = "Patient List:";
             // 
             // ReceptionistMaster
             // 
@@ -1466,6 +1565,10 @@
             this.WardListTab.ResumeLayout(false);
             this.WardListTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).EndInit();
+            this.DoctorTab.ResumeLayout(false);
+            this.DoctorTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1599,5 +1702,13 @@
         private System.Windows.Forms.Label CurrentPatientLabel;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TabPage DoctorTab;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.DataGridView DoctorGrid;
+        private System.Windows.Forms.ListBox DoctorListBox;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.VScrollBar vScrollBar4;
+        private System.Windows.Forms.DataGridView PatientGrid;
+        private System.Windows.Forms.Label label30;
     }
 }
