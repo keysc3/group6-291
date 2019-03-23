@@ -856,16 +856,6 @@ namespace group6_291
                 addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
                 addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
 
-                //Check if departure date is null
-                /*MaskedTextBox departDate = addDepartDateBox;
-                departDate.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-                if (departDate.Text == "") { addRegister.Parameters.AddWithValue("@departDate", DBNull.Value); }
-                else
-                {
-                    departDate.TextMaskFormat = MaskFormat.IncludePromptAndLiterals;
-                    addRegister.Parameters.AddWithValue("@departDate", addDepartDateBox.Text);
-                }*/
-
                 //Check if notes are null
                 if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
                 else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
@@ -1019,7 +1009,7 @@ namespace group6_291
 
         private void registerListBox_DoubleClick(object sender, EventArgs e)
         {
-            if (registerListBox.SelectedItem != null)
+            if (registerListBox.SelectedItem != null && addSINBox.Text.Length == 9)
             {
                 DataRowView registrantList = registerListBox.SelectedItem as DataRowView;
                 int patientType = Int32.Parse(registrantList["patientType"].ToString());

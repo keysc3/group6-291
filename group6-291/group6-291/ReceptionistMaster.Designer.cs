@@ -28,43 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.Notes = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.CellLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.addSINBox = new System.Windows.Forms.TextBox();
+            this.addCellphoneBox = new System.Windows.Forms.MaskedTextBox();
+            this.addHomePhoneBox = new System.Windows.Forms.MaskedTextBox();
+            this.addDOBBox = new System.Windows.Forms.MaskedTextBox();
+            this.addRegisterInfo = new System.Windows.Forms.Label();
+            this.addRegisterRequestInfo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.addGenderBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.addNotesBox = new System.Windows.Forms.RichTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.addPatientTypeBox = new System.Windows.Forms.ComboBox();
+            this.Notes = new System.Windows.Forms.Label();
+            this.resetRegisterButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.addInsuranceBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.addCityBox = new System.Windows.Forms.TextBox();
+            this.CellLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.addProvinceBox = new System.Windows.Forms.TextBox();
+            this.addCountryBox = new System.Windows.Forms.TextBox();
+            this.addStreetBox = new System.Windows.Forms.TextBox();
             this.AddressLabel = new System.Windows.Forms.Label();
             this.LastName = new System.Windows.Forms.Label();
             this.FisrtName = new System.Windows.Forms.Label();
-            this.LastNameBox = new System.Windows.Forms.TextBox();
-            this.FirstNameBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.test = new System.Windows.Forms.Button();
+            this.addLastNameBox = new System.Windows.Forms.TextBox();
+            this.addFirstNameBox = new System.Windows.Forms.TextBox();
+            this.addRegisterButton = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.registerListBox = new System.Windows.Forms.ListBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.PatientRecTab = new System.Windows.Forms.TabPage();
             this.CurentPatientsTab = new System.Windows.Forms.TabPage();
             this.releaseButton = new System.Windows.Forms.Button();
@@ -155,14 +161,14 @@
             this.label23 = new System.Windows.Forms.Label();
             this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
             this.DoctorTab = new System.Windows.Forms.TabPage();
+            this.label30 = new System.Windows.Forms.Label();
+            this.PatientGrid = new System.Windows.Forms.DataGridView();
             this.label41 = new System.Windows.Forms.Label();
             this.DoctorGrid = new System.Windows.Forms.DataGridView();
             this.DoctorListBox = new System.Windows.Forms.ListBox();
             this.label42 = new System.Windows.Forms.Label();
             this.vScrollBar4 = new System.Windows.Forms.VScrollBar();
             this.logoutRecep = new System.Windows.Forms.Button();
-            this.PatientGrid = new System.Windows.Forms.DataGridView();
-            this.label30 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -175,8 +181,8 @@
             this.WardListTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).BeginInit();
             this.DoctorTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -205,39 +211,45 @@
             // PatientRegTab
             // 
             this.PatientRegTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.PatientRegTab.Controls.Add(this.label14);
-            this.PatientRegTab.Controls.Add(this.textBox8);
-            this.PatientRegTab.Controls.Add(this.label13);
-            this.PatientRegTab.Controls.Add(this.richTextBox1);
-            this.PatientRegTab.Controls.Add(this.label12);
-            this.PatientRegTab.Controls.Add(this.comboBox1);
-            this.PatientRegTab.Controls.Add(this.listBox1);
-            this.PatientRegTab.Controls.Add(this.label11);
-            this.PatientRegTab.Controls.Add(this.vScrollBar1);
-            this.PatientRegTab.Controls.Add(this.Notes);
-            this.PatientRegTab.Controls.Add(this.button1);
-            this.PatientRegTab.Controls.Add(this.label9);
-            this.PatientRegTab.Controls.Add(this.label8);
-            this.PatientRegTab.Controls.Add(this.textBox7);
-            this.PatientRegTab.Controls.Add(this.label7);
-            this.PatientRegTab.Controls.Add(this.label6);
-            this.PatientRegTab.Controls.Add(this.textBox6);
-            this.PatientRegTab.Controls.Add(this.textBox5);
-            this.PatientRegTab.Controls.Add(this.textBox4);
-            this.PatientRegTab.Controls.Add(this.CellLabel);
-            this.PatientRegTab.Controls.Add(this.label4);
-            this.PatientRegTab.Controls.Add(this.label3);
+            this.PatientRegTab.Controls.Add(this.addSINBox);
+            this.PatientRegTab.Controls.Add(this.addCellphoneBox);
+            this.PatientRegTab.Controls.Add(this.addHomePhoneBox);
+            this.PatientRegTab.Controls.Add(this.addDOBBox);
+            this.PatientRegTab.Controls.Add(this.addRegisterInfo);
+            this.PatientRegTab.Controls.Add(this.addRegisterRequestInfo);
             this.PatientRegTab.Controls.Add(this.label2);
-            this.PatientRegTab.Controls.Add(this.textBox3);
-            this.PatientRegTab.Controls.Add(this.textBox2);
-            this.PatientRegTab.Controls.Add(this.textBox1);
+            this.PatientRegTab.Controls.Add(this.label3);
+            this.PatientRegTab.Controls.Add(this.addGenderBox);
+            this.PatientRegTab.Controls.Add(this.label4);
+            this.PatientRegTab.Controls.Add(this.label13);
+            this.PatientRegTab.Controls.Add(this.addNotesBox);
+            this.PatientRegTab.Controls.Add(this.label12);
+            this.PatientRegTab.Controls.Add(this.addPatientTypeBox);
+            this.PatientRegTab.Controls.Add(this.Notes);
+            this.PatientRegTab.Controls.Add(this.resetRegisterButton);
+            this.PatientRegTab.Controls.Add(this.label9);
+            this.PatientRegTab.Controls.Add(this.addInsuranceBox);
+            this.PatientRegTab.Controls.Add(this.label7);
+            this.PatientRegTab.Controls.Add(this.label5);
+            this.PatientRegTab.Controls.Add(this.addCityBox);
+            this.PatientRegTab.Controls.Add(this.CellLabel);
+            this.PatientRegTab.Controls.Add(this.label6);
+            this.PatientRegTab.Controls.Add(this.label8);
+            this.PatientRegTab.Controls.Add(this.label14);
+            this.PatientRegTab.Controls.Add(this.addProvinceBox);
+            this.PatientRegTab.Controls.Add(this.addCountryBox);
+            this.PatientRegTab.Controls.Add(this.addStreetBox);
             this.PatientRegTab.Controls.Add(this.AddressLabel);
             this.PatientRegTab.Controls.Add(this.LastName);
             this.PatientRegTab.Controls.Add(this.FisrtName);
-            this.PatientRegTab.Controls.Add(this.LastNameBox);
-            this.PatientRegTab.Controls.Add(this.FirstNameBox);
-            this.PatientRegTab.Controls.Add(this.label5);
-            this.PatientRegTab.Controls.Add(this.test);
+            this.PatientRegTab.Controls.Add(this.addLastNameBox);
+            this.PatientRegTab.Controls.Add(this.addFirstNameBox);
+            this.PatientRegTab.Controls.Add(this.addRegisterButton);
+            this.PatientRegTab.Controls.Add(this.label37);
+            this.PatientRegTab.Controls.Add(this.label38);
+            this.PatientRegTab.Controls.Add(this.registerListBox);
+            this.PatientRegTab.Controls.Add(this.label11);
+            this.PatientRegTab.Controls.Add(this.vScrollBar1);
             this.PatientRegTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRegTab.Name = "PatientRegTab";
             this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3);
@@ -245,62 +257,331 @@
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
             // 
-            // label14
+            // addSINBox
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(518, 47);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 13);
-            this.label14.TabIndex = 106;
-            this.label14.Text = "Date:";
+            this.addSINBox.Location = new System.Drawing.Point(280, 68);
+            this.addSINBox.Name = "addSINBox";
+            this.addSINBox.Size = new System.Drawing.Size(100, 20);
+            this.addSINBox.TabIndex = 205;
+            this.addSINBox.TextChanged += new System.EventHandler(this.addSINBox_TextChanged);
             // 
-            // textBox8
+            // addCellphoneBox
             // 
-            this.textBox8.Location = new System.Drawing.Point(521, 63);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 105;
+            this.addCellphoneBox.Location = new System.Drawing.Point(399, 180);
+            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2);
+            this.addCellphoneBox.Mask = "000-0000";
+            this.addCellphoneBox.Name = "addCellphoneBox";
+            this.addCellphoneBox.Size = new System.Drawing.Size(101, 20);
+            this.addCellphoneBox.TabIndex = 197;
+            // 
+            // addHomePhoneBox
+            // 
+            this.addHomePhoneBox.Location = new System.Drawing.Point(280, 180);
+            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2);
+            this.addHomePhoneBox.Mask = "000-0000";
+            this.addHomePhoneBox.Name = "addHomePhoneBox";
+            this.addHomePhoneBox.Size = new System.Drawing.Size(101, 20);
+            this.addHomePhoneBox.TabIndex = 196;
+            // 
+            // addDOBBox
+            // 
+            this.addDOBBox.Location = new System.Drawing.Point(640, 68);
+            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2);
+            this.addDOBBox.Mask = "00/00/0000";
+            this.addDOBBox.Name = "addDOBBox";
+            this.addDOBBox.Size = new System.Drawing.Size(101, 20);
+            this.addDOBBox.TabIndex = 189;
+            this.addDOBBox.ValidatingType = typeof(System.DateTime);
+            // 
+            // addRegisterInfo
+            // 
+            this.addRegisterInfo.AutoSize = true;
+            this.addRegisterInfo.Location = new System.Drawing.Point(539, 320);
+            this.addRegisterInfo.Name = "addRegisterInfo";
+            this.addRegisterInfo.Size = new System.Drawing.Size(0, 13);
+            this.addRegisterInfo.TabIndex = 204;
+            // 
+            // addRegisterRequestInfo
+            // 
+            this.addRegisterRequestInfo.AutoSize = true;
+            this.addRegisterRequestInfo.Location = new System.Drawing.Point(277, 430);
+            this.addRegisterRequestInfo.Name = "addRegisterRequestInfo";
+            this.addRegisterRequestInfo.Size = new System.Drawing.Size(0, 13);
+            this.addRegisterRequestInfo.TabIndex = 193;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(638, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 190;
+            this.label2.Text = "Date of Birth:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(397, 211);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 188;
+            this.label3.Text = "Gender:";
+            // 
+            // addGenderBox
+            // 
+            this.addGenderBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.addGenderBox.FormattingEnabled = true;
+            this.addGenderBox.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.addGenderBox.Location = new System.Drawing.Point(400, 227);
+            this.addGenderBox.Name = "addGenderBox";
+            this.addGenderBox.Size = new System.Drawing.Size(100, 21);
+            this.addGenderBox.TabIndex = 200;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(277, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 185;
+            this.label4.Text = "SIN:";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(277, 312);
+            this.label13.Location = new System.Drawing.Point(276, 312);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(0, 13);
-            this.label13.TabIndex = 104;
+            this.label13.TabIndex = 184;
             // 
-            // richTextBox1
+            // addNotesBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(281, 323);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(464, 98);
-            this.richTextBox1.TabIndex = 103;
-            this.richTextBox1.Text = "";
+            this.addNotesBox.Location = new System.Drawing.Point(280, 323);
+            this.addNotesBox.Name = "addNotesBox";
+            this.addNotesBox.Size = new System.Drawing.Size(249, 98);
+            this.addNotesBox.TabIndex = 201;
+            this.addNotesBox.Text = "";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(398, 211);
+            this.label12.Location = new System.Drawing.Point(277, 211);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 13);
-            this.label12.TabIndex = 102;
+            this.label12.TabIndex = 183;
             this.label12.Text = "Patient Type:";
             // 
-            // comboBox1
+            // addPatientTypeBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(401, 227);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 101;
+            this.addPatientTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.addPatientTypeBox.FormattingEnabled = true;
+            this.addPatientTypeBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+            this.addPatientTypeBox.Location = new System.Drawing.Point(280, 227);
+            this.addPatientTypeBox.Name = "addPatientTypeBox";
+            this.addPatientTypeBox.Size = new System.Drawing.Size(100, 21);
+            this.addPatientTypeBox.TabIndex = 199;
             // 
-            // listBox1
+            // Notes
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 44);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(182, 433);
-            this.listBox1.TabIndex = 100;
+            this.Notes.AutoSize = true;
+            this.Notes.Location = new System.Drawing.Point(277, 307);
+            this.Notes.Name = "Notes";
+            this.Notes.Size = new System.Drawing.Size(67, 13);
+            this.Notes.TabIndex = 182;
+            this.Notes.Text = "Other Notes:";
+            // 
+            // resetRegisterButton
+            // 
+            this.resetRegisterButton.Location = new System.Drawing.Point(414, 449);
+            this.resetRegisterButton.Name = "resetRegisterButton";
+            this.resetRegisterButton.Size = new System.Drawing.Size(115, 31);
+            this.resetRegisterButton.TabIndex = 203;
+            this.resetRegisterButton.Text = "Reset";
+            this.resetRegisterButton.UseVisualStyleBackColor = true;
+            this.resetRegisterButton.Click += new System.EventHandler(this.resetRegisterButton_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label9.Location = new System.Drawing.Point(276, 271);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(54, 24);
+            this.label9.TabIndex = 181;
+            this.label9.Text = "Misc:";
+            // 
+            // addInsuranceBox
+            // 
+            this.addInsuranceBox.Location = new System.Drawing.Point(520, 180);
+            this.addInsuranceBox.Name = "addInsuranceBox";
+            this.addInsuranceBox.Size = new System.Drawing.Size(100, 20);
+            this.addInsuranceBox.TabIndex = 198;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(517, 161);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 180;
+            this.label7.Text = "Insurance:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(517, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 179;
+            this.label5.Text = "Province:";
+            // 
+            // addCityBox
+            // 
+            this.addCityBox.Location = new System.Drawing.Point(400, 121);
+            this.addCityBox.Name = "addCityBox";
+            this.addCityBox.Size = new System.Drawing.Size(100, 20);
+            this.addCityBox.TabIndex = 192;
+            // 
+            // CellLabel
+            // 
+            this.CellLabel.AutoSize = true;
+            this.CellLabel.Location = new System.Drawing.Point(397, 161);
+            this.CellLabel.Name = "CellLabel";
+            this.CellLabel.Size = new System.Drawing.Size(57, 13);
+            this.CellLabel.TabIndex = 178;
+            this.CellLabel.Text = "Cellphone:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(277, 161);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.TabIndex = 177;
+            this.label6.Text = "Home Phone:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(639, 105);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 176;
+            this.label8.Text = "Country:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(397, 105);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(27, 13);
+            this.label14.TabIndex = 175;
+            this.label14.Text = "City:";
+            // 
+            // addProvinceBox
+            // 
+            this.addProvinceBox.Location = new System.Drawing.Point(520, 121);
+            this.addProvinceBox.Name = "addProvinceBox";
+            this.addProvinceBox.Size = new System.Drawing.Size(100, 20);
+            this.addProvinceBox.TabIndex = 194;
+            // 
+            // addCountryBox
+            // 
+            this.addCountryBox.Location = new System.Drawing.Point(642, 121);
+            this.addCountryBox.Name = "addCountryBox";
+            this.addCountryBox.Size = new System.Drawing.Size(100, 20);
+            this.addCountryBox.TabIndex = 195;
+            // 
+            // addStreetBox
+            // 
+            this.addStreetBox.Location = new System.Drawing.Point(280, 121);
+            this.addStreetBox.Name = "addStreetBox";
+            this.addStreetBox.Size = new System.Drawing.Size(100, 20);
+            this.addStreetBox.TabIndex = 191;
+            // 
+            // AddressLabel
+            // 
+            this.AddressLabel.AutoSize = true;
+            this.AddressLabel.Location = new System.Drawing.Point(277, 105);
+            this.AddressLabel.Name = "AddressLabel";
+            this.AddressLabel.Size = new System.Drawing.Size(38, 13);
+            this.AddressLabel.TabIndex = 174;
+            this.AddressLabel.Text = "Street:";
+            // 
+            // LastName
+            // 
+            this.LastName.AutoSize = true;
+            this.LastName.Location = new System.Drawing.Point(517, 52);
+            this.LastName.Name = "LastName";
+            this.LastName.Size = new System.Drawing.Size(61, 13);
+            this.LastName.TabIndex = 173;
+            this.LastName.Text = "Last Name:";
+            // 
+            // FisrtName
+            // 
+            this.FisrtName.AutoSize = true;
+            this.FisrtName.Location = new System.Drawing.Point(397, 52);
+            this.FisrtName.Name = "FisrtName";
+            this.FisrtName.Size = new System.Drawing.Size(60, 13);
+            this.FisrtName.TabIndex = 172;
+            this.FisrtName.Text = "First Name:";
+            // 
+            // addLastNameBox
+            // 
+            this.addLastNameBox.Location = new System.Drawing.Point(520, 68);
+            this.addLastNameBox.Name = "addLastNameBox";
+            this.addLastNameBox.Size = new System.Drawing.Size(100, 20);
+            this.addLastNameBox.TabIndex = 187;
+            // 
+            // addFirstNameBox
+            // 
+            this.addFirstNameBox.Location = new System.Drawing.Point(400, 68);
+            this.addFirstNameBox.Name = "addFirstNameBox";
+            this.addFirstNameBox.Size = new System.Drawing.Size(100, 20);
+            this.addFirstNameBox.TabIndex = 186;
+            // 
+            // addRegisterButton
+            // 
+            this.addRegisterButton.Location = new System.Drawing.Point(279, 449);
+            this.addRegisterButton.Name = "addRegisterButton";
+            this.addRegisterButton.Size = new System.Drawing.Size(115, 31);
+            this.addRegisterButton.TabIndex = 202;
+            this.addRegisterButton.Text = "Add";
+            this.addRegisterButton.UseVisualStyleBackColor = true;
+            this.addRegisterButton.Click += new System.EventHandler(this.addRegisterButton_Click);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label37.Location = new System.Drawing.Point(275, 16);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(93, 24);
+            this.label37.TabIndex = 171;
+            this.label37.Text = "Required:";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.label38.Location = new System.Drawing.Point(552, 4);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(252, 31);
+            this.label38.TabIndex = 170;
+            this.label38.Text = "Patient Registration";
+            // 
+            // registerListBox
+            // 
+            this.registerListBox.FormattingEnabled = true;
+            this.registerListBox.Location = new System.Drawing.Point(7, 44);
+            this.registerListBox.Name = "registerListBox";
+            this.registerListBox.Size = new System.Drawing.Size(182, 433);
+            this.registerListBox.TabIndex = 100;
             // 
             // label11
             // 
@@ -318,207 +599,6 @@
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(17, 433);
             this.vScrollBar1.TabIndex = 98;
-            // 
-            // Notes
-            // 
-            this.Notes.AutoSize = true;
-            this.Notes.Location = new System.Drawing.Point(278, 307);
-            this.Notes.Name = "Notes";
-            this.Notes.Size = new System.Drawing.Size(67, 13);
-            this.Notes.TabIndex = 97;
-            this.Notes.Text = "Other Notes:";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(415, 449);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 31);
-            this.button1.TabIndex = 96;
-            this.button1.Text = "Reset";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label9.Location = new System.Drawing.Point(277, 266);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(54, 24);
-            this.label9.TabIndex = 95;
-            this.label9.Text = "Misc:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label8.Location = new System.Drawing.Point(276, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 24);
-            this.label8.TabIndex = 94;
-            this.label8.Text = "Required:";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(281, 227);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 93;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(278, 211);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 13);
-            this.label7.TabIndex = 92;
-            this.label7.Text = "Insurance:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(518, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
-            this.label6.TabIndex = 91;
-            this.label6.Text = "Province:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(401, 113);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 90;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(401, 169);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 89;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(281, 169);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 88;
-            // 
-            // CellLabel
-            // 
-            this.CellLabel.AutoSize = true;
-            this.CellLabel.Location = new System.Drawing.Point(398, 153);
-            this.CellLabel.Name = "CellLabel";
-            this.CellLabel.Size = new System.Drawing.Size(57, 13);
-            this.CellLabel.TabIndex = 87;
-            this.CellLabel.Text = "Cellphone:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(278, 153);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 13);
-            this.label4.TabIndex = 86;
-            this.label4.Text = "Home Phone:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(642, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
-            this.label3.TabIndex = 85;
-            this.label3.Text = "Postal Code:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(398, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
-            this.label2.TabIndex = 84;
-            this.label2.Text = "City:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(521, 113);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 83;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(645, 113);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 82;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(281, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 81;
-            // 
-            // AddressLabel
-            // 
-            this.AddressLabel.AutoSize = true;
-            this.AddressLabel.Location = new System.Drawing.Point(278, 97);
-            this.AddressLabel.Name = "AddressLabel";
-            this.AddressLabel.Size = new System.Drawing.Size(38, 13);
-            this.AddressLabel.TabIndex = 80;
-            this.AddressLabel.Text = "Street:";
-            // 
-            // LastName
-            // 
-            this.LastName.AutoSize = true;
-            this.LastName.Location = new System.Drawing.Point(398, 47);
-            this.LastName.Name = "LastName";
-            this.LastName.Size = new System.Drawing.Size(61, 13);
-            this.LastName.TabIndex = 79;
-            this.LastName.Text = "Last Name:";
-            // 
-            // FisrtName
-            // 
-            this.FisrtName.AutoSize = true;
-            this.FisrtName.Location = new System.Drawing.Point(278, 47);
-            this.FisrtName.Name = "FisrtName";
-            this.FisrtName.Size = new System.Drawing.Size(60, 13);
-            this.FisrtName.TabIndex = 78;
-            this.FisrtName.Text = "First Name:";
-            // 
-            // LastNameBox
-            // 
-            this.LastNameBox.Location = new System.Drawing.Point(401, 63);
-            this.LastNameBox.Name = "LastNameBox";
-            this.LastNameBox.Size = new System.Drawing.Size(100, 20);
-            this.LastNameBox.TabIndex = 77;
-            // 
-            // FirstNameBox
-            // 
-            this.FirstNameBox.Location = new System.Drawing.Point(281, 63);
-            this.FirstNameBox.Name = "FirstNameBox";
-            this.FirstNameBox.Size = new System.Drawing.Size(100, 20);
-            this.FirstNameBox.TabIndex = 76;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label5.Location = new System.Drawing.Point(549, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(252, 31);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "Patient Registration";
-            // 
-            // test
-            // 
-            this.test.Location = new System.Drawing.Point(280, 449);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(115, 31);
-            this.test.TabIndex = 74;
-            this.test.Text = "Add";
-            this.test.UseVisualStyleBackColor = true;
             // 
             // PatientRecTab
             // 
@@ -948,14 +1028,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.selectedWardGridView.Location = new System.Drawing.Point(249, 38);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -1457,6 +1537,28 @@
             this.DoctorTab.Text = "Doctor List";
             this.DoctorTab.UseVisualStyleBackColor = true;
             // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label30.Location = new System.Drawing.Point(245, 122);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(103, 24);
+            this.label30.TabIndex = 117;
+            this.label30.Text = "Patient List:";
+            // 
+            // PatientGrid
+            // 
+            this.PatientGrid.AllowUserToAddRows = false;
+            this.PatientGrid.AllowUserToDeleteRows = false;
+            this.PatientGrid.AllowUserToOrderColumns = true;
+            this.PatientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PatientGrid.Location = new System.Drawing.Point(249, 149);
+            this.PatientGrid.Name = "PatientGrid";
+            this.PatientGrid.ReadOnly = true;
+            this.PatientGrid.Size = new System.Drawing.Size(444, 255);
+            this.PatientGrid.TabIndex = 116;
+            // 
             // label41
             // 
             this.label41.AutoSize = true;
@@ -1515,28 +1617,6 @@
             this.logoutRecep.UseVisualStyleBackColor = true;
             this.logoutRecep.Click += new System.EventHandler(this.logoutRecep_Click);
             // 
-            // PatientGrid
-            // 
-            this.PatientGrid.AllowUserToAddRows = false;
-            this.PatientGrid.AllowUserToDeleteRows = false;
-            this.PatientGrid.AllowUserToOrderColumns = true;
-            this.PatientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PatientGrid.Location = new System.Drawing.Point(249, 149);
-            this.PatientGrid.Name = "PatientGrid";
-            this.PatientGrid.ReadOnly = true;
-            this.PatientGrid.Size = new System.Drawing.Size(444, 255);
-            this.PatientGrid.TabIndex = 116;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label30.Location = new System.Drawing.Point(245, 122);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(103, 24);
-            this.label30.TabIndex = 117;
-            this.label30.Text = "Patient List:";
-            // 
             // ReceptionistMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1567,8 +1647,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).EndInit();
             this.DoctorTab.ResumeLayout(false);
             this.DoctorTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoctorGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1579,39 +1659,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage PatientRegTab;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox registerListBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.VScrollBar vScrollBar1;
-        private System.Windows.Forms.Label Notes;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label CellLabel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label AddressLabel;
-        private System.Windows.Forms.Label LastName;
-        private System.Windows.Forms.Label FisrtName;
-        private System.Windows.Forms.TextBox LastNameBox;
-        private System.Windows.Forms.TextBox FirstNameBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button test;
         private System.Windows.Forms.TabPage PatientRecTab;
         private System.Windows.Forms.TabPage CurentPatientsTab;
         private System.Windows.Forms.TabControl tabControl2;
@@ -1710,5 +1760,41 @@
         private System.Windows.Forms.VScrollBar vScrollBar4;
         private System.Windows.Forms.DataGridView PatientGrid;
         private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox addSINBox;
+        private System.Windows.Forms.MaskedTextBox addCellphoneBox;
+        private System.Windows.Forms.MaskedTextBox addHomePhoneBox;
+        private System.Windows.Forms.MaskedTextBox addDOBBox;
+        private System.Windows.Forms.Label addRegisterInfo;
+        private System.Windows.Forms.Label addRegisterRequestInfo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox addGenderBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox addNotesBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox addPatientTypeBox;
+        private System.Windows.Forms.Label Notes;
+        private System.Windows.Forms.Button resetRegisterButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox addInsuranceBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox addCityBox;
+        private System.Windows.Forms.Label CellLabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox addProvinceBox;
+        private System.Windows.Forms.TextBox addCountryBox;
+        private System.Windows.Forms.TextBox addStreetBox;
+        private System.Windows.Forms.Label AddressLabel;
+        private System.Windows.Forms.Label LastName;
+        private System.Windows.Forms.Label FisrtName;
+        private System.Windows.Forms.TextBox addLastNameBox;
+        private System.Windows.Forms.TextBox addFirstNameBox;
+        private System.Windows.Forms.Button addRegisterButton;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
     }
 }

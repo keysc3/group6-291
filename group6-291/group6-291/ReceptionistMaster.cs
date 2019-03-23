@@ -15,6 +15,7 @@ namespace group6_291
     public partial class ReceptionistMaster : Form
     {
         Form1 loginForm;
+        DataSet patientList = new DataSet();
         public ReceptionistMaster(Form1 login)
         {
             InitializeComponent();
@@ -26,7 +27,9 @@ namespace group6_291
             populateCurrentPatientBox();
             populateWardList();
             populateDoctorList();
+            registerListBox.DoubleClick += new EventHandler(registerListBox_DoubleClick);
             currentPatientsBox.DoubleClick += new EventHandler(currentPatientsBox_DoubleClick);
+            populatePatientList();
         }
 
         private void populateCurrentPatientBox()
@@ -49,7 +52,7 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select wardName, registerID from [Patient_Ward]", conn);
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from Ward", conn);
             //Fill the dataset, sort it, and bind it to the list box
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "wardName asc";
@@ -473,7 +476,7 @@ namespace group6_291
             DataRowView currentPatient = currentPatientsBox.SelectedItem as DataRowView;
 
             //If all criteria for every field is met, add user to databse
-            if (fieldsAreValid())
+            if (fieldsAreValid("update"))
             {
                 //Insert into database
                 SqlConnection conn = new SqlConnection(Globals.conn);
@@ -496,112 +499,193 @@ namespace group6_291
                 //Update status and reset fields
                 updatePatientRequestInfo.Text = "Patient updated successfully";
                 updatePatientRequestInfo.ForeColor = Color.Green;
-                resetUpdatePatientFields();
+                resetAddUpdatePatientFields("update");
             }
         }
 
         private void resetUpdatePatientButton_Click(object sender, EventArgs e)
         {
-            resetUpdatePatientFields();
+            resetAddUpdatePatientFields("update");
             updatePatientErrorInfo.Text = "";
             updatePatientRequestInfo.Text = "";
         }
 
-        private void resetUpdatePatientFields()
+        private void resetAddUpdatePatientFields(string type)
         {
-            updateSINBox.Text = "";
-            updatePatientTypeBox.SelectedIndex = -1;
-            updateFirstNameBox.Text = "";
-            updateLastNameBox.Text = "";
-            updateStreetBox.Text = "";
-            updateCityBox.Text = "";
-            updateProvinceBox.Text = "";
-            updateCountryBox.Text = "";
-            updateGenderBox.SelectedIndex = -1;
-            updateDOBBox.Text = "";
-            updateHomePhoneBox.Text = "";
-            updateCellphoneBox.Text = "";
-            populateCurrentPatientBox();
+            if (type.Equals("update"))
+            {
+                updateSINBox.Text = "";
+                updatePatientTypeBox.SelectedIndex = -1;
+                updateFirstNameBox.Text = "";
+                updateLastNameBox.Text = "";
+                updateStreetBox.Text = "";
+                updateCityBox.Text = "";
+                updateProvinceBox.Text = "";
+                updateCountryBox.Text = "";
+                updateGenderBox.SelectedIndex = -1;
+                updateDOBBox.Text = "";
+                updateHomePhoneBox.Text = "";
+                updateCellphoneBox.Text = "";
+                populateCurrentPatientBox();
+            }
+            else
+            {
+                addSINBox.Text = "";
+                addPatientTypeBox.SelectedIndex = -1;
+                addFirstNameBox.Text = "";
+                addLastNameBox.Text = "";
+                addStreetBox.Text = "";
+                addCityBox.Text = "";
+                addProvinceBox.Text = "";
+                addCountryBox.Text = "";
+                addGenderBox.SelectedIndex = -1;
+                addDOBBox.Text = "";
+                addHomePhoneBox.Text = "";
+                addCellphoneBox.Text = "";
+            }
         }
 
         //Check all fields after add button is pressed. If there are any invalid fields, points them out.
-        private bool fieldsAreValid()
+        private bool fieldsAreValid(string inputeType)
         {
-            string inputedSIN = updateSINBox.Text;
-            string inputedFName = updateFirstNameBox.Text;
-            string inputedLName = updateLastNameBox.Text;
-            string inputedStreet = updateStreetBox.Text;
-            string inputedCity = updateCityBox.Text;
-            string inputedProvince = updateProvinceBox.Text;
-            string inputedCountry = updateCountryBox.Text;
-            string inputedPType = updatePatientTypeBox.SelectedText;
-            string inputedGender = updateGenderBox.SelectedText;
+            string inputedSIN;
+            string inputedFName;
+            string inputedLName;
+            string inputedStreet;
+            string inputedCity;
+            string inputedProvince;
+            string inputedCountry;
+            string inputedPType;
+            string inputedGender;
 
-            updatePatientErrorInfo.ForeColor = Color.Red;
+            if (inputeType.Equals("update"))
+            {
+                inputedSIN = updateSINBox.Text;
+                inputedFName = updateFirstNameBox.Text;
+                inputedLName = updateLastNameBox.Text;
+                inputedStreet = updateStreetBox.Text;
+                inputedCity = updateCityBox.Text;
+                inputedProvince = updateProvinceBox.Text;
+                inputedCountry = updateCountryBox.Text;
+                inputedPType = updatePatientTypeBox.SelectedText;
+                inputedGender = updateGenderBox.SelectedText;
+                updatePatientErrorInfo.ForeColor = Color.Red;
+            }
+            else
+            {
+                inputedSIN = addSINBox.Text;
+                inputedFName = addFirstNameBox.Text;
+                inputedLName = addLastNameBox.Text;
+                inputedStreet = addStreetBox.Text;
+                inputedCity = addCityBox.Text;
+                inputedProvince = addProvinceBox.Text;
+                inputedCountry = addCountryBox.Text;
+                inputedPType = addPatientTypeBox.SelectedText;
+                inputedGender = addGenderBox.SelectedText;
+                addRegisterInfo.ForeColor = Color.Red;
+            }
+
+            string errorInfo = "";
 
             //Check SIN against SIN constraints (all num, length = 9)
             if (!Regex.IsMatch(inputedSIN, @"^[0-9]+$") | inputedSIN.Length != 9)
             {
-                updatePatientErrorInfo.Text += "*SIN must be 9 numbers\n";
+                errorInfo = errorInfo + "*SIN must be 9 numbers\n";
             }
             //Check First Name
             if (!Regex.IsMatch(inputedFName, @"^[a-zA-Z]+$") | inputedFName.Length > 32)
             {
-                updatePatientErrorInfo.Text += "*First Name must be between 0 and 32 letters long.\n";
+                errorInfo = errorInfo + "*First Name must be between 0 and 32 letters long.\n";
             }
             //Check Last Name
             if (!Regex.IsMatch(inputedLName, @"^[a-zA-Z]+$") | inputedLName.Length > 32)
             {
-                updatePatientErrorInfo.Text += "*Last Name must be between 0 and 32 letters long.\n";
+                errorInfo = errorInfo + "*Last Name must be between 0 and 32 letters long.\n";
             }
             //Check Street (Allow for numbers and white space)
             if (!Regex.IsMatch(inputedStreet, @"^[a-zA-Z0-9\s]+$") | inputedStreet.Length > 50)
             {
-                updatePatientErrorInfo.Text += "*Street must be between 0 and 50 characters long.\n";
+                errorInfo = errorInfo + "*Street must be between 0 and 50 characters long.\n";
             }
             //Check City (Allow whitespace)
             if (!Regex.IsMatch(inputedCity, @"^[a-zA-Z\s]+$") | inputedCity.Length > 50)
             {
-                updatePatientErrorInfo.Text += "*City must be between 0 and 50 characters long.\n";
+                errorInfo = errorInfo + "*City must be between 0 and 50 characters long.\n";
             }
             //Check Province (Allow whitespace)
             if (!Regex.IsMatch(inputedProvince, @"^[a-zA-Z\s]+$") | inputedProvince.Length > 50)
             {
-                updatePatientErrorInfo.Text += "*Province must be between 0 and 50 characters long.\n";
+                errorInfo = errorInfo + "*Province must be between 0 and 50 characters long.\n";
             }
             //Check Country (Allow whitespace)
             if (!Regex.IsMatch(inputedCountry, @"^[a-zA-Z\s]+$") | inputedCountry.Length > 50)
             {
-                updatePatientErrorInfo.Text += "*Country must be between 0 and 50 characters long.\n";
+                errorInfo = errorInfo + "*Country must be between 0 and 50 characters long.\n";
             }
             //Check DOB, Admit Date, and Depart Date: 1. Valid date, 1.5 Depart is completely empty or full, 2. DOB < Admit < Depart
-            dateIsValid();
+            errorInfo = dateIsValid(inputeType, errorInfo);
             //Check Patient Type, error if nothing chosen
-            if (updatePatientTypeBox.SelectedItem == null)
+            if (inputeType.Equals("update"))
             {
-                updatePatientErrorInfo.Text += "*Please choose a Patient Type.\n";
+                if (updatePatientTypeBox.SelectedItem == null)
+                {
+                    errorInfo = errorInfo + "*Please choose a Patient Type.\n";
+                }
+            }
+            else
+            {
+                if (addPatientTypeBox.SelectedItem == null)
+                {
+                    errorInfo = errorInfo + "*Please choose a Patient Type.\n";
+                }
             }
             //Check Gender, error if nothing chosen
-            if (updateGenderBox.SelectedItem == null)
+            if (inputeType.Equals("update"))
             {
-                updatePatientErrorInfo.Text += "*Please choose a Gender.\n";
+                if (updateGenderBox.SelectedItem == null)
+                {
+                    errorInfo = errorInfo + "*Please choose a Gender.\n";
+                }
             }
-
+            else
+            {
+                if (addGenderBox.SelectedItem == null)
+                {
+                    errorInfo = errorInfo + "*Please choose a Gender.\n";
+                }
+            }
+            if (inputeType.Equals("update"))
+            {
+                updatePatientErrorInfo.Text = errorInfo;
+            }
+            else
+            {
+                addRegisterInfo.Text = errorInfo;
+            }
             //If there are any warnings, return false.
-            if (updatePatientErrorInfo.Text.Length > 0) { return false; }
+            if (errorInfo.Length > 0) { return false; }
             else { return true; }
         }
 
-        private bool dateIsValid()
+        private string dateIsValid(string inputType, string errorInfo)
         {
             DateTime inputedDOB;
-
-            //Check if entry is empty or incorrect
-            if (!updateDOBBox.MaskCompleted | !DateTime.TryParse(updateDOBBox.Text, out inputedDOB))
-            {
-                updatePatientErrorInfo.Text += "*Invalid Date of Birth.\n";
+            if (inputType.Equals("update")){
+                //Check if entry is empty or incorrect
+                if (!updateDOBBox.MaskCompleted | !DateTime.TryParse(updateDOBBox.Text, out inputedDOB))
+                {
+                    errorInfo = errorInfo + "*Invalid Date of Birth.\n";
+                }
             }
-            return true;
+            else
+            {
+                if (!addDOBBox.MaskCompleted | !DateTime.TryParse(addDOBBox.Text, out inputedDOB))
+                {
+                    errorInfo = errorInfo + "*Invalid Date of Birth.\n";
+                }
+            }
+            return errorInfo;
+
         }
 
         private void logoutRecep_Click(object sender, EventArgs e)
@@ -619,17 +703,10 @@ namespace group6_291
         {
             DataRowView WardList = WardListBox.SelectedItem as DataRowView;
             string wardName = WardList["wardName"].ToString();
-            string registerID = WardList["registerID"].ToString();
 
             DataSet patientsInWard = new DataSet();
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
-
-
-            ///SELECT firstName FROM Doctor WHERE doctorID IN
-            //(SELECT doctorID FROM Doctor_Patient WHERE registerID IN
-            //(SELECT registerID FROM Register WHERE leaveDate IS NULL))
-            //
 
             SqlCommand getWard = new SqlCommand("select concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
                 " patientType as Patient_Type, city as City from Patient, Register" +
@@ -659,34 +736,22 @@ namespace group6_291
                 }
             }
 
+            int max = Int32.Parse(WardList["overall_capacity"].ToString());
+            int cur = Int32.Parse(WardList["current_capacity"].ToString());
+            //Send these to your WinForms textboxes
+            MaxCapacityLabel.Text = WardList["overall_capacity"].ToString();
+            CurrentPatientLabel.Text = WardList["current_capacity"].ToString();
 
-            SqlCommand getCapacity = new SqlCommand("select overall_capacity, current_capacity from Ward where wardName=@wardName", conn);
-            getCapacity.Parameters.AddWithValue("@wardName", wardName);
-
-            using (SqlDataReader reader = getCapacity.ExecuteReader())
+            if (cur == max)
             {
-                while (reader.Read())
-                {
-                    int max = Int32.Parse(reader["overall_capacity"].ToString());
-                    int cur = Int32.Parse(reader["current_capacity"].ToString());
-                    //Send these to your WinForms textboxes
-                    MaxCapacityLabel.Text = reader["overall_capacity"].ToString();
-                    CurrentPatientLabel.Text = reader["current_capacity"].ToString();
-
-                    if (cur == max)
-                    {
-                        StatusLabel.Text = "Full";
-                        StatusLabel.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        StatusLabel.Text = "Not Full";
-                        StatusLabel.ForeColor = Color.Green;
-                    }
-                }
+                StatusLabel.Text = "Full";
+                StatusLabel.ForeColor = Color.Red;
             }
-            conn.Close();
-
+            else
+            {
+                StatusLabel.Text = "Not Full";
+                StatusLabel.ForeColor = Color.Green;
+            }
         }
 
         private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -776,5 +841,149 @@ namespace group6_291
 
         }
 
+        private void addRegisterButton_Click(object sender, EventArgs e)
+        {
+            //Clear error/success info everytime add button is clicked
+            addRegisterInfo.Text = "";
+            addRegisterRequestInfo.Text = "";
+
+            //If all criteria for every field is met, add user to databse
+            if (fieldsAreValid("add"))
+            {
+                //Insert into database
+                SqlConnection conn = new SqlConnection(Globals.conn);
+                conn.Open();
+
+                //Check if patient already exists in Patient Table
+                if (patientIsValid())
+                {
+                    SqlCommand addPatient = new SqlCommand(@"INSERT into [Patient] (patientSIN, patientType, firstName, lastName, street, city, province, country, sex, dateOfBirth) 
+                                                        VALUES (@SIN, @pType, @fName, @lName, @street, @city, @province, @country, @sex, @dateOfBirth)", conn);
+                    addPatient.Parameters.AddWithValue("@SIN", addSINBox.Text);
+                    addPatient.Parameters.AddWithValue("@pType", Int32.Parse(addPatientTypeBox.Text));
+                    addPatient.Parameters.AddWithValue("@fName", addFirstNameBox.Text);
+                    addPatient.Parameters.AddWithValue("@lName", addLastNameBox.Text);
+                    addPatient.Parameters.AddWithValue("@street", addStreetBox.Text);
+                    addPatient.Parameters.AddWithValue("@city", addCityBox.Text);
+                    addPatient.Parameters.AddWithValue("@province", addProvinceBox.Text);
+                    addPatient.Parameters.AddWithValue("@country", addCountryBox.Text);
+                    addPatient.Parameters.AddWithValue("@sex", addGenderBox.Text);
+                    addPatient.Parameters.AddWithValue("@dateOfBirth", addDOBBox.Text);
+                    addPatient.ExecuteNonQuery();
+                }
+
+                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
+                addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
+                addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
+
+                //Check if notes are null
+                if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
+                else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
+
+                addRegister.ExecuteNonQuery();
+                conn.Close();
+                //Update status and reset fields
+                addRegisterRequestInfo.Text = "Patient registered successfully";
+                addRegisterRequestInfo.ForeColor = Color.Green;
+                resetAddUpdatePatientFields("Add");
+                populatePatientList();
+            }
+        }
+
+        //For Patient Table (no dupes): If SIN already exists, do not add to Patient Table.
+        private bool patientIsValid()
+        {
+            string inputedSIN = addSINBox.Text;
+            //Check to see if the patient record already exists in Patient Table
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand checkSIN = new SqlCommand("select count(*) from [Patient] where patientSin = @patientSin", conn);
+            checkSIN.Parameters.AddWithValue("@patientSin", inputedSIN);
+            int SINExist = (int)checkSIN.ExecuteScalar();
+            //Record (SIN) already exists
+            if (SINExist > 0)
+            {
+                addRegisterInfo.Text = "*SIN already exists, no new record was created.";
+                addRegisterInfo.ForeColor = Color.Red;
+                return false;
+            }
+            else { return true; }
+        }
+
+        private void resetRegisterButton_Click(object sender, EventArgs e)
+        {
+            resetAddUpdatePatientFields("add");
+            registerListBox.DataSource = patientList.Tables[0];
+            addRegisterInfo.Text = "";
+            addRegisterRequestInfo.Text = "";
+        }
+
+        private void populatePatientList()
+        {
+            patientList.Clear();
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT *, CONCAT(lastName, ', ', firstName) as fullName FROM [Patient]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(patientList);
+            patientList.Tables[0].DefaultView.Sort = "fullName asc";
+            registerListBox.DataSource = patientList.Tables[0];
+            registerListBox.DisplayMember = "fullName";
+            conn.Close();
+        }
+
+        private void registerListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (registerListBox.SelectedItem != null && addSINBox.Text.Length == 9)
+            {
+                DataRowView registrantList = registerListBox.SelectedItem as DataRowView;
+                int patientType = Int32.Parse(registrantList["patientType"].ToString());
+                addSINBox.Text = registrantList["patientSIN"].ToString();
+                if (patientType == 0)
+                    addPatientTypeBox.SelectedIndex = 0;
+                else if (patientType == 1)
+                    addPatientTypeBox.SelectedIndex = 1;
+                else
+                    addPatientTypeBox.SelectedIndex = 2;
+
+                addFirstNameBox.Text = registrantList["firstName"].ToString();
+                addLastNameBox.Text = registrantList["lastName"].ToString();
+                addStreetBox.Text = registrantList["street"].ToString();
+                addCityBox.Text = registrantList["city"].ToString();
+                addProvinceBox.Text = registrantList["province"].ToString();
+                addCountryBox.Text = registrantList["country"].ToString();
+                if (registrantList["sex"].ToString().Equals("Male"))
+                    addGenderBox.SelectedIndex = 0;
+                else
+                    addGenderBox.SelectedIndex = 1;
+                addDOBBox.Text = Convert.ToDateTime(registrantList["dateOfBirth"]).ToString("MM/dd/yyyy");
+                //addAdmitDateBox.Text = "";
+                //addDepartDateBox.Text = "";
+                addInsuranceBox.Text = "";
+                addHomePhoneBox.Text = "";
+                addCellphoneBox.Text = "";
+                addNotesBox.Text = "";
+            }
+        }
+
+        private void addSINBox_TextChanged(object sender, EventArgs e)
+        {
+            if (addSINBox.Text.Length == 9)
+            {
+                DataSet patientSINs = new DataSet();
+                DataTable matchingSINs = patientList.Tables[0].Clone();
+                foreach (DataRow row in patientList.Tables[0].Rows)
+                {
+                    if (row["patientSIN"].ToString().StartsWith(addSINBox.Text))
+                        matchingSINs.ImportRow(row);
+                }
+                patientSINs.Tables.Add(matchingSINs);
+                patientSINs.Tables[0].DefaultView.Sort = "fullName asc";
+                registerListBox.DataSource = patientSINs.Tables[0];
+                registerListBox.DisplayMember = "fullName";
+            }
+        }
     }
 }
