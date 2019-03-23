@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
@@ -143,7 +143,18 @@
             this.vScrollBar3 = new System.Windows.Forms.VScrollBar();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
+            this.WardListTab = new System.Windows.Forms.TabPage();
+            this.WardListGrid = new System.Windows.Forms.DataGridView();
+            this.WardListBox = new System.Windows.Forms.ListBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
             this.logoutRecep = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.CurrentPatientLabel = new System.Windows.Forms.Label();
+            this.MaxCapacityLabel = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.StatusLabel = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.CurentPatientsTab.SuspendLayout();
@@ -153,6 +164,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectedWardGridView)).BeginInit();
             this.managePatientDoc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.currentDoctorsGridView)).BeginInit();
+            this.WardListTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -170,6 +183,7 @@
             this.TabControl.Controls.Add(this.PatientRegTab);
             this.TabControl.Controls.Add(this.PatientRecTab);
             this.TabControl.Controls.Add(this.CurentPatientsTab);
+            this.TabControl.Controls.Add(this.WardListTab);
             this.TabControl.Location = new System.Drawing.Point(15, 37);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -922,14 +936,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.selectedWardGridView.Location = new System.Drawing.Point(249, 38);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -1296,6 +1310,64 @@
             this.label28.TabIndex = 67;
             this.label28.Text = "Current Patients";
             // 
+            // WardListTab
+            // 
+            this.WardListTab.Controls.Add(this.StatusLabel);
+            this.WardListTab.Controls.Add(this.label35);
+            this.WardListTab.Controls.Add(this.MaxCapacityLabel);
+            this.WardListTab.Controls.Add(this.CurrentPatientLabel);
+            this.WardListTab.Controls.Add(this.label29);
+            this.WardListTab.Controls.Add(this.label25);
+            this.WardListTab.Controls.Add(this.WardListGrid);
+            this.WardListTab.Controls.Add(this.WardListBox);
+            this.WardListTab.Controls.Add(this.label23);
+            this.WardListTab.Controls.Add(this.vScrollBar2);
+            this.WardListTab.Location = new System.Drawing.Point(4, 22);
+            this.WardListTab.Name = "WardListTab";
+            this.WardListTab.Padding = new System.Windows.Forms.Padding(3);
+            this.WardListTab.Size = new System.Drawing.Size(806, 487);
+            this.WardListTab.TabIndex = 5;
+            this.WardListTab.Text = "Ward List";
+            this.WardListTab.UseVisualStyleBackColor = true;
+            // 
+            // WardListGrid
+            // 
+            this.WardListGrid.AllowUserToAddRows = false;
+            this.WardListGrid.AllowUserToDeleteRows = false;
+            this.WardListGrid.AllowUserToOrderColumns = true;
+            this.WardListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.WardListGrid.Location = new System.Drawing.Point(242, 114);
+            this.WardListGrid.Name = "WardListGrid";
+            this.WardListGrid.ReadOnly = true;
+            this.WardListGrid.Size = new System.Drawing.Size(543, 360);
+            this.WardListGrid.TabIndex = 104;
+            // 
+            // WardListBox
+            // 
+            this.WardListBox.FormattingEnabled = true;
+            this.WardListBox.Location = new System.Drawing.Point(8, 41);
+            this.WardListBox.Name = "WardListBox";
+            this.WardListBox.Size = new System.Drawing.Size(182, 433);
+            this.WardListBox.TabIndex = 103;
+            this.WardListBox.SelectedIndexChanged += new System.EventHandler(this.WardListBox_SelectedIndexChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label23.Location = new System.Drawing.Point(20, 13);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(92, 24);
+            this.label23.TabIndex = 102;
+            this.label23.Text = "Ward List:";
+            // 
+            // vScrollBar2
+            // 
+            this.vScrollBar2.Location = new System.Drawing.Point(193, 44);
+            this.vScrollBar2.Name = "vScrollBar2";
+            this.vScrollBar2.Size = new System.Drawing.Size(17, 433);
+            this.vScrollBar2.TabIndex = 101;
+            // 
             // logoutRecep
             // 
             this.logoutRecep.Location = new System.Drawing.Point(754, 30);
@@ -1305,6 +1377,66 @@
             this.logoutRecep.Text = "Logout";
             this.logoutRecep.UseVisualStyleBackColor = true;
             this.logoutRecep.Click += new System.EventHandler(this.logoutRecep_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label25.Location = new System.Drawing.Point(238, 62);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(174, 24);
+            this.label25.TabIndex = 105;
+            this.label25.Text = "Number of Patients:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label29.Location = new System.Drawing.Point(442, 62);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(174, 24);
+            this.label29.TabIndex = 106;
+            this.label29.Text = "Maximum Capacity:";
+            // 
+            // CurrentPatientLabel
+            // 
+            this.CurrentPatientLabel.AutoSize = true;
+            this.CurrentPatientLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.CurrentPatientLabel.Location = new System.Drawing.Point(406, 62);
+            this.CurrentPatientLabel.Name = "CurrentPatientLabel";
+            this.CurrentPatientLabel.Size = new System.Drawing.Size(40, 24);
+            this.CurrentPatientLabel.TabIndex = 107;
+            this.CurrentPatientLabel.Text = "300";
+            // 
+            // MaxCapacityLabel
+            // 
+            this.MaxCapacityLabel.AutoSize = true;
+            this.MaxCapacityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.MaxCapacityLabel.Location = new System.Drawing.Point(611, 62);
+            this.MaxCapacityLabel.Name = "MaxCapacityLabel";
+            this.MaxCapacityLabel.Size = new System.Drawing.Size(40, 24);
+            this.MaxCapacityLabel.TabIndex = 108;
+            this.MaxCapacityLabel.Text = "300";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label35.Location = new System.Drawing.Point(650, 62);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(65, 24);
+            this.label35.TabIndex = 109;
+            this.label35.Text = "Status:";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.StatusLabel.Location = new System.Drawing.Point(710, 62);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(75, 24);
+            this.StatusLabel.TabIndex = 110;
+            this.StatusLabel.Text = "Not Full";
             // 
             // ReceptionistMaster
             // 
@@ -1331,6 +1463,9 @@
             this.managePatientDoc.ResumeLayout(false);
             this.managePatientDoc.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.currentDoctorsGridView)).EndInit();
+            this.WardListTab.ResumeLayout(false);
+            this.WardListTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1453,5 +1588,16 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label updatePatientErrorInfo;
         private System.Windows.Forms.Button logoutRecep;
+        private System.Windows.Forms.TabPage WardListTab;
+        private System.Windows.Forms.DataGridView WardListGrid;
+        private System.Windows.Forms.ListBox WardListBox;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.VScrollBar vScrollBar2;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label MaxCapacityLabel;
+        private System.Windows.Forms.Label CurrentPatientLabel;
+        private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Label label35;
     }
 }

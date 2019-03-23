@@ -24,6 +24,7 @@ namespace group6_291
         private void ReceptionistMaster_Load(object sender, EventArgs e)
         {
             populateCurrentPatientBox();
+            populateWardList();
             currentPatientsBox.DoubleClick += new EventHandler(currentPatientsBox_DoubleClick);
         }
 
@@ -39,6 +40,20 @@ namespace group6_291
             ds.Tables[0].DefaultView.Sort = "fullName asc";
             currentPatientsBox.DataSource = ds.Tables[0];
             currentPatientsBox.DisplayMember = "fullName";
+            conn.Close();
+        }
+        private void populateWardList()
+        {
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select wardName, registerID from [Patient_Ward]", conn);
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(ds);
+            ds.Tables[0].DefaultView.Sort = "wardName asc";
+            WardListBox.DataSource = ds.Tables[0];
+            WardListBox.DisplayMember = "wardName";
             conn.Close();
         }
 
@@ -578,6 +593,78 @@ namespace group6_291
         {
             loginForm.Show();
             this.Close();
+        }
+
+        private void currentDoctorsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void WardListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRowView WardList = WardListBox.SelectedItem as DataRowView;
+            string wardName = WardList["wardName"].ToString();
+            string registerID = WardList["registerID"].ToString();
+
+            DataSet patientsInWard = new DataSet();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlCommand getWard = new SqlCommand("select concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
+                " patientType as Patient_Type, city as City from Patient, Register" +
+                " where Patient.patientSIN = Register.patientSIN and Register.leaveDate is null and Register.registerID in" +
+                " (select registerID from Patient_Ward where dateOut is null and wardName = @wardName)", conn);
+
+            getWard.Parameters.AddWithValue("@wardName", wardName);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = getWard;
+            adapter.Fill(patientsInWard);
+            WardListGrid.AutoGenerateColumns = true;
+            WardListGrid.DataSource = patientsInWard.Tables[0];
+
+            int rowCount = WardListGrid.RowCount;
+            if (rowCount > 0)
+            {
+                int totalRowHeight = WardListGrid.ColumnHeadersHeight;
+                if (rowCount > 8)
+                {
+                    totalRowHeight += (WardListGrid.Rows[0].Height * 8) - 20;
+                    WardListGrid.Height = totalRowHeight;
+                }
+                else
+                {
+                    totalRowHeight += (WardListGrid.Rows[0].Height * (rowCount + 1)) - 20;
+                    WardListGrid.Height = totalRowHeight;
+                }
+            }
+
+
+            SqlCommand getCapacity = new SqlCommand("select overall_capacity, current_capacity from Ward where wardName=@wardName", conn);
+            getCapacity.Parameters.AddWithValue("@wardName", wardName);
+
+            using (SqlDataReader reader = getCapacity.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int max = Int32.Parse(reader["overall_capacity"].ToString());
+                    int cur = Int32.Parse(reader["current_capacity"].ToString());
+                    //Send these to your WinForms textboxes
+                    MaxCapacityLabel.Text = reader["overall_capacity"].ToString();
+                    CurrentPatientLabel.Text = reader["current_capacity"].ToString();
+
+                    if (cur == max)
+                    {
+                        StatusLabel.Text = "Full";
+                        StatusLabel.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        StatusLabel.Text = "Not Full";
+                        StatusLabel.ForeColor = Color.Green;
+                    }
+                }
+            }
+
         }
     }
 }
