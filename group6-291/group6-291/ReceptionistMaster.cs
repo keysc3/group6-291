@@ -909,6 +909,8 @@ namespace group6_291
             patientList.Tables[0].DefaultView.Sort = "fullName asc";
             registerListBox.DataSource = patientList.Tables[0];
             registerListBox.DisplayMember = "fullName";
+            patientRecordBox.DataSource = patientList.Tables[0];
+            patientRecordBox.DisplayMember = "fullName";
             conn.Close();
         }
 
@@ -965,6 +967,58 @@ namespace group6_291
         }
 
         private void label39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void patientRecordBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRowView selectedPatient = registerListBox.SelectedItem as DataRowView;
+            string name = selectedPatient["fullName"].ToString();
+            string address = selectedPatient["street"].ToString() + ", " + selectedPatient["city"].ToString() 
+                + ", " + selectedPatient["province"].ToString() + ", " + selectedPatient["country"].ToString();
+            string gender = selectedPatient["sex"].ToString();
+            string DOB = selectedPatient["dateOfBirth"].ToString();
+            patientName.Text = name;
+            patientAddress.Text = address;
+            patientGender.Text = gender;
+            patientDOB.Text = DOB;
+            populatePatientRegsList();
+
+        }
+
+        private void populatePatientRegsList()
+        {
+            
+            DataSet regNums = new DataSet();
+            DataRowView selectedPatient = registerListBox.SelectedItem as DataRowView;
+            //Open connection and create a dataset from the query
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+
+            SqlCommand getRegs = new SqlCommand("SELECT * FROM [Register] where patientSIN = @patientSIN", conn);
+            getRegs.Parameters.AddWithValue("@patientSIN", selectedPatient["patientSIN"].ToString());
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = getRegs;
+            //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(regNums);
+            regNums.Tables[0].DefaultView.Sort = "admitDate asc";
+            selectedPatientRegs.DataSource = regNums.Tables[0];
+            selectedPatientRegs.DisplayMember = "admitDate";
+            conn.Close();
+        }
+
+        private void label46_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label45_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectedPatientRegs_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
