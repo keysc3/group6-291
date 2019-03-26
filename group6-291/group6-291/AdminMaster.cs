@@ -1121,5 +1121,6 @@ namespace group6_291
             addNotesBox.Text = "";
             addRegisterInfo.Text = "";
         }
+        //removed patient records
     }
 }
