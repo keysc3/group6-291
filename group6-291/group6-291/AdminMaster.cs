@@ -887,7 +887,7 @@ namespace group6_291
             //Record (SIN) already exists
             if (SINExist > 0)
             {
-                addRegisterInfo.Text = "*Patient is already registered, no new record was created.";
+                addRegisterInfo.Text = "*Patient is already registered,\n no new record was created.";
                 addRegisterInfo.ForeColor = Color.Red;
                 conn.Close();
                 return false;
@@ -1103,6 +1103,22 @@ namespace group6_291
 
         private void registerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //addSINBox.Text = "";
+            addPatientTypeBox.SelectedIndex = -1;
+            addFirstNameBox.Text = "";
+            addLastNameBox.Text = "";
+            addStreetBox.Text = "";
+            addCityBox.Text = "";
+            addProvinceBox.Text = "";
+            addCountryBox.Text = "";
+            addGenderBox.SelectedIndex = -1;
+            addDOBBox.Text = "";
+            //addAdmitDateBox.Text = "";
+            //addDepartDateBox.Text = "";
+            addInsuranceBox.Text = "";
+            addHomePhoneBox.Text = "";
+            addCellphoneBox.Text = "";
+            addNotesBox.Text = "";
             addRegisterInfo.Text = "";
         }
     }
