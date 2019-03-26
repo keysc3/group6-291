@@ -1011,6 +1011,8 @@ namespace group6_291
                 registerListBox.DataSource = patientSINs.Tables[0];
                 registerListBox.DisplayMember = "fullName";
             }
+            if (addSINBox.Text.Length == 0)
+                registerListBox.DataSource = patientList.Tables[0];
         }
 
         private void registerListBox_DoubleClick(object sender, EventArgs e)
