@@ -832,11 +832,12 @@ namespace group6_291
             {
                 //Insert into database
                 SqlConnection conn = new SqlConnection(Globals.conn);
-                conn.Open();
+                //conn.Open();
 
                 //Check if patient already exists in Patient Table
                 if (patientIsValid())
                 {
+                    conn.Open();
                     SqlCommand addPatient = new SqlCommand(@"INSERT into [Patient] (patientSIN, patientType, firstName, lastName, street, city, province, country, sex, dateOfBirth) 
                                                         VALUES (@SIN, @pType, @fName, @lName, @street, @city, @province, @country, @sex, @dateOfBirth)", conn);
                     addPatient.Parameters.AddWithValue("@SIN", addSINBox.Text);
@@ -850,23 +851,49 @@ namespace group6_291
                     addPatient.Parameters.AddWithValue("@sex", addGenderBox.Text);
                     addPatient.Parameters.AddWithValue("@dateOfBirth", addDOBBox.Text);
                     addPatient.ExecuteNonQuery();
+                    conn.Close();
                 }
+                if (checkRegister())
+                {
+                    conn.Open();
+                    SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
+                    addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
+                    addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
 
-                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
-                addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
-                addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
+                    //Check if notes are null
+                    if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
+                    else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
 
-                //Check if notes are null
-                if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
-                else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
+                    addRegister.ExecuteNonQuery();
+                    conn.Close();
+                    //Update status and reset fields
+                    addRegisterRequestInfo.Text = "Patient registered successfully";
+                    addRegisterRequestInfo.ForeColor = Color.Green;
+                    resetAddRegisterFields();
 
-                addRegister.ExecuteNonQuery();
-                conn.Close();
-                //Update status and reset fields
-                addRegisterRequestInfo.Text = "Patient registered successfully";
-                addRegisterRequestInfo.ForeColor = Color.Green;
-                resetAddRegisterFields();
+                }
+                
             }
+        }
+        private bool checkRegister()
+        {
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            string SIN = addSINBox.Text;
+            //checks if the patient is still registered
+            SqlCommand checkSIN = new SqlCommand("select count(*) from [Register] where patientSIN = @patientSIN and leaveDate is null", conn);
+            checkSIN.Parameters.AddWithValue("@patientSin", SIN);
+            int SINExist = (int)checkSIN.ExecuteScalar();
+            //Record (SIN) already exists
+            if (SINExist > 0)
+            {
+                addRegisterInfo.Text = "*Patient is already registered, no new record was created.";
+                addRegisterInfo.ForeColor = Color.Red;
+                conn.Close();
+                return false;
+            }
+            conn.Close();
+            return true;
         }
 
         //Check all fields after add button is pressed. If there are any invalid fields, points them out.
@@ -965,27 +992,6 @@ namespace group6_291
             //DateTime inputedDepartDate;
             //Check if entry is empty or incorrect
             if (!addDOBBox.MaskCompleted | !DateTime.TryParse(addDOBBox.Text, out inputedDOB)) { addRegisterInfo.Text += "*Invalid Date of Birth.\n"; }
-
-            //Check if entry is empty or incorrect, or admission date is earlier than birth date
-            /*
-            if (!addAdmitDateBox.MaskCompleted | !DateTime.TryParse(addAdmitDateBox.Text, out inputedAdmitDate) | DateTime.Compare(inputedDOB, inputedAdmitDate) > 0)
-            {
-                addRegisterInfo.Text += "*Invalid Admission Date.\n";
-            }
-
-            //Check if entry is completely empty (OK)
-            MaskedTextBox departDate = addDepartDateBox;
-            departDate.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            if (departDate.Text == "") { return true; }
-            //If not, put back the literals
-            else
-            { departDate.TextMaskFormat = MaskFormat.IncludePromptAndLiterals; }
-
-            //If entry is not completely empty, check for partial input, or if departure date incorrect or is earlier than admission date
-            if (!DateTime.TryParse(addDepartDateBox.Text, out inputedDepartDate) | DateTime.Compare(inputedAdmitDate, inputedDepartDate) > 0)
-            {
-                addRegisterInfo.Text += "*Invalid Departure Date.\n"; }
-            */
             return true;
         }
 
@@ -1093,6 +1099,11 @@ namespace group6_291
         {
             loginForm.Show();
             this.Close();
+        }
+
+        private void registerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addRegisterInfo.Text = "";
         }
     }
 }
