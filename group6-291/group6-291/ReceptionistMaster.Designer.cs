@@ -72,6 +72,18 @@
             this.label11 = new System.Windows.Forms.Label();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.PatientRecTab = new System.Windows.Forms.TabPage();
+            this.DoctorUnassignLabel = new System.Windows.Forms.Label();
+            this.DoctorAssignLabel = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.DoctorMiscLabel = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.DoctorSurgLabel = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.DoctorMedLabel = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.PatientDoctorGrid = new System.Windows.Forms.DataGridView();
+            this.PatientWardGrid = new System.Windows.Forms.DataGridView();
             this.selectedPatientRegs = new System.Windows.Forms.ListBox();
             this.patientDOB = new System.Windows.Forms.Label();
             this.patientGender = new System.Windows.Forms.Label();
@@ -185,21 +197,11 @@
             this.label42 = new System.Windows.Forms.Label();
             this.vScrollBar4 = new System.Windows.Forms.VScrollBar();
             this.logoutRecep = new System.Windows.Forms.Button();
-            this.PatientWardGrid = new System.Windows.Forms.DataGridView();
-            this.PatientDoctorGrid = new System.Windows.Forms.DataGridView();
-            this.label50 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.DoctorMedLabel = new System.Windows.Forms.Label();
-            this.DoctorSurgLabel = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.DoctorMiscLabel = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.DoctorAssignLabel = new System.Windows.Forms.Label();
-            this.DoctorUnassignLabel = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.PatientRegTab.SuspendLayout();
             this.PatientRecTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientDoctorGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientWardGrid)).BeginInit();
             this.CurentPatientsTab.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.updatePatientInfo.SuspendLayout();
@@ -211,8 +213,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.WardListGrid)).BeginInit();
             this.DoctorTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PatientWardGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PatientDoctorGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -282,7 +282,7 @@
             this.PatientRegTab.Controls.Add(this.vScrollBar1);
             this.PatientRegTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRegTab.Name = "PatientRegTab";
-            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3);
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
@@ -298,7 +298,7 @@
             // addCellphoneBox
             // 
             this.addCellphoneBox.Location = new System.Drawing.Point(399, 180);
-            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addCellphoneBox.Mask = "000-0000";
             this.addCellphoneBox.Name = "addCellphoneBox";
             this.addCellphoneBox.Size = new System.Drawing.Size(101, 20);
@@ -307,7 +307,7 @@
             // addHomePhoneBox
             // 
             this.addHomePhoneBox.Location = new System.Drawing.Point(280, 180);
-            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addHomePhoneBox.Mask = "000-0000";
             this.addHomePhoneBox.Name = "addHomePhoneBox";
             this.addHomePhoneBox.Size = new System.Drawing.Size(101, 20);
@@ -316,7 +316,7 @@
             // addDOBBox
             // 
             this.addDOBBox.Location = new System.Drawing.Point(640, 68);
-            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2);
             this.addDOBBox.Mask = "00/00/0000";
             this.addDOBBox.Name = "addDOBBox";
             this.addDOBBox.Size = new System.Drawing.Size(101, 20);
@@ -612,6 +612,7 @@
             this.registerListBox.Name = "registerListBox";
             this.registerListBox.Size = new System.Drawing.Size(182, 433);
             this.registerListBox.TabIndex = 100;
+            this.registerListBox.SelectedIndexChanged += new System.EventHandler(this.registerListBox_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -661,11 +662,125 @@
             this.PatientRecTab.TabIndex = 4;
             this.PatientRecTab.Text = "Patient Records";
             // 
+            // DoctorUnassignLabel
+            // 
+            this.DoctorUnassignLabel.AutoSize = true;
+            this.DoctorUnassignLabel.Location = new System.Drawing.Point(502, 591);
+            this.DoctorUnassignLabel.Name = "DoctorUnassignLabel";
+            this.DoctorUnassignLabel.Size = new System.Drawing.Size(19, 13);
+            this.DoctorUnassignLabel.TabIndex = 116;
+            this.DoctorUnassignLabel.Text = "na";
+            // 
+            // DoctorAssignLabel
+            // 
+            this.DoctorAssignLabel.AutoSize = true;
+            this.DoctorAssignLabel.Location = new System.Drawing.Point(489, 567);
+            this.DoctorAssignLabel.Name = "DoctorAssignLabel";
+            this.DoctorAssignLabel.Size = new System.Drawing.Size(19, 13);
+            this.DoctorAssignLabel.TabIndex = 115;
+            this.DoctorAssignLabel.Text = "na";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(404, 591);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(92, 13);
+            this.label48.TabIndex = 114;
+            this.label48.Text = "Unassigned Date:";
+            // 
+            // DoctorMiscLabel
+            // 
+            this.DoctorMiscLabel.AutoSize = true;
+            this.DoctorMiscLabel.Location = new System.Drawing.Point(477, 502);
+            this.DoctorMiscLabel.Name = "DoctorMiscLabel";
+            this.DoctorMiscLabel.Size = new System.Drawing.Size(19, 13);
+            this.DoctorMiscLabel.TabIndex = 113;
+            this.DoctorMiscLabel.Text = "na";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(404, 502);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(67, 13);
+            this.label52.TabIndex = 112;
+            this.label52.Text = "Misc Details:";
+            // 
+            // DoctorSurgLabel
+            // 
+            this.DoctorSurgLabel.AutoSize = true;
+            this.DoctorSurgLabel.Location = new System.Drawing.Point(485, 447);
+            this.DoctorSurgLabel.Name = "DoctorSurgLabel";
+            this.DoctorSurgLabel.Size = new System.Drawing.Size(19, 13);
+            this.DoctorSurgLabel.TabIndex = 111;
+            this.DoctorSurgLabel.Text = "na";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(404, 567);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(79, 13);
+            this.label47.TabIndex = 108;
+            this.label47.Text = "Assigned Date:";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(404, 447);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(83, 13);
+            this.label49.TabIndex = 110;
+            this.label49.Text = "Surgical Details:";
+            // 
+            // DoctorMedLabel
+            // 
+            this.DoctorMedLabel.AutoSize = true;
+            this.DoctorMedLabel.Location = new System.Drawing.Point(485, 396);
+            this.DoctorMedLabel.Name = "DoctorMedLabel";
+            this.DoctorMedLabel.Size = new System.Drawing.Size(19, 13);
+            this.DoctorMedLabel.TabIndex = 109;
+            this.DoctorMedLabel.Text = "na";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(404, 396);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(74, 13);
+            this.label50.TabIndex = 107;
+            this.label50.Text = "Medical Case:";
+            // 
+            // PatientDoctorGrid
+            // 
+            this.PatientDoctorGrid.AllowUserToAddRows = false;
+            this.PatientDoctorGrid.AllowUserToDeleteRows = false;
+            this.PatientDoctorGrid.AllowUserToOrderColumns = true;
+            this.PatientDoctorGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PatientDoctorGrid.Location = new System.Drawing.Point(404, 267);
+            this.PatientDoctorGrid.Name = "PatientDoctorGrid";
+            this.PatientDoctorGrid.ReadOnly = true;
+            this.PatientDoctorGrid.Size = new System.Drawing.Size(338, 105);
+            this.PatientDoctorGrid.TabIndex = 106;
+            // 
+            // PatientWardGrid
+            // 
+            this.PatientWardGrid.AllowUserToAddRows = false;
+            this.PatientWardGrid.AllowUserToDeleteRows = false;
+            this.PatientWardGrid.AllowUserToOrderColumns = true;
+            this.PatientWardGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PatientWardGrid.Location = new System.Drawing.Point(404, 32);
+            this.PatientWardGrid.Name = "PatientWardGrid";
+            this.PatientWardGrid.ReadOnly = true;
+            this.PatientWardGrid.Size = new System.Drawing.Size(338, 196);
+            this.PatientWardGrid.TabIndex = 105;
+            // 
             // selectedPatientRegs
             // 
             this.selectedPatientRegs.FormattingEnabled = true;
             this.selectedPatientRegs.Location = new System.Drawing.Point(195, 96);
-            this.selectedPatientRegs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectedPatientRegs.Margin = new System.Windows.Forms.Padding(2);
             this.selectedPatientRegs.Name = "selectedPatientRegs";
             this.selectedPatientRegs.Size = new System.Drawing.Size(182, 381);
             this.selectedPatientRegs.TabIndex = 8;
@@ -747,7 +862,7 @@
             // 
             this.patientRecordBox.FormattingEnabled = true;
             this.patientRecordBox.Location = new System.Drawing.Point(7, 44);
-            this.patientRecordBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.patientRecordBox.Margin = new System.Windows.Forms.Padding(2);
             this.patientRecordBox.Name = "patientRecordBox";
             this.patientRecordBox.Size = new System.Drawing.Size(182, 433);
             this.patientRecordBox.TabIndex = 0;
@@ -765,7 +880,7 @@
             this.CurentPatientsTab.Controls.Add(this.label28);
             this.CurentPatientsTab.Location = new System.Drawing.Point(4, 22);
             this.CurentPatientsTab.Name = "CurentPatientsTab";
-            this.CurentPatientsTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.CurentPatientsTab.Padding = new System.Windows.Forms.Padding(3);
             this.CurentPatientsTab.Size = new System.Drawing.Size(806, 487);
             this.CurentPatientsTab.TabIndex = 3;
             this.CurentPatientsTab.Text = "Current Patients";
@@ -826,7 +941,7 @@
             this.updatePatientInfo.Controls.Add(this.updatePatientButton);
             this.updatePatientInfo.Location = new System.Drawing.Point(4, 22);
             this.updatePatientInfo.Name = "updatePatientInfo";
-            this.updatePatientInfo.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.updatePatientInfo.Padding = new System.Windows.Forms.Padding(3);
             this.updatePatientInfo.Size = new System.Drawing.Size(541, 368);
             this.updatePatientInfo.TabIndex = 1;
             this.updatePatientInfo.Text = "Update";
@@ -870,7 +985,7 @@
             // updateCellphoneBox
             // 
             this.updateCellphoneBox.Location = new System.Drawing.Point(125, 176);
-            this.updateCellphoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.updateCellphoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.updateCellphoneBox.Mask = "000-0000";
             this.updateCellphoneBox.Name = "updateCellphoneBox";
             this.updateCellphoneBox.Size = new System.Drawing.Size(101, 20);
@@ -879,7 +994,7 @@
             // updateHomePhoneBox
             // 
             this.updateHomePhoneBox.Location = new System.Drawing.Point(6, 176);
-            this.updateHomePhoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.updateHomePhoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.updateHomePhoneBox.Mask = "000-0000";
             this.updateHomePhoneBox.Name = "updateHomePhoneBox";
             this.updateHomePhoneBox.Size = new System.Drawing.Size(101, 20);
@@ -888,7 +1003,7 @@
             // updateDOBBox
             // 
             this.updateDOBBox.Location = new System.Drawing.Point(366, 64);
-            this.updateDOBBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.updateDOBBox.Margin = new System.Windows.Forms.Padding(2);
             this.updateDOBBox.Mask = "00/00/0000";
             this.updateDOBBox.Name = "updateDOBBox";
             this.updateDOBBox.Size = new System.Drawing.Size(101, 20);
@@ -1243,7 +1358,7 @@
             // SubmitNewWard
             // 
             this.SubmitNewWard.Location = new System.Drawing.Point(8, 140);
-            this.SubmitNewWard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SubmitNewWard.Margin = new System.Windows.Forms.Padding(2);
             this.SubmitNewWard.Name = "SubmitNewWard";
             this.SubmitNewWard.Size = new System.Drawing.Size(92, 23);
             this.SubmitNewWard.TabIndex = 5;
@@ -1255,7 +1370,7 @@
             // 
             this.NewWardBox.FormattingEnabled = true;
             this.NewWardBox.Location = new System.Drawing.Point(8, 115);
-            this.NewWardBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NewWardBox.Margin = new System.Windows.Forms.Padding(2);
             this.NewWardBox.Name = "NewWardBox";
             this.NewWardBox.Size = new System.Drawing.Size(92, 21);
             this.NewWardBox.TabIndex = 4;
@@ -1569,7 +1684,7 @@
             this.WardListTab.Controls.Add(this.vScrollBar2);
             this.WardListTab.Location = new System.Drawing.Point(4, 22);
             this.WardListTab.Name = "WardListTab";
-            this.WardListTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.WardListTab.Padding = new System.Windows.Forms.Padding(3);
             this.WardListTab.Size = new System.Drawing.Size(806, 487);
             this.WardListTab.TabIndex = 5;
             this.WardListTab.Text = "Ward List";
@@ -1690,7 +1805,7 @@
             this.DoctorTab.Controls.Add(this.vScrollBar4);
             this.DoctorTab.Location = new System.Drawing.Point(4, 22);
             this.DoctorTab.Name = "DoctorTab";
-            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3);
             this.DoctorTab.Size = new System.Drawing.Size(806, 487);
             this.DoctorTab.TabIndex = 6;
             this.DoctorTab.Text = "Doctor List";
@@ -1835,120 +1950,6 @@
             this.logoutRecep.UseVisualStyleBackColor = true;
             this.logoutRecep.Click += new System.EventHandler(this.logoutRecep_Click);
             // 
-            // PatientWardGrid
-            // 
-            this.PatientWardGrid.AllowUserToAddRows = false;
-            this.PatientWardGrid.AllowUserToDeleteRows = false;
-            this.PatientWardGrid.AllowUserToOrderColumns = true;
-            this.PatientWardGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PatientWardGrid.Location = new System.Drawing.Point(404, 32);
-            this.PatientWardGrid.Name = "PatientWardGrid";
-            this.PatientWardGrid.ReadOnly = true;
-            this.PatientWardGrid.Size = new System.Drawing.Size(338, 196);
-            this.PatientWardGrid.TabIndex = 105;
-            // 
-            // PatientDoctorGrid
-            // 
-            this.PatientDoctorGrid.AllowUserToAddRows = false;
-            this.PatientDoctorGrid.AllowUserToDeleteRows = false;
-            this.PatientDoctorGrid.AllowUserToOrderColumns = true;
-            this.PatientDoctorGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.PatientDoctorGrid.Location = new System.Drawing.Point(404, 267);
-            this.PatientDoctorGrid.Name = "PatientDoctorGrid";
-            this.PatientDoctorGrid.ReadOnly = true;
-            this.PatientDoctorGrid.Size = new System.Drawing.Size(338, 105);
-            this.PatientDoctorGrid.TabIndex = 106;
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(404, 396);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(74, 13);
-            this.label50.TabIndex = 107;
-            this.label50.Text = "Medical Case:";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(404, 567);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(79, 13);
-            this.label47.TabIndex = 108;
-            this.label47.Text = "Assigned Date:";
-            // 
-            // DoctorMedLabel
-            // 
-            this.DoctorMedLabel.AutoSize = true;
-            this.DoctorMedLabel.Location = new System.Drawing.Point(485, 396);
-            this.DoctorMedLabel.Name = "DoctorMedLabel";
-            this.DoctorMedLabel.Size = new System.Drawing.Size(19, 13);
-            this.DoctorMedLabel.TabIndex = 109;
-            this.DoctorMedLabel.Text = "na";
-            // 
-            // DoctorSurgLabel
-            // 
-            this.DoctorSurgLabel.AutoSize = true;
-            this.DoctorSurgLabel.Location = new System.Drawing.Point(485, 447);
-            this.DoctorSurgLabel.Name = "DoctorSurgLabel";
-            this.DoctorSurgLabel.Size = new System.Drawing.Size(19, 13);
-            this.DoctorSurgLabel.TabIndex = 111;
-            this.DoctorSurgLabel.Text = "na";
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(404, 447);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(83, 13);
-            this.label49.TabIndex = 110;
-            this.label49.Text = "Surgical Details:";
-            // 
-            // DoctorMiscLabel
-            // 
-            this.DoctorMiscLabel.AutoSize = true;
-            this.DoctorMiscLabel.Location = new System.Drawing.Point(477, 502);
-            this.DoctorMiscLabel.Name = "DoctorMiscLabel";
-            this.DoctorMiscLabel.Size = new System.Drawing.Size(19, 13);
-            this.DoctorMiscLabel.TabIndex = 113;
-            this.DoctorMiscLabel.Text = "na";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(404, 502);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(67, 13);
-            this.label52.TabIndex = 112;
-            this.label52.Text = "Misc Details:";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(404, 591);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(92, 13);
-            this.label48.TabIndex = 114;
-            this.label48.Text = "Unassigned Date:";
-            // 
-            // DoctorAssignLabel
-            // 
-            this.DoctorAssignLabel.AutoSize = true;
-            this.DoctorAssignLabel.Location = new System.Drawing.Point(489, 567);
-            this.DoctorAssignLabel.Name = "DoctorAssignLabel";
-            this.DoctorAssignLabel.Size = new System.Drawing.Size(19, 13);
-            this.DoctorAssignLabel.TabIndex = 115;
-            this.DoctorAssignLabel.Text = "na";
-            // 
-            // DoctorUnassignLabel
-            // 
-            this.DoctorUnassignLabel.AutoSize = true;
-            this.DoctorUnassignLabel.Location = new System.Drawing.Point(502, 591);
-            this.DoctorUnassignLabel.Name = "DoctorUnassignLabel";
-            this.DoctorUnassignLabel.Size = new System.Drawing.Size(19, 13);
-            this.DoctorUnassignLabel.TabIndex = 116;
-            this.DoctorUnassignLabel.Text = "na";
-            // 
             // ReceptionistMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1965,6 +1966,8 @@
             this.PatientRegTab.PerformLayout();
             this.PatientRecTab.ResumeLayout(false);
             this.PatientRecTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientDoctorGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PatientWardGrid)).EndInit();
             this.CurentPatientsTab.ResumeLayout(false);
             this.CurentPatientsTab.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -1982,8 +1985,6 @@
             this.DoctorTab.ResumeLayout(false);
             this.DoctorTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PatientGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PatientWardGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PatientDoctorGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
