@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -205,6 +205,9 @@
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lougoutAdmin = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.vacancyFilter = new System.Windows.Forms.ComboBox();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1106,6 +1109,9 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.WardTab.Controls.Add(this.vacancyFilter);
+            this.WardTab.Controls.Add(this.label20);
+            this.WardTab.Controls.Add(this.label24);
             this.WardTab.Controls.Add(this.label23);
             this.WardTab.Controls.Add(this.filterErrorWard);
             this.WardTab.Controls.Add(this.filterWardButton);
@@ -1138,7 +1144,7 @@
             // filterErrorWard
             // 
             this.filterErrorWard.AutoSize = true;
-            this.filterErrorWard.Location = new System.Drawing.Point(19, 533);
+            this.filterErrorWard.Location = new System.Drawing.Point(168, 530);
             this.filterErrorWard.Name = "filterErrorWard";
             this.filterErrorWard.Size = new System.Drawing.Size(0, 17);
             this.filterErrorWard.TabIndex = 77;
@@ -1369,14 +1375,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.selectedWardGridView.Location = new System.Drawing.Point(349, 54);
             this.selectedWardGridView.Margin = new System.Windows.Forms.Padding(4);
             this.selectedWardGridView.Name = "selectedWardGridView";
@@ -2148,6 +2154,34 @@
             this.lougoutAdmin.UseVisualStyleBackColor = true;
             this.lougoutAdmin.Click += new System.EventHandler(this.lougoutAdmin_Click);
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(14, 537);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(114, 17);
+            this.label20.TabIndex = 82;
+            this.label20.Text = "Filter by capacity";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(19, 584);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(0, 17);
+            this.label24.TabIndex = 81;
+            // 
+            // vacancyFilter
+            // 
+            this.vacancyFilter.FormattingEnabled = true;
+            this.vacancyFilter.Items.AddRange(new object[] {
+            "Vacancy",
+            "No Vacancy"});
+            this.vacancyFilter.Location = new System.Drawing.Point(13, 558);
+            this.vacancyFilter.Name = "vacancyFilter";
+            this.vacancyFilter.Size = new System.Drawing.Size(132, 24);
+            this.vacancyFilter.TabIndex = 69;
+            // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2371,5 +2405,8 @@
         private System.Windows.Forms.Button filterWardButton;
         private System.Windows.Forms.Button refreshWard;
         private System.Windows.Forms.TextBox wardNameFilter;
+        private System.Windows.Forms.ComboBox vacancyFilter;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label24;
     }
 }
