@@ -18,6 +18,7 @@ namespace group6_291
         Form1 loginForm;
         DataSet patientList = new DataSet();
         DataSet accountList = new DataSet();
+        DataSet wardList = new DataSet();
         public AdminMaster(Form1 login)
         {
             InitializeComponent();
@@ -372,6 +373,8 @@ namespace group6_291
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter("select * from [Ward]", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            wardList = new DataSet();
+            adapter.Fill(wardList);
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "wardName asc";
             wardListBox.DataSource = ds.Tables[0];
@@ -1168,6 +1171,39 @@ namespace group6_291
             filterError.Text = "";
             userNameFilter.Text = "";
         }
+
+        private void filterWardButton_Click(object sender, EventArgs e)
+        
+        {
+            string exp = "";
+            if (wardNameFilter.Text.Length > 0)
+                exp += "wardName like '" + wardNameFilter.Text + "%' ";
+           
+            if (exp.Length > 0)
+            {
+                //Debug.WriteLine("first check: " + wardList.Tables[0].Rows.Count.ToString());
+                DataRow[] foundRows = wardList.Tables[0].Select(exp);
+                //Debug.WriteLine("second check: " + wardList.Tables[0].Rows.Count.ToString());
+                if (foundRows.Length > 0)
+                {
+                    wardList.Tables[0].DefaultView.RowFilter = exp;
+                    wardListBox.DataSource = wardList.Tables[0];
+                    filterErrorWard.Text = "";
+                }
+                else
+                    filterErrorWard.Text = "no results found";
+            }
+        }
+
+        private void refreshWard_Click(object sender, EventArgs e)
+        {
+            populateWardList();
+            filterErrorWard.Text = "";
+            wardNameFilter.Text = "";
+        }
+
+
+
         //removed patient records
     }
 }

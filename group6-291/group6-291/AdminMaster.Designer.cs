@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.refreshAccount = new System.Windows.Forms.Button();
             this.filterError = new System.Windows.Forms.Label();
             this.filterButton = new System.Windows.Forms.Button();
             this.roleFilter = new System.Windows.Forms.ComboBox();
@@ -108,6 +111,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.PatientRecTab = new System.Windows.Forms.TabPage();
             this.WardTab = new System.Windows.Forms.TabPage();
+            this.label23 = new System.Windows.Forms.Label();
+            this.filterErrorWard = new System.Windows.Forms.Label();
+            this.filterWardButton = new System.Windows.Forms.Button();
+            this.wardNameFilter = new System.Windows.Forms.TextBox();
+            this.refreshWard = new System.Windows.Forms.Button();
             this.deleteWardButton = new System.Windows.Forms.Button();
             this.wardActionTabs = new System.Windows.Forms.TabControl();
             this.addWardTab = new System.Windows.Forms.TabPage();
@@ -197,9 +205,6 @@
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lougoutAdmin = new System.Windows.Forms.Button();
-            this.refreshAccount = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -255,6 +260,34 @@
             this.UserAccTab.Size = new System.Drawing.Size(1077, 602);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(160, 476);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(86, 17);
+            this.label19.TabIndex = 73;
+            this.label19.Text = "Filter by role";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 476);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 17);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "Filter by username";
+            // 
+            // refreshAccount
+            // 
+            this.refreshAccount.Location = new System.Drawing.Point(162, 435);
+            this.refreshAccount.Name = "refreshAccount";
+            this.refreshAccount.Size = new System.Drawing.Size(132, 28);
+            this.refreshAccount.TabIndex = 71;
+            this.refreshAccount.Text = "Refresh";
+            this.refreshAccount.UseVisualStyleBackColor = true;
+            this.refreshAccount.Click += new System.EventHandler(this.refreshAccount_Click);
             // 
             // filterError
             // 
@@ -1073,6 +1106,11 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.WardTab.Controls.Add(this.label23);
+            this.WardTab.Controls.Add(this.filterErrorWard);
+            this.WardTab.Controls.Add(this.filterWardButton);
+            this.WardTab.Controls.Add(this.wardNameFilter);
+            this.WardTab.Controls.Add(this.refreshWard);
             this.WardTab.Controls.Add(this.deleteWardButton);
             this.WardTab.Controls.Add(this.wardActionTabs);
             this.WardTab.Controls.Add(this.wardListBox);
@@ -1088,12 +1126,56 @@
             this.WardTab.TabIndex = 1;
             this.WardTab.Text = "Ward Details";
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(14, 476);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(129, 17);
+            this.label23.TabIndex = 78;
+            this.label23.Text = "Filter alphabetically";
+            // 
+            // filterErrorWard
+            // 
+            this.filterErrorWard.AutoSize = true;
+            this.filterErrorWard.Location = new System.Drawing.Point(19, 533);
+            this.filterErrorWard.Name = "filterErrorWard";
+            this.filterErrorWard.Size = new System.Drawing.Size(0, 17);
+            this.filterErrorWard.TabIndex = 77;
+            // 
+            // filterWardButton
+            // 
+            this.filterWardButton.Location = new System.Drawing.Point(162, 493);
+            this.filterWardButton.Name = "filterWardButton";
+            this.filterWardButton.Size = new System.Drawing.Size(132, 28);
+            this.filterWardButton.TabIndex = 76;
+            this.filterWardButton.Text = "Apply Filter";
+            this.filterWardButton.UseVisualStyleBackColor = true;
+            this.filterWardButton.Click += new System.EventHandler(this.filterWardButton_Click);
+            // 
+            // wardNameFilter
+            // 
+            this.wardNameFilter.Location = new System.Drawing.Point(15, 496);
+            this.wardNameFilter.Name = "wardNameFilter";
+            this.wardNameFilter.Size = new System.Drawing.Size(132, 22);
+            this.wardNameFilter.TabIndex = 74;
+            // 
+            // refreshWard
+            // 
+            this.refreshWard.Location = new System.Drawing.Point(162, 435);
+            this.refreshWard.Name = "refreshWard";
+            this.refreshWard.Size = new System.Drawing.Size(132, 28);
+            this.refreshWard.TabIndex = 72;
+            this.refreshWard.Text = "Refresh";
+            this.refreshWard.UseVisualStyleBackColor = true;
+            this.refreshWard.Click += new System.EventHandler(this.refreshWard_Click);
+            // 
             // deleteWardButton
             // 
-            this.deleteWardButton.Location = new System.Drawing.Point(8, 567);
+            this.deleteWardButton.Location = new System.Drawing.Point(15, 435);
             this.deleteWardButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteWardButton.Name = "deleteWardButton";
-            this.deleteWardButton.Size = new System.Drawing.Size(100, 28);
+            this.deleteWardButton.Size = new System.Drawing.Size(132, 28);
             this.deleteWardButton.TabIndex = 66;
             this.deleteWardButton.Text = "Delete Ward";
             this.deleteWardButton.UseVisualStyleBackColor = true;
@@ -1287,14 +1369,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.selectedWardGridView.Location = new System.Drawing.Point(349, 54);
             this.selectedWardGridView.Margin = new System.Windows.Forms.Padding(4);
             this.selectedWardGridView.Name = "selectedWardGridView";
@@ -1475,7 +1557,7 @@
             this.wardListBox.Location = new System.Drawing.Point(8, 80);
             this.wardListBox.Margin = new System.Windows.Forms.Padding(4);
             this.wardListBox.Name = "wardListBox";
-            this.wardListBox.Size = new System.Drawing.Size(297, 484);
+            this.wardListBox.Size = new System.Drawing.Size(297, 340);
             this.wardListBox.TabIndex = 50;
             this.wardListBox.SelectedIndexChanged += new System.EventHandler(this.wardListBox_SelectedIndexChanged);
             // 
@@ -2066,34 +2148,6 @@
             this.lougoutAdmin.UseVisualStyleBackColor = true;
             this.lougoutAdmin.Click += new System.EventHandler(this.lougoutAdmin_Click);
             // 
-            // refreshAccount
-            // 
-            this.refreshAccount.Location = new System.Drawing.Point(162, 435);
-            this.refreshAccount.Name = "refreshAccount";
-            this.refreshAccount.Size = new System.Drawing.Size(132, 28);
-            this.refreshAccount.TabIndex = 71;
-            this.refreshAccount.Text = "Refresh";
-            this.refreshAccount.UseVisualStyleBackColor = true;
-            this.refreshAccount.Click += new System.EventHandler(this.refreshAccount_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 476);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 17);
-            this.label6.TabIndex = 72;
-            this.label6.Text = "Filter by username";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(160, 476);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(86, 17);
-            this.label19.TabIndex = 73;
-            this.label19.Text = "Filter by role";
-            // 
             // AdminMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2312,5 +2366,10 @@
         private System.Windows.Forms.Button refreshAccount;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label filterErrorWard;
+        private System.Windows.Forms.Button filterWardButton;
+        private System.Windows.Forms.Button refreshWard;
+        private System.Windows.Forms.TextBox wardNameFilter;
     }
 }
