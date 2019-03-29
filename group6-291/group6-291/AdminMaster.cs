@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace group6_291
     {
         Form1 loginForm;
         DataSet patientList = new DataSet();
+        DataSet accountList = new DataSet();
         public AdminMaster(Form1 login)
         {
             InitializeComponent();
@@ -60,11 +62,13 @@ namespace group6_291
         private void populateAccountList()
         {
             //Open connection and create a dataset from the query
+            DataSet ds = new DataSet();
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
-            DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter("select username, password, isAdmin from [User]", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            accountList = new DataSet();
+            adapter.Fill(accountList);
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "username asc";
             accountListBox.DataSource = ds.Tables[0];
@@ -1122,6 +1126,47 @@ namespace group6_291
             addCellphoneBox.Text = "";
             addNotesBox.Text = "";
             addRegisterInfo.Text = "";
+        }
+
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (userNameFilter.Text.Length > 0)
+                exp += "username like '" + userNameFilter.Text + "%' ";
+            if (roleFilter.SelectedIndex == 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "isAdmin = true";
+            }
+            if (roleFilter.SelectedIndex == 1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "isAdmin = false";
+            }
+            if (exp.Length > 0 || roleFilter.SelectedIndex == 2)
+            {
+                //Debug.WriteLine("first check: " + accountList.Tables[0].Rows.Count.ToString());
+                DataRow[] foundRows = accountList.Tables[0].Select(exp);
+                //Debug.WriteLine("second check: " + accountList.Tables[0].Rows.Count.ToString());
+                if (foundRows.Length > 0)
+                {
+                    accountList.Tables[0].DefaultView.RowFilter = exp;
+                    accountListBox.DataSource = accountList.Tables[0];
+                    filterError.Text = "";
+                }
+                else
+                    filterError.Text = "no results found";
+            }
+        }
+
+        private void refreshAccount_Click(object sender, EventArgs e)
+        {
+            populateAccountList();
+            roleFilter.SelectedIndex = -1;
+            filterError.Text = "";
+            userNameFilter.Text = "";
         }
         //removed patient records
     }
