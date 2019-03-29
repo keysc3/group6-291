@@ -1179,7 +1179,18 @@ namespace group6_291
             string exp = "";
             if (wardNameFilter.Text.Length > 0)
                 exp += "wardName like '" + wardNameFilter.Text + "%' ";
-           
+            if (vacancyFilter.SelectedIndex == 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "current_capacity < overall_capacity";
+            }
+            if (vacancyFilter.SelectedIndex == 1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "current_capacity = overall_capacity";
+            }
             if (exp.Length > 0)
             {
                 //Debug.WriteLine("first check: " + wardList.Tables[0].Rows.Count.ToString());
@@ -1199,6 +1210,7 @@ namespace group6_291
         private void refreshWard_Click(object sender, EventArgs e)
         {
             populateWardList();
+            vacancyFilter.SelectedIndex = -1;
             filterErrorWard.Text = "";
             wardNameFilter.Text = "";
         }

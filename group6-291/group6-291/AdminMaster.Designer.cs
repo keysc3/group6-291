@@ -213,6 +213,9 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.vacancyFilter = new System.Windows.Forms.ComboBox();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1050,6 +1053,9 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.WardTab.Controls.Add(this.vacancyFilter);
+            this.WardTab.Controls.Add(this.label20);
+            this.WardTab.Controls.Add(this.label24);
             this.WardTab.Controls.Add(this.label23);
             this.WardTab.Controls.Add(this.filterErrorWard);
             this.WardTab.Controls.Add(this.filterWardButton);
@@ -1083,7 +1089,7 @@
             // 
             this.filterErrorWard.AutoSize = true;
             this.filterErrorWard.Location = new System.Drawing.Point(14, 433);
-            this.filterErrorWard.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.filterErrorWard.Location = new System.Drawing.Point(168, 530);
             this.filterErrorWard.Name = "filterErrorWard";
             this.filterErrorWard.Size = new System.Drawing.Size(0, 13);
             this.filterErrorWard.TabIndex = 77;
@@ -1310,6 +1316,8 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.selectedWardGridView.Location = new System.Drawing.Point(262, 44);
+            this.selectedWardGridView.Location = new System.Drawing.Point(349, 54);
+            this.selectedWardGridView.Margin = new System.Windows.Forms.Padding(4);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
             this.selectedWardGridView.RowHeadersVisible = false;
@@ -2054,6 +2062,14 @@
             this.label20.Size = new System.Drawing.Size(57, 13);
             this.label20.TabIndex = 81;
             this.label20.Text = "First Name";
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(14, 537);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(114, 17);
+            this.label20.TabIndex = 82;
+            this.label20.Text = "Filter by capacity";
             // 
             // label24
             // 
@@ -2081,6 +2097,21 @@
             this.label26.Size = new System.Drawing.Size(62, 13);
             this.label26.TabIndex = 84;
             this.label26.Text = "Department";
+            this.label24.Location = new System.Drawing.Point(19, 584);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(0, 17);
+            this.label24.TabIndex = 81;
+            // 
+            // vacancyFilter
+            // 
+            this.vacancyFilter.FormattingEnabled = true;
+            this.vacancyFilter.Items.AddRange(new object[] {
+            "Vacancy",
+            "No Vacancy"});
+            this.vacancyFilter.Location = new System.Drawing.Point(13, 558);
+            this.vacancyFilter.Name = "vacancyFilter";
+            this.vacancyFilter.Size = new System.Drawing.Size(132, 24);
+            this.vacancyFilter.TabIndex = 69;
             // 
             // AdminMaster
             // 
@@ -2312,5 +2343,8 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox vacancyFilter;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label24;
     }
 }
