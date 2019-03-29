@@ -17,6 +17,7 @@ namespace group6_291
     {
         Form1 loginForm;
         DataSet patientList = new DataSet();
+        DataSet doctorList = new DataSet();
         DataSet accountList = new DataSet();
         DataSet wardList = new DataSet();
         public AdminMaster(Form1 login)
@@ -49,10 +50,12 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter("select (firstName + lastName) AS Name, * from [Doctor]", conn);
+            doctorList = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter("select concat(firstName, ' ',lastName) AS Name, * from [Doctor]", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(doctorList);
             adapter.Fill(ds);
-            ds.Tables[0].DefaultView.Sort = "firstName asc";
+            ds.Tables[0].DefaultView.Sort = "Name asc";
             DoctorListBox.DataSource = ds.Tables[0];
             DoctorListBox.DisplayMember = "Name";
             conn.Close();
@@ -625,6 +628,7 @@ namespace group6_291
             DoctorUpdDeptError.Text = "";
             DoctorErrorLabel.Text = "";
             DoctorUpdateError.Text = "";
+            docDeptFilter.Items.Clear();
             DoctorDeptBox.Items.Clear();
             DoctorUpdDeptBox.Items.Clear();
             DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
@@ -649,11 +653,11 @@ namespace group6_291
             {
                 DoctorDeptBox.Items.Add(items[0].ToString());
                 DoctorUpdDeptBox.Items.Add(items[0].ToString());
+                docDeptFilter.Items.Add(items[0].ToString());
             }
             string departmentName1 = DoctorList["departmentName"].ToString();
             DoctorUpdDeptBox.SelectedItem = departmentName1;//DoctorUpdDeptBox.Items.IndexOf(departmentName1);//DoctorUpdDeptBox.FindStringExact(departmentName1);
             conn.Close();
-            //DoctorUpdDeptBox.SelectedIndex = -1;
             DoctorDeptBox.SelectedIndex = -1;
         }
 
@@ -662,12 +666,6 @@ namespace group6_291
 
             DataRowView DoctorList = DoctorListBox.SelectedItem as DataRowView;
             string doctorID = DoctorList["doctorID"].ToString();
-            //DoctorUpdateError.Text = doctorID;
-            string firstName = DoctorList["firstName"].ToString();
-            string lastName = DoctorList["lastName"].ToString();
-            string departmentName = DoctorList["departmentName"].ToString();
-            string specialization = DoctorList["specialization"].ToString();
-            string duties = DoctorList["duties"].ToString();
 
             if (DoctorUpdDeptBox.SelectedIndex == -1)
             {
@@ -692,14 +690,14 @@ namespace group6_291
                 updateDoctor.Parameters.AddWithValue("@firstName", DoctorUpdFirstName.Text);
                 updateDoctor.Parameters.AddWithValue("@lastName", DoctorUpdLastName.Text);
                 updateDoctor.Parameters.AddWithValue("@department", DoctorUpdDeptBox.SelectedItem.ToString());
-                updateDoctor.Parameters.AddWithValue("@spec", specialization);
+                updateDoctor.Parameters.AddWithValue("@spec", DoctorUpdSpec.Text);
 
-                if (DoctorUpdDuty.TextLength.Equals(0))
+                if (DoctorUpdDuty.Text.Length > 0)
                 {
                     updateDoctor.Parameters.AddWithValue("@duty", DoctorUpdDuty.Text);
                 } else
                 {
-                    updateDoctor.Parameters.AddWithValue("@duty", duties);
+                    updateDoctor.Parameters.AddWithValue("@duty", DBNull.Value);
                 }
                 updateDoctor.Parameters.AddWithValue("@doctorID", Int32.Parse(doctorID));
                 updateDoctor.ExecuteNonQuery();
@@ -732,7 +730,10 @@ namespace group6_291
                 addDoctor.Parameters.AddWithValue("@lastName", DoctorLastNameText.Text);
                 addDoctor.Parameters.AddWithValue("@department", DoctorDeptBox.SelectedItem.ToString());
                 addDoctor.Parameters.AddWithValue("@spec", DoctorSpecText.Text);
-                addDoctor.Parameters.AddWithValue("@duty", DoctorDutyText.Text);
+                if(DoctorDutyText.Text.Length > 0)
+                    addDoctor.Parameters.AddWithValue("@duty", DoctorDutyText.Text);
+                else
+                    addDoctor.Parameters.AddWithValue("@duty", DBNull.Value);
                 addDoctor.ExecuteNonQuery();
                 conn.Close();
                 //Update status and reset fields
@@ -1212,6 +1213,64 @@ namespace group6_291
             vacancyFilter.SelectedIndex = -1;
             filterErrorWard.Text = "";
             wardNameFilter.Text = "";
+        }
+
+        private void applyDocFilter_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (docFirstNameFilter.Text.Length > 0)
+                exp += "firstName like '" + docFirstNameFilter.Text + "%' ";
+            if (docLastNameFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "lastName like '" + docLastNameFilter.Text + "%' ";
+            }
+            if (docDeptFilter.SelectedIndex > -1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "departmentName = '" + docDeptFilter.SelectedItem.ToString() + "' ";
+            }
+            if (docSpecFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "specialization like '" + docSpecFilter.Text + "%'";
+            }
+            if (exp.Length > 0)
+            {
+                Debug.WriteLine(exp);
+                DataRow[] foundRows = doctorList.Tables[0].Select(exp);
+                if (foundRows.Length > 0)
+                {
+                    doctorList.Tables[0].DefaultView.RowFilter = exp;
+                    doctorList.Tables[0].DefaultView.Sort = "Name asc";
+                    DoctorListBox.DataSource = doctorList.Tables[0];
+                    docFilterError.Text = "";
+                }
+                else
+                {
+                    docFilterError.Text = "No results found";
+                    docFilterError.ForeColor = Color.Red;
+                }
+                docDeptFilter.SelectedIndex = -1;
+            }
+            else
+            {
+                docFilterError.Text = "No filters selected";
+                docFilterError.ForeColor = Color.Red;
+            }
+        }
+
+        private void refreshDocList_Click(object sender, EventArgs e)
+        {
+            populateDoctorList();
+            docFilterError.Text = "";
+            docFirstNameFilter.Text = "";
+            docLastNameFilter.Text = "";
+            docSpecFilter.Text = "";
+            docDeptFilter.SelectedIndex = -1;
         }
 
 
