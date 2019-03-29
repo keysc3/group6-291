@@ -63,6 +63,7 @@ namespace group6_291
                 usernameBox.Text = "";
                 passwordBox.Text = "";
                 conn.Close();
+                loginResponseLabel.Text = "";
                 return;
             }
 

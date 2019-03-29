@@ -815,7 +815,6 @@ namespace group6_291
                     PatientGrid.Height = totalRowHeight;
                 }
             }
-            
             conn.Close();
 
         }
@@ -831,11 +830,12 @@ namespace group6_291
             {
                 //Insert into database
                 SqlConnection conn = new SqlConnection(Globals.conn);
-                conn.Open();
+                //conn.Open();
 
                 //Check if patient already exists in Patient Table
                 if (patientIsValid())
                 {
+                    conn.Open();
                     SqlCommand addPatient = new SqlCommand(@"INSERT into [Patient] (patientSIN, patientType, firstName, lastName, street, city, province, country, sex, dateOfBirth) 
                                                         VALUES (@SIN, @pType, @fName, @lName, @street, @city, @province, @country, @sex, @dateOfBirth)", conn);
                     addPatient.Parameters.AddWithValue("@SIN", addSINBox.Text);
@@ -849,24 +849,50 @@ namespace group6_291
                     addPatient.Parameters.AddWithValue("@sex", addGenderBox.Text);
                     addPatient.Parameters.AddWithValue("@dateOfBirth", addDOBBox.Text);
                     addPatient.ExecuteNonQuery();
+                    conn.Close();
                 }
 
-                SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
-                addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
-                addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
+                if (checkRegister())
+                {
+                    conn.Open();
+                    SqlCommand addRegister = new SqlCommand(@"INSERT into [Register] (patientSIN, admitDate, notes) VALUES (@SIN, @admitDate, @notes)", conn);
+                    addRegister.Parameters.AddWithValue("@SIN", addSINBox.Text);
+                    addRegister.Parameters.AddWithValue("@admitDate", DateTime.Now);
 
-                //Check if notes are null
-                if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
-                else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
+                    //Check if notes are null
+                    if (addNotesBox.TextLength == 0) { addRegister.Parameters.AddWithValue("@notes", DBNull.Value); }
+                    else { addRegister.Parameters.AddWithValue("@notes", addNotesBox.Text); }
 
-                addRegister.ExecuteNonQuery();
-                conn.Close();
-                //Update status and reset fields
-                addRegisterRequestInfo.Text = "Patient registered successfully";
-                addRegisterRequestInfo.ForeColor = Color.Green;
-                resetAddUpdatePatientFields("Add");
-                populatePatientList();
+                    addRegister.ExecuteNonQuery();
+                    conn.Close();
+                    //Update status and reset fields
+                    addRegisterRequestInfo.Text = "Patient registered successfully";
+                    addRegisterRequestInfo.ForeColor = Color.Green;
+                    resetAddUpdatePatientFields("Add");
+                    populatePatientList();
+                }
             }
+        }
+
+        private bool checkRegister()
+        {
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            string SIN = addSINBox.Text;
+            //checks if the patient is still registered
+            SqlCommand checkSIN = new SqlCommand("select count(*) from [Register] where patientSIN = @patientSIN and leaveDate is null", conn);
+            checkSIN.Parameters.AddWithValue("@patientSin", SIN);
+            int SINExist = (int)checkSIN.ExecuteScalar();
+            //Record (SIN) already exists
+            if (SINExist > 0)
+            {
+                addRegisterInfo.Text = "*Patient is already registered,\n no new record was created.";
+                addRegisterInfo.ForeColor = Color.Red;
+                conn.Close();
+                return false;
+            }
+            conn.Close();
+            return true;
         }
 
         //For Patient Table (no dupes): If SIN already exists, do not add to Patient Table.
@@ -965,6 +991,8 @@ namespace group6_291
                 registerListBox.DataSource = patientSINs.Tables[0];
                 registerListBox.DisplayMember = "fullName";
             }
+            if (addSINBox.Text.Length == 0)
+                registerListBox.DataSource = patientList.Tables[0];
         }
 
         private void label39_Click(object sender, EventArgs e)
@@ -1121,5 +1149,22 @@ namespace group6_291
             }
         }
 
+        private void registerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addPatientTypeBox.SelectedIndex = -1;
+            addFirstNameBox.Text = "";
+            addLastNameBox.Text = "";
+            addStreetBox.Text = "";
+            addCityBox.Text = "";
+            addProvinceBox.Text = "";
+            addCountryBox.Text = "";
+            addGenderBox.SelectedIndex = -1;
+            addDOBBox.Text = "";
+            addInsuranceBox.Text = "";
+            addHomePhoneBox.Text = "";
+            addCellphoneBox.Text = "";
+            addNotesBox.Text = "";
+            addRegisterInfo.Text = "";
+        }
     }
 }
