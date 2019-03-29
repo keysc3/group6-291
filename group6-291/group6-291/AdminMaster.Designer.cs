@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.UserAccTab = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -111,6 +111,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.PatientRecTab = new System.Windows.Forms.TabPage();
             this.WardTab = new System.Windows.Forms.TabPage();
+            this.vacancyFilter = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.filterErrorWard = new System.Windows.Forms.Label();
             this.filterWardButton = new System.Windows.Forms.Button();
@@ -155,6 +156,15 @@
             this.wardActionLabel = new System.Windows.Forms.Label();
             this.wardManagementTitle = new System.Windows.Forms.Label();
             this.DoctorTab = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.refreshDocList = new System.Windows.Forms.Button();
+            this.docFilterError = new System.Windows.Forms.Label();
+            this.applyDocFilter = new System.Windows.Forms.Button();
+            this.docSpecFilter = new System.Windows.Forms.TextBox();
+            this.docDeptFilter = new System.Windows.Forms.ComboBox();
+            this.docLastNameFilter = new System.Windows.Forms.TextBox();
+            this.docFirstNameFilter = new System.Windows.Forms.TextBox();
             this.DeleteDoctorButton = new System.Windows.Forms.Button();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -202,20 +212,9 @@
             this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lougoutAdmin = new System.Windows.Forms.Button();
-            this.docFirstNameFilter = new System.Windows.Forms.TextBox();
-            this.docLastNameFilter = new System.Windows.Forms.TextBox();
-            this.docDeptFilter = new System.Windows.Forms.ComboBox();
-            this.docSpecFilter = new System.Windows.Forms.TextBox();
-            this.applyDocFilter = new System.Windows.Forms.Button();
-            this.docFilterError = new System.Windows.Forms.Label();
-            this.refreshDocList = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.vacancyFilter = new System.Windows.Forms.ComboBox();
+            this.docFirstNameLabel = new System.Windows.Forms.Label();
+            this.docLastNameLabel = new System.Windows.Forms.Label();
+            this.wardVacancy = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.UserAccTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -265,7 +264,7 @@
             this.UserAccTab.Controls.Add(this.label34);
             this.UserAccTab.Location = new System.Drawing.Point(4, 22);
             this.UserAccTab.Name = "UserAccTab";
-            this.UserAccTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.UserAccTab.Padding = new System.Windows.Forms.Padding(3);
             this.UserAccTab.Size = new System.Drawing.Size(806, 487);
             this.UserAccTab.TabIndex = 2;
             this.UserAccTab.Text = "User Accounts";
@@ -293,7 +292,7 @@
             // refreshAccount
             // 
             this.refreshAccount.Location = new System.Drawing.Point(122, 353);
-            this.refreshAccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refreshAccount.Margin = new System.Windows.Forms.Padding(2);
             this.refreshAccount.Name = "refreshAccount";
             this.refreshAccount.Size = new System.Drawing.Size(99, 23);
             this.refreshAccount.TabIndex = 71;
@@ -313,7 +312,7 @@
             // filterButton
             // 
             this.filterButton.Location = new System.Drawing.Point(122, 427);
-            this.filterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(2);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(99, 23);
             this.filterButton.TabIndex = 69;
@@ -329,7 +328,7 @@
             "Receptionist",
             "All"});
             this.roleFilter.Location = new System.Drawing.Point(122, 403);
-            this.roleFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roleFilter.Margin = new System.Windows.Forms.Padding(2);
             this.roleFilter.Name = "roleFilter";
             this.roleFilter.Size = new System.Drawing.Size(100, 21);
             this.roleFilter.TabIndex = 68;
@@ -337,7 +336,7 @@
             // userNameFilter
             // 
             this.userNameFilter.Location = new System.Drawing.Point(11, 403);
-            this.userNameFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userNameFilter.Margin = new System.Windows.Forms.Padding(2);
             this.userNameFilter.Name = "userNameFilter";
             this.userNameFilter.Size = new System.Drawing.Size(100, 20);
             this.userNameFilter.TabIndex = 67;
@@ -378,7 +377,7 @@
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(535, 368);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add";
@@ -504,7 +503,7 @@
             this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(535, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Update";
@@ -692,7 +691,7 @@
             this.PatientRegTab.Controls.Add(this.label5);
             this.PatientRegTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRegTab.Name = "PatientRegTab";
-            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PatientRegTab.Padding = new System.Windows.Forms.Padding(3);
             this.PatientRegTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRegTab.TabIndex = 0;
             this.PatientRegTab.Text = "Patient Registration";
@@ -707,7 +706,7 @@
             // addCellphoneBox
             // 
             this.addCellphoneBox.Location = new System.Drawing.Point(400, 180);
-            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addCellphoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addCellphoneBox.Mask = "000-0000";
             this.addCellphoneBox.Name = "addCellphoneBox";
             this.addCellphoneBox.Size = new System.Drawing.Size(101, 20);
@@ -716,7 +715,7 @@
             // addHomePhoneBox
             // 
             this.addHomePhoneBox.Location = new System.Drawing.Point(281, 180);
-            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addHomePhoneBox.Margin = new System.Windows.Forms.Padding(2);
             this.addHomePhoneBox.Mask = "000-0000";
             this.addHomePhoneBox.Name = "addHomePhoneBox";
             this.addHomePhoneBox.Size = new System.Drawing.Size(101, 20);
@@ -725,7 +724,7 @@
             // addDOBBox
             // 
             this.addDOBBox.Location = new System.Drawing.Point(641, 68);
-            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addDOBBox.Margin = new System.Windows.Forms.Padding(2);
             this.addDOBBox.Mask = "00/00/0000";
             this.addDOBBox.Name = "addDOBBox";
             this.addDOBBox.Size = new System.Drawing.Size(101, 20);
@@ -1045,7 +1044,7 @@
             this.PatientRecTab.BackColor = System.Drawing.Color.WhiteSmoke;
             this.PatientRecTab.Location = new System.Drawing.Point(4, 22);
             this.PatientRecTab.Name = "PatientRecTab";
-            this.PatientRecTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PatientRecTab.Padding = new System.Windows.Forms.Padding(3);
             this.PatientRecTab.Size = new System.Drawing.Size(806, 487);
             this.PatientRecTab.TabIndex = 3;
             this.PatientRecTab.Text = "Patient Records";
@@ -1053,9 +1052,8 @@
             // WardTab
             // 
             this.WardTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.WardTab.Controls.Add(this.wardVacancy);
             this.WardTab.Controls.Add(this.vacancyFilter);
-            this.WardTab.Controls.Add(this.label20);
-            this.WardTab.Controls.Add(this.label24);
             this.WardTab.Controls.Add(this.label23);
             this.WardTab.Controls.Add(this.filterErrorWard);
             this.WardTab.Controls.Add(this.filterWardButton);
@@ -1070,10 +1068,21 @@
             this.WardTab.Controls.Add(this.wardManagementTitle);
             this.WardTab.Location = new System.Drawing.Point(4, 22);
             this.WardTab.Name = "WardTab";
-            this.WardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.WardTab.Padding = new System.Windows.Forms.Padding(3);
             this.WardTab.Size = new System.Drawing.Size(806, 487);
             this.WardTab.TabIndex = 1;
             this.WardTab.Text = "Ward Details";
+            // 
+            // vacancyFilter
+            // 
+            this.vacancyFilter.FormattingEnabled = true;
+            this.vacancyFilter.Items.AddRange(new object[] {
+            "Vacancy",
+            "No Vacancy"});
+            this.vacancyFilter.Location = new System.Drawing.Point(11, 441);
+            this.vacancyFilter.Name = "vacancyFilter";
+            this.vacancyFilter.Size = new System.Drawing.Size(100, 21);
+            this.vacancyFilter.TabIndex = 69;
             // 
             // label23
             // 
@@ -1081,14 +1090,13 @@
             this.label23.Location = new System.Drawing.Point(10, 387);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(96, 13);
+            this.label23.Size = new System.Drawing.Size(64, 13);
             this.label23.TabIndex = 78;
-            this.label23.Text = "Filter alphabetically";
+            this.label23.Text = "Ward Name";
             // 
             // filterErrorWard
             // 
             this.filterErrorWard.AutoSize = true;
-            this.filterErrorWard.Location = new System.Drawing.Point(14, 433);
             this.filterErrorWard.Location = new System.Drawing.Point(168, 530);
             this.filterErrorWard.Name = "filterErrorWard";
             this.filterErrorWard.Size = new System.Drawing.Size(0, 13);
@@ -1096,8 +1104,8 @@
             // 
             // filterWardButton
             // 
-            this.filterWardButton.Location = new System.Drawing.Point(122, 401);
-            this.filterWardButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filterWardButton.Location = new System.Drawing.Point(122, 400);
+            this.filterWardButton.Margin = new System.Windows.Forms.Padding(2);
             this.filterWardButton.Name = "filterWardButton";
             this.filterWardButton.Size = new System.Drawing.Size(99, 23);
             this.filterWardButton.TabIndex = 76;
@@ -1108,7 +1116,7 @@
             // wardNameFilter
             // 
             this.wardNameFilter.Location = new System.Drawing.Point(11, 403);
-            this.wardNameFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wardNameFilter.Margin = new System.Windows.Forms.Padding(2);
             this.wardNameFilter.Name = "wardNameFilter";
             this.wardNameFilter.Size = new System.Drawing.Size(100, 20);
             this.wardNameFilter.TabIndex = 74;
@@ -1116,7 +1124,7 @@
             // refreshWard
             // 
             this.refreshWard.Location = new System.Drawing.Point(122, 353);
-            this.refreshWard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refreshWard.Margin = new System.Windows.Forms.Padding(2);
             this.refreshWard.Name = "refreshWard";
             this.refreshWard.Size = new System.Drawing.Size(99, 23);
             this.refreshWard.TabIndex = 72;
@@ -1158,7 +1166,7 @@
             this.addWardTab.Controls.Add(this.addWardName);
             this.addWardTab.Location = new System.Drawing.Point(4, 22);
             this.addWardTab.Name = "addWardTab";
-            this.addWardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.addWardTab.Padding = new System.Windows.Forms.Padding(3);
             this.addWardTab.Size = new System.Drawing.Size(539, 373);
             this.addWardTab.TabIndex = 0;
             this.addWardTab.Text = "Add";
@@ -1272,7 +1280,7 @@
             this.updateWardTab.Controls.Add(this.updateWardName);
             this.updateWardTab.Location = new System.Drawing.Point(4, 22);
             this.updateWardTab.Name = "updateWardTab";
-            this.updateWardTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.updateWardTab.Padding = new System.Windows.Forms.Padding(3);
             this.updateWardTab.Size = new System.Drawing.Size(539, 373);
             this.updateWardTab.TabIndex = 1;
             this.updateWardTab.Text = "Update";
@@ -1307,16 +1315,15 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.selectedWardGridView.Location = new System.Drawing.Point(262, 44);
-            this.selectedWardGridView.Location = new System.Drawing.Point(349, 54);
             this.selectedWardGridView.Margin = new System.Windows.Forms.Padding(4);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -1326,7 +1333,7 @@
             // 
             // resetUpdateWard
             // 
-            this.resetUpdateWard.Location = new System.Drawing.Point(10, 231);
+            this.resetUpdateWard.Location = new System.Drawing.Point(10, 232);
             this.resetUpdateWard.Name = "resetUpdateWard";
             this.resetUpdateWard.Size = new System.Drawing.Size(100, 23);
             this.resetUpdateWard.TabIndex = 64;
@@ -1337,7 +1344,7 @@
             // wardUpdateReqInfo
             // 
             this.wardUpdateReqInfo.AutoSize = true;
-            this.wardUpdateReqInfo.Location = new System.Drawing.Point(7, 228);
+            this.wardUpdateReqInfo.Location = new System.Drawing.Point(7, 258);
             this.wardUpdateReqInfo.Name = "wardUpdateReqInfo";
             this.wardUpdateReqInfo.Size = new System.Drawing.Size(0, 13);
             this.wardUpdateReqInfo.TabIndex = 63;
@@ -1364,7 +1371,7 @@
             // 
             // WardUpdateButton
             // 
-            this.WardUpdateButton.Location = new System.Drawing.Point(9, 202);
+            this.WardUpdateButton.Location = new System.Drawing.Point(10, 202);
             this.WardUpdateButton.Name = "WardUpdateButton";
             this.WardUpdateButton.Size = new System.Drawing.Size(100, 23);
             this.WardUpdateButton.TabIndex = 60;
@@ -1522,10 +1529,10 @@
             // DoctorTab
             // 
             this.DoctorTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.DoctorTab.Controls.Add(this.docLastNameLabel);
+            this.DoctorTab.Controls.Add(this.docFirstNameLabel);
             this.DoctorTab.Controls.Add(this.label26);
             this.DoctorTab.Controls.Add(this.label25);
-            this.DoctorTab.Controls.Add(this.label24);
-            this.DoctorTab.Controls.Add(this.label20);
             this.DoctorTab.Controls.Add(this.refreshDocList);
             this.DoctorTab.Controls.Add(this.docFilterError);
             this.DoctorTab.Controls.Add(this.applyDocFilter);
@@ -1542,10 +1549,86 @@
             this.DoctorTab.Controls.Add(this.label58);
             this.DoctorTab.Location = new System.Drawing.Point(4, 22);
             this.DoctorTab.Name = "DoctorTab";
-            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.DoctorTab.Padding = new System.Windows.Forms.Padding(3);
             this.DoctorTab.Size = new System.Drawing.Size(806, 487);
             this.DoctorTab.TabIndex = 4;
             this.DoctorTab.Text = "Doctor Management";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(127, 413);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(62, 13);
+            this.label26.TabIndex = 84;
+            this.label26.Text = "Department";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(5, 413);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(72, 13);
+            this.label25.TabIndex = 83;
+            this.label25.Text = "Specialization";
+            // 
+            // refreshDocList
+            // 
+            this.refreshDocList.Location = new System.Drawing.Point(128, 343);
+            this.refreshDocList.Name = "refreshDocList";
+            this.refreshDocList.Size = new System.Drawing.Size(100, 23);
+            this.refreshDocList.TabIndex = 80;
+            this.refreshDocList.Text = "Refresh";
+            this.refreshDocList.UseVisualStyleBackColor = true;
+            this.refreshDocList.Click += new System.EventHandler(this.refreshDocList_Click);
+            // 
+            // docFilterError
+            // 
+            this.docFilterError.AutoSize = true;
+            this.docFilterError.Location = new System.Drawing.Point(2, 464);
+            this.docFilterError.Name = "docFilterError";
+            this.docFilterError.Size = new System.Drawing.Size(0, 13);
+            this.docFilterError.TabIndex = 79;
+            // 
+            // applyDocFilter
+            // 
+            this.applyDocFilter.Location = new System.Drawing.Point(128, 456);
+            this.applyDocFilter.Name = "applyDocFilter";
+            this.applyDocFilter.Size = new System.Drawing.Size(102, 23);
+            this.applyDocFilter.TabIndex = 78;
+            this.applyDocFilter.Text = "Apply Filter";
+            this.applyDocFilter.UseVisualStyleBackColor = true;
+            this.applyDocFilter.Click += new System.EventHandler(this.applyDocFilter_Click);
+            // 
+            // docSpecFilter
+            // 
+            this.docSpecFilter.Location = new System.Drawing.Point(6, 429);
+            this.docSpecFilter.Name = "docSpecFilter";
+            this.docSpecFilter.Size = new System.Drawing.Size(100, 20);
+            this.docSpecFilter.TabIndex = 77;
+            // 
+            // docDeptFilter
+            // 
+            this.docDeptFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.docDeptFilter.FormattingEnabled = true;
+            this.docDeptFilter.Location = new System.Drawing.Point(130, 428);
+            this.docDeptFilter.Name = "docDeptFilter";
+            this.docDeptFilter.Size = new System.Drawing.Size(100, 21);
+            this.docDeptFilter.TabIndex = 64;
+            // 
+            // docLastNameFilter
+            // 
+            this.docLastNameFilter.Location = new System.Drawing.Point(130, 392);
+            this.docLastNameFilter.Name = "docLastNameFilter";
+            this.docLastNameFilter.Size = new System.Drawing.Size(100, 20);
+            this.docLastNameFilter.TabIndex = 76;
+            // 
+            // docFirstNameFilter
+            // 
+            this.docFirstNameFilter.Location = new System.Drawing.Point(6, 391);
+            this.docFirstNameFilter.Name = "docFirstNameFilter";
+            this.docFirstNameFilter.Size = new System.Drawing.Size(100, 20);
+            this.docFirstNameFilter.TabIndex = 75;
             // 
             // DeleteDoctorButton
             // 
@@ -1588,8 +1671,8 @@
             this.tabPage3.Controls.Add(this.DoctorNameLabel);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage3.Size = new System.Drawing.Size(540, 391);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(540, 393);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Add";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1762,7 +1845,7 @@
             this.tabPage5.Controls.Add(this.label45);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(540, 393);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Update";
@@ -1996,122 +2079,33 @@
             this.lougoutAdmin.UseVisualStyleBackColor = true;
             this.lougoutAdmin.Click += new System.EventHandler(this.lougoutAdmin_Click);
             // 
-            // docFirstNameFilter
+            // docFirstNameLabel
             // 
-            this.docFirstNameFilter.Location = new System.Drawing.Point(6, 391);
-            this.docFirstNameFilter.Name = "docFirstNameFilter";
-            this.docFirstNameFilter.Size = new System.Drawing.Size(100, 20);
-            this.docFirstNameFilter.TabIndex = 75;
+            this.docFirstNameLabel.AutoSize = true;
+            this.docFirstNameLabel.Location = new System.Drawing.Point(5, 374);
+            this.docFirstNameLabel.Name = "docFirstNameLabel";
+            this.docFirstNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.docFirstNameLabel.TabIndex = 85;
+            this.docFirstNameLabel.Text = "First Name";
             // 
-            // docLastNameFilter
+            // docLastNameLabel
             // 
-            this.docLastNameFilter.Location = new System.Drawing.Point(130, 392);
-            this.docLastNameFilter.Name = "docLastNameFilter";
-            this.docLastNameFilter.Size = new System.Drawing.Size(100, 20);
-            this.docLastNameFilter.TabIndex = 76;
+            this.docLastNameLabel.AutoSize = true;
+            this.docLastNameLabel.Location = new System.Drawing.Point(127, 376);
+            this.docLastNameLabel.Name = "docLastNameLabel";
+            this.docLastNameLabel.Size = new System.Drawing.Size(58, 13);
+            this.docLastNameLabel.TabIndex = 86;
+            this.docLastNameLabel.Text = "Last Name";
             // 
-            // docDeptFilter
+            // wardVacancy
             // 
-            this.docDeptFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.docDeptFilter.FormattingEnabled = true;
-            this.docDeptFilter.Location = new System.Drawing.Point(130, 428);
-            this.docDeptFilter.Name = "docDeptFilter";
-            this.docDeptFilter.Size = new System.Drawing.Size(100, 21);
-            this.docDeptFilter.TabIndex = 64;
-            // 
-            // docSpecFilter
-            // 
-            this.docSpecFilter.Location = new System.Drawing.Point(6, 429);
-            this.docSpecFilter.Name = "docSpecFilter";
-            this.docSpecFilter.Size = new System.Drawing.Size(100, 20);
-            this.docSpecFilter.TabIndex = 77;
-            // 
-            // applyDocFilter
-            // 
-            this.applyDocFilter.Location = new System.Drawing.Point(128, 456);
-            this.applyDocFilter.Name = "applyDocFilter";
-            this.applyDocFilter.Size = new System.Drawing.Size(102, 23);
-            this.applyDocFilter.TabIndex = 78;
-            this.applyDocFilter.Text = "Apply Filter";
-            this.applyDocFilter.UseVisualStyleBackColor = true;
-            this.applyDocFilter.Click += new System.EventHandler(this.applyDocFilter_Click);
-            // 
-            // docFilterError
-            // 
-            this.docFilterError.AutoSize = true;
-            this.docFilterError.Location = new System.Drawing.Point(2, 464);
-            this.docFilterError.Name = "docFilterError";
-            this.docFilterError.Size = new System.Drawing.Size(0, 13);
-            this.docFilterError.TabIndex = 79;
-            // 
-            // refreshDocList
-            // 
-            this.refreshDocList.Location = new System.Drawing.Point(128, 343);
-            this.refreshDocList.Name = "refreshDocList";
-            this.refreshDocList.Size = new System.Drawing.Size(100, 23);
-            this.refreshDocList.TabIndex = 80;
-            this.refreshDocList.Text = "Refresh";
-            this.refreshDocList.UseVisualStyleBackColor = true;
-            this.refreshDocList.Click += new System.EventHandler(this.refreshDocList_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(5, 375);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(57, 13);
-            this.label20.TabIndex = 81;
-            this.label20.Text = "First Name";
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(14, 537);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(114, 17);
-            this.label20.TabIndex = 82;
-            this.label20.Text = "Filter by capacity";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(127, 376);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(58, 13);
-            this.label24.TabIndex = 82;
-            this.label24.Text = "Last Name";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(5, 413);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(72, 13);
-            this.label25.TabIndex = 83;
-            this.label25.Text = "Specialization";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(127, 413);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(62, 13);
-            this.label26.TabIndex = 84;
-            this.label26.Text = "Department";
-            this.label24.Location = new System.Drawing.Point(19, 584);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(0, 17);
-            this.label24.TabIndex = 81;
-            // 
-            // vacancyFilter
-            // 
-            this.vacancyFilter.FormattingEnabled = true;
-            this.vacancyFilter.Items.AddRange(new object[] {
-            "Vacancy",
-            "No Vacancy"});
-            this.vacancyFilter.Location = new System.Drawing.Point(13, 558);
-            this.vacancyFilter.Name = "vacancyFilter";
-            this.vacancyFilter.Size = new System.Drawing.Size(132, 24);
-            this.vacancyFilter.TabIndex = 69;
+            this.wardVacancy.AutoSize = true;
+            this.wardVacancy.Location = new System.Drawing.Point(10, 425);
+            this.wardVacancy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.wardVacancy.Name = "wardVacancy";
+            this.wardVacancy.Size = new System.Drawing.Size(49, 13);
+            this.wardVacancy.TabIndex = 79;
+            this.wardVacancy.Text = "Vacancy";
             // 
             // AdminMaster
             // 
@@ -2344,7 +2338,8 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox vacancyFilter;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label docLastNameLabel;
+        private System.Windows.Forms.Label docFirstNameLabel;
+        private System.Windows.Forms.Label wardVacancy;
     }
 }
