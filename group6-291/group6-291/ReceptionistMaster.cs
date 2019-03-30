@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,10 @@ namespace group6_291
     {
         Form1 loginForm;
         DataSet patientList = new DataSet();
+        DataSet patientRecordList = new DataSet();
+        DataSet currPatientList = new DataSet();
+        DataSet wardList = new DataSet();
+        DataSet doctorList = new DataSet();
         public ReceptionistMaster(Form1 login)
         {
             InitializeComponent();
@@ -39,8 +44,10 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
+            currPatientList = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter("select Patient.*, lastName, concat(firstName, ' ',lastName) as fullName, Patient.patientSIN, Register.registerID from Patient, Register where Patient.patientSIN = Register.patientSIN and leaveDate is null", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(currPatientList);
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "fullName asc";
             currentPatientsBox.DataSource = ds.Tables[0];
@@ -55,6 +62,8 @@ namespace group6_291
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter("select * from Ward", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            wardList = new DataSet();
+            adapter.Fill(wardList);
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "wardName asc";
             WardListBox.DataSource = ds.Tables[0];
@@ -67,8 +76,10 @@ namespace group6_291
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
             DataSet ds = new DataSet();
+            doctorList = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter("select concat(firstName, ' ', lastName) as Name, Doctor.* from [Doctor]", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            adapter.Fill(doctorList);
             adapter.Fill(ds);
             ds.Tables[0].DefaultView.Sort = "Name asc";
             DoctorListBox.DataSource = ds.Tables[0];
@@ -919,19 +930,21 @@ namespace group6_291
         {
             resetAddUpdatePatientFields("add");
             registerListBox.DataSource = patientList.Tables[0];
+            populatePatientList();
             addRegisterInfo.Text = "";
             addRegisterRequestInfo.Text = "";
         }
 
         private void populatePatientList()
         {
-            patientList.Clear();
+            patientList = new DataSet();
             //Open connection and create a dataset from the query
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
-
             SqlDataAdapter adapter = new SqlDataAdapter("SELECT *, CONCAT(lastName, ', ', firstName) as fullName FROM [Patient]", conn);
             //Fill the dataset, sort it, and bind it to the list box
+            patientRecordList = new DataSet();
+            adapter.Fill(patientRecordList);
             adapter.Fill(patientList);
             patientList.Tables[0].DefaultView.Sort = "fullName asc";
             registerListBox.DataSource = patientList.Tables[0];
@@ -1024,7 +1037,7 @@ namespace group6_291
             //Open connection and create a dataset from the query
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();
-
+            
             SqlCommand getRegs = new SqlCommand("SELECT * FROM [Register] where patientSIN = @patientSIN", conn);
             getRegs.Parameters.AddWithValue("@patientSIN", selectedPatient["patientSIN"].ToString());
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -1165,6 +1178,217 @@ namespace group6_291
             addCellphoneBox.Text = "";
             addNotesBox.Text = "";
             addRegisterInfo.Text = "";
+        }
+
+        private void refreshWard_Click(object sender, EventArgs e)
+        {
+            populateWardList();
+            vacancyFilter.SelectedIndex = -1;
+            filterErrorWard.Text = "";
+            wardNameFilter.Text = "";
+        }
+
+        private void filterWardButton_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (wardNameFilter.Text.Length > 0)
+                exp += "wardName like '" + wardNameFilter.Text + "%' ";
+            if (vacancyFilter.SelectedIndex == 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "current_capacity < overall_capacity";
+            }
+            if (vacancyFilter.SelectedIndex == 1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "current_capacity = overall_capacity";
+            }
+            if (exp.Length > 0)
+            {
+                //Debug.WriteLine("first check: " + wardList.Tables[0].Rows.Count.ToString());
+                DataRow[] foundRows = wardList.Tables[0].Select(exp);
+                //Debug.WriteLine("second check: " + wardList.Tables[0].Rows.Count.ToString());
+                if (foundRows.Length > 0)
+                {
+                    wardList.Tables[0].DefaultView.RowFilter = exp;
+                    WardListBox.DataSource = wardList.Tables[0];
+                    filterErrorWard.Text = "";
+                }
+                else
+                {
+                    filterErrorWard.Text = "No results found.";
+                }
+            }
+        }
+
+        private void refreshCurrPatients_Click(object sender, EventArgs e)
+        {
+            populateCurrentPatientBox();
+            currPatFilterError.Text = "";
+            currPatFNameFilter.Text = "";
+            currPatLNameFilter.Text = "";
+            filterPType.SelectedIndex = -1;
+            filterGender.SelectedIndex = -1;
+            filterSIN.Text = "";
+        }
+
+        private void filterCurrPatients_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (currPatFNameFilter.Text.Length > 0)
+                exp += "firstName like '" + currPatFNameFilter.Text + "%' ";
+            if (currPatLNameFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "lastName like '" + currPatLNameFilter.Text + "%' ";
+            }
+            if (filterPType.SelectedIndex > -1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "patientType = '" + filterPType.SelectedItem.ToString() + "' ";
+            }
+            if (filterGender.SelectedIndex > -1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "sex = '" + filterGender.SelectedItem.ToString() + "' ";
+            }
+            if (filterSIN.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "patientSIN like '" + filterSIN.Text + "%'";
+            }
+            if (exp.Length > 0)
+            {
+                DataRow[] foundRows = currPatientList.Tables[0].Select(exp);
+                if (foundRows.Length > 0)
+                {
+                    currPatientList.Tables[0].DefaultView.RowFilter = exp;
+                    currPatientList.Tables[0].DefaultView.Sort = "lastName asc";
+                    currentPatientsBox.DataSource = currPatientList.Tables[0];
+                    currPatFilterError.Text = "";
+                }
+                else
+                {
+                    currPatFilterError.Text = "No results found";
+                }
+                filterGender.SelectedIndex = -1;
+                filterPType.SelectedIndex = -1;
+            }
+            else
+            {
+                currPatFilterError.Text = "No filters selected";
+            }
+        }
+
+        private void refreshDocList_Click(object sender, EventArgs e)
+        {
+            populateDoctorList();
+            recepDocFilterError.Text = "";
+            docFirstNameFilter.Text = "";
+            docLastNameFilter.Text = "";
+            docSpecFilter.Text = "";
+            docDeptFilter.SelectedIndex = -1;
+        }
+
+        private void applyDocFilter_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (docFirstNameFilter.Text.Length > 0)
+                exp += "firstName like '" + docFirstNameFilter.Text + "%' ";
+            if (docLastNameFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "lastName like '" + docLastNameFilter.Text + "%' ";
+            }
+            if (docDeptFilter.SelectedIndex > -1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "departmentName = '" + docDeptFilter.SelectedItem.ToString() + "' ";
+            }
+            if (docSpecFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "specialization like '" + docSpecFilter.Text + "%'";
+            }
+            if (exp.Length > 0)
+            {
+                Debug.WriteLine(exp);
+                DataRow[] foundRows = doctorList.Tables[0].Select(exp);
+                if (foundRows.Length > 0)
+                {
+                    doctorList.Tables[0].DefaultView.RowFilter = exp;
+                    doctorList.Tables[0].DefaultView.Sort = "Name asc";
+                    DoctorListBox.DataSource = doctorList.Tables[0];
+                    recepDocFilterError.Text = "";
+                }
+                else
+                {
+                    recepDocFilterError.Text = "No results found.";
+                }
+                docDeptFilter.SelectedIndex = -1;
+            }
+            else
+            {
+                recepDocFilterError.Text = "No filters selected.";
+            }
+        }
+
+        private void refreshRecords_Click(object sender, EventArgs e)
+        {
+            populatePatientList();
+            recordFilterError.Text = "";
+            recordFNameFilter.Text = "";
+            recordLNameFilter.Text = "";
+            recordGenderFilter.SelectedIndex = -1;
+        }
+
+        private void filterRecords_Click(object sender, EventArgs e)
+        {
+            string exp = "";
+            if (recordFNameFilter.Text.Length > 0)
+                exp += "firstName like '" + recordFNameFilter.Text + "%' ";
+            if (recordLNameFilter.Text.Length > 0)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "lastName like '" + recordLNameFilter.Text + "%' ";
+            }
+            if (recordGenderFilter.SelectedIndex > -1)
+            {
+                if (exp.Length > 0)
+                    exp += "and ";
+                exp += "sex = '" + recordGenderFilter.SelectedItem.ToString() + "' ";
+            }
+            if (exp.Length > 0)
+            {
+                Debug.WriteLine(exp);
+                DataRow[] foundRows = patientRecordList.Tables[0].Select(exp);
+                if (foundRows.Length > 0)
+                {
+                    patientRecordList.Tables[0].DefaultView.RowFilter = exp;
+                    patientRecordList.Tables[0].DefaultView.Sort = "lastname asc";
+                    patientRecordBox.DataSource = patientRecordList.Tables[0];
+                    recordFilterError.Text = "";
+                }
+                else
+                {
+                    recordFilterError.Text = "No results found.";
+                }
+                recordGenderFilter.SelectedIndex = -1;
+            }
+            else
+            {
+                recordFilterError.Text = "No filters selected.";
+            }
         }
     }
 }
