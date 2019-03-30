@@ -774,6 +774,7 @@ namespace group6_291
 
         private void DoctorListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DocClearReset();
             PatientGrid.Hide();
             DataRowView selectedDoctor = DoctorListBox.SelectedItem as DataRowView;
             doctorName.Text = selectedDoctor["Name"].ToString();
@@ -798,7 +799,7 @@ namespace group6_291
             conn.Open();
 
             //query needs work for current patients, currenty only shows all patients for that doctor
-            SqlCommand getPatient = new SqlCommand("select concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
+            SqlCommand getPatient = new SqlCommand("select patientSIN, concat(firstName, ' ', lastName) as Name, sex as Sex, dateOfBirth as Date_of_Birth," +
                 " patientType as Patient_Type from Patient where patientSIN in" +
                 " (SELECT patientSIN FROM Register WHERE registerID IN" +
                 " (SELECT registerID FROM Doctor_Patient where doctorID = @doctorID))", conn);
@@ -809,7 +810,7 @@ namespace group6_291
             adapter.Fill(Doctor_Patient);
             PatientGrid.AutoGenerateColumns = true;
             PatientGrid.DataSource = Doctor_Patient.Tables[0];
-            
+            PatientGrid.Columns[0].Visible = false;
             int rowCount = PatientGrid.RowCount;
             if (rowCount > 0)
             {
@@ -1390,5 +1391,65 @@ namespace group6_291
                 recordFilterError.Text = "No filters selected.";
             }
         }
+        
+        private void PatientGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DocClearReset();
+            string patientSIN = PatientGrid.CurrentRow.Cells["patientSIN"].Value.ToString();
+            DataRowView selectedDoctor = DoctorListBox.SelectedItem as DataRowView;
+            string doctorID = selectedDoctor["doctorID"].ToString();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand getDetails = new SqlCommand("Select miscDetails, surgicalDetails, medicalCase from Doctor_Patient WHERE doctorID = @doctorID" +
+                " and registerID in (Select registerID from Register Where patientSIN = @patientSIN)", conn);
+            getDetails.Parameters.AddWithValue("@patientSIN", patientSIN);
+            getDetails.Parameters.AddWithValue("@doctorID", Int32.Parse(doctorID));
+            SqlDataReader docPatientDetails = getDetails.ExecuteReader();
+            while (docPatientDetails.Read())
+            {
+                SurgNoteText.Text = docPatientDetails["surgicalDetails"].ToString();
+                MiscNoteText.Text = docPatientDetails["miscDetails"].ToString();
+                MedNoteText.Text = docPatientDetails["medicalCase"].ToString();
+            }
+            conn.Close();
+        }
+
+        private void DocUpdateNoteButton_Click(object sender, EventArgs e)
+        {
+            DataRowView selectedDoctor = DoctorListBox.SelectedItem as DataRowView;
+            int doctorID = Int32.Parse(selectedDoctor["doctorID"].ToString());
+
+            string patientSIN = PatientGrid.CurrentRow.Cells["patientSIN"].Value.ToString();
+            SqlConnection conn = new SqlConnection(Globals.conn);
+            conn.Open();
+            SqlCommand updateNotes = new SqlCommand("update Doctor_Patient set miscDetails = @miscDetails, surgicalDetails = @surgDetails," +
+                " medicalCase = @medCase where doctorID = @doctorID and registerID in" +
+                " (Select registerID from Register Where patientSIN = @patientSIN)", conn);
+
+            updateNotes.Parameters.AddWithValue("@miscDetails", MiscNoteText.Text);
+            updateNotes.Parameters.AddWithValue("@surgDetails", SurgNoteText.Text);
+            updateNotes.Parameters.AddWithValue("@medCase", MedNoteText.Text);
+            updateNotes.Parameters.AddWithValue("@doctorID", doctorID);
+            updateNotes.Parameters.AddWithValue("@patientSIN", patientSIN);
+            updateNotes.ExecuteNonQuery();
+            conn.Close();
+            UpdateNotesLabel.Text = "Notes updated for patient: " + PatientGrid.CurrentRow.Cells["Name"].Value.ToString();
+            UpdateNotesLabel.ForeColor = Color.Green;
+        }
+
+        private void DocClearButton_Click(object sender, EventArgs e)
+        {
+            DocClearReset();
+        }
+
+        private void DocClearReset()
+        {
+            SurgNoteText.Clear();
+            MiscNoteText.Clear();
+            MedNoteText.Clear();
+            UpdateNotesLabel.Text = "";
+        }
+       
     }
+
 }
