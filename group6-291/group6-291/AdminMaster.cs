@@ -1203,7 +1203,10 @@ namespace group6_291
                     filterErrorWard.Text = "";
                 }
                 else
-                    filterErrorWard.Text = "no results found";
+                {
+                    filterErrorAWard.ForeColor = Color.Red;
+                    filterErrorAWard.Text = "No results found.";
+                }
             }
         }
 
@@ -1211,7 +1214,7 @@ namespace group6_291
         {
             populateWardList();
             vacancyFilter.SelectedIndex = -1;
-            filterErrorWard.Text = "";
+            filterErrorAWard.Text = "";
             wardNameFilter.Text = "";
         }
 
