@@ -87,6 +87,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="bin\Debug\group6-291.exe.config" />
     <None Include="bin\Debug\group6-291.vshost.exe.config" />
@@ -108,6 +109,10 @@
   <ItemGroup>
     <Content Include="bin\Debug\group6-291.vshost.exe" />
     <Content Include="obj\Debug\group6-291.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\stethoscope-1584222_1920.jpg" />
+    <None Include="Resources\aerial-view-3292550_1920.jpg" />
+    <None Include="Resources\bright-cardiac-cardiology-433267.jpg" />
+    <None Include="Resources\appointment-book-blur-care-40568.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
