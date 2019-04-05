@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.PatientRegTab = new System.Windows.Forms.TabPage();
@@ -694,6 +694,7 @@
             // 
             this.PatientRecTab.AutoScroll = true;
             this.PatientRecTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PatientRecTab.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PatientRecTab.Controls.Add(this.recordFilterError);
             this.PatientRecTab.Controls.Add(this.label66);
             this.PatientRecTab.Controls.Add(this.label67);
@@ -858,6 +859,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label50);
             this.panel1.Controls.Add(this.DoctorUnassignLabel);
             this.panel1.Controls.Add(this.DoctorMedLabel);
@@ -1641,14 +1643,14 @@
             this.selectedWardGridView.AllowUserToResizeRows = false;
             this.selectedWardGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.selectedWardGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectedWardGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.selectedWardGridView.Location = new System.Drawing.Point(249, 38);
             this.selectedWardGridView.Name = "selectedWardGridView";
             this.selectedWardGridView.ReadOnly = true;
@@ -2505,11 +2507,12 @@
             // label62
             // 
             this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(105, 395);
+            this.label62.Location = new System.Drawing.Point(15, 435);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(62, 13);
             this.label62.TabIndex = 132;
             this.label62.Text = "Department";
+            this.label62.Visible = false;
             // 
             // label63
             // 
@@ -2532,7 +2535,7 @@
             // 
             // applyDocFilter
             // 
-            this.applyDocFilter.Location = new System.Drawing.Point(108, 444);
+            this.applyDocFilter.Location = new System.Drawing.Point(108, 409);
             this.applyDocFilter.Name = "applyDocFilter";
             this.applyDocFilter.Size = new System.Drawing.Size(77, 23);
             this.applyDocFilter.TabIndex = 129;
@@ -2551,10 +2554,11 @@
             // 
             this.docDeptFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.docDeptFilter.FormattingEnabled = true;
-            this.docDeptFilter.Location = new System.Drawing.Point(108, 410);
+            this.docDeptFilter.Location = new System.Drawing.Point(15, 451);
             this.docDeptFilter.Name = "docDeptFilter";
             this.docDeptFilter.Size = new System.Drawing.Size(78, 21);
             this.docDeptFilter.TabIndex = 125;
+            this.docDeptFilter.Visible = false;
             // 
             // docLastNameFilter
             // 
