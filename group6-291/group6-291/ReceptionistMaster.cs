@@ -1418,7 +1418,8 @@ namespace group6_291
         {
             DataRowView selectedDoctor = DoctorListBox.SelectedItem as DataRowView;
             int doctorID = Int32.Parse(selectedDoctor["doctorID"].ToString());
-
+            if (PatientGrid.CurrentRow == null)
+                return;
             string patientSIN = PatientGrid.CurrentRow.Cells["patientSIN"].Value.ToString();
             SqlConnection conn = new SqlConnection(Globals.conn);
             conn.Open();

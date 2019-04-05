@@ -1276,6 +1276,11 @@ namespace group6_291
             docDeptFilter.SelectedIndex = -1;
         }
 
+        private void DoctorDeptBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
         //removed patient records
